@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<title>Test Test Edit </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="" />
+	<meta http-equiv="Content-Language" content="en" />
+	<meta name="revisit-after" content="45 Days" />
+
+	
+	<link rel="stylesheet" href="/css_base/oswald.css">
+	<link rel="stylesheet" href="/css_base/plugins/font-awesome.min.css">
+	<link rel="stylesheet" href="/css_base/bootstrap.min.css">
+
+	<link rel="stylesheet" href="/css_base/landing.css">
+	<link rel="stylesheet" href="/css_base/admin.css">
+	<link rel="stylesheet" href="/css_base/jquery.jgrowl.css">
+	<link rel="stylesheet" href="/css_base/uniform.default.css">
+	<link rel="stylesheet" href="/css_base/magnific-popup.css">
+	<link rel="stylesheet" href="/css_base/chosen.css">
+	<link rel="stylesheet" href="/css_base/nanoscroller.css">
+	<link rel="stylesheet" href="/css_base/custom.css">
+
+	<script type="text/javascript" src="/js_base/jq/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery-ui.min.v1.14.1.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery-migrate-selected.js"></script>
+	<script src="/js_base/bootstrap.js"></script>
+	<script src="/js_base/tpl.js"></script>
+
+	<script type="text/javascript" src="/js_base/base.js"></script>
+	<script type="text/javascript" src="/js_base/ajax.js"></script>
+	<script type="text/javascript" src="/js_base/dialog-single.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.jgrowl.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.uniform.min.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.chosen.min.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.nanoscroller.js"></script>
+	<script type="text/javascript" src="/js_base/spin.min.js"></script>
+	<script type="text/javascript" src="/js_base/custom.js"></script>
+	<script type="text/javascript" src="/js_base/drag-drop.js"></script>	
+	
+	<link rel="shortcut icon" href="/img/favicon.ico">
+    <meta property="og:image" content="/img/mobile.png" />
+</head>
+<body class="">
+	<div id="wrapper">
+		<header class="navbar mainnav">
+			<div class="container">
+				<div class="navbar-header">
+					<div class="navbar-brand navbar-brand-cnt">
+						<a class="navbar-brand-img" href="/"><img src="/img/logo.png" alt="">---</a>
+						<a class="navbar-brand-text" href="/"></a>
+						<span>---</span>
+					</div>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="fa fa-bars"></i>
+					</button>
+				</div> <!-- /.navbar-header -->
+
+				<nav class="collapse navbar-collapse" role="navigation">
+
+					<ul class="nav navbar-nav navbar-right mainnav-menu" id="TopNavbar">
+						<li id="MenuHomeId">
+							<a href="/">Home</a>
+						</li>
+						<!--li id="MenuPurchaseId" class="dropdown">
+							<a class="dropdown-toggle hand" data-toggle="dropdown" data-hover="dropdown">Purchase <i class="fa fa-caret-down navbar-caret"></i></a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="/individuals-pricing-plans.html"><i class="fa fa-angle-double-right dropdown-icon"></i>  Pricing plans</a>
+								</li>
+								<li>
+									<a href="/individuals-pricing-comparison.html"><i class="fa fa-angle-double-right dropdown-icon"></i>  Pricing comparison</a>
+								</li>
+							</ul>
+						</li-->
+						<li id="MenuSupportId">
+							<a href="/faq.html">Support</a>
+						</li>
+						
+						
+						<li id="MenuExamId">
+							<a href="/exam.html">Exam</a>
+						</li>
+						<li id="MenuProfileId">
+							<a href="/profile/edit.html">Profile</a>
+						</li>
+						<li>
+							<a href="/profile/logout.html">Logout <i style="font-size: 125%;" class="fa fa-sign-out"></i></a>
+						</li>
+						
+					</ul>
+				</nav>
+			</div> <!-- /.container -->
+		</header>
+
+	<style>
+.content {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+</style>
+<div class="content">
+	<div class="container">
+		<div class="edit-container">
+
+			<div class="edit-container-left">
+				<div class="edit-cnt">
+					<ul class="edit-menu">
+						<li class="menu-line">
+							<div class="header hand"> <i class="fa fa-bars"></i> Menu</div>
+							<div class="line-cnt">
+								<ul class="bullet">
+									<li><a href="javascript:dn();" onclick="LoadMainEditScreen();">Main edit screen</a></li>
+									<li><a href="/exam/11.html">Back to exam info</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="menu-line">
+							<div class="header hand"> <i class="fa fa-cog"></i> Parameters</div>
+							<div class="line-cnt" id="QuestionParmsId">
+								<div align='center'>Please select question</div>
+							</div>
+						</li>
+						<li class="menu-line">
+							<div class="header hand"> <i class="fa fa-question"></i> Question list</div>
+							<div class="line-cnt">
+								<ul class="bullet" style="padding-bottom: 5px;">
+									<li><a href="javascript:dn();" onclick="CreateNewQuestion();">Create question</a></li>
+								</ul>
+								<div class="nano" id="CntQuetionListId" style="height: 300px; width: 205px;">
+									<div class="nano-content" id="QuestionListMenuId">
+									</div>
+								</div>
+							</div>
+						</li>
+
+						<li class="menu-line">
+							<div class="header hand"> <i class="fa fa-info"></i> Case studies</div>
+							<div class="line-cnt">
+								<ul class="bullet" style="padding-bottom: 5px;">
+									<li><a href="javascript:dn();" onclick="CreateNewCaseStudy();">Create case study</a></li>
+								</ul>
+								<div class="nano" id="CntStudyListListId" style="height: 150px; width: 205px;">
+									<div class="nano-content" id="CaseStudyListMenuId">
+									</div>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</div> <!-- /.col -->
+
+			<div class="edit-container-right">
+				<div class="edit-cnt" id="DynCntId">
+					
+					<div class="heading-block">
+						<h1>Drag&Drop EDITOR Page</h1>
+					</div>
+					<div class="alert alert-success" id="CntMessageId" style="display: none;">&nbsp;</div>
+					<div class="qa-page">
+						<select name="mySelect" id="mySelect" class="chzn-select">
+							<option value="0">none</option>
+							<option value="1">option 1</option>
+							<option value="2">option 2</option>
+						</select>
+						
+						<button type="button" onclick="addOptionToSelect('mySelect', 'option 3', 3);" class="btn btn-secondary">Add chzn select option</button>
+						<br><br><br>
+						
+						<input type="text" class="form-control" id="TextInput" name="TextInput" placeholder="Test" value=""><br><br>
+						<label><input type="checkbox" name="CheckBox" name="CheckBoxId" checked> Some checkbox</label><br><br>
+						
+						<button type="button" onclick="alertError('Test error');" class="btn btn-secondary">Test error</button>
+						<button type="button" onclick="alertWarning('Test warning');" class="btn btn-secondary">Test warning</button>
+						<button type="button" onclick="alertMessage('Test message');" class="btn btn-secondary">Test message</button> <br><br>
+						
+						<button type="button" onclick="dialog.confirm('Confirmation', 'Dialog with confirmation message.', ActionConfirmedFnc);" class="btn btn-secondary">Confirmation dialog</button>
+						
+						<br><br>
+						<p>Drag&Drop EDITOR JavaScript control content</p>
+						<img src="/img/placeholder-image.jpg" nozoom="1"><br>
+						
+						<img src="/img/img-example-1.png" nozoom="1">
+						<br><br>
+					</div>
+				</div> <!-- /.tab-content -->
+			</div> <!-- /.col -->
+
+		</div> <!-- /.row -->
+	</div> <!-- /.container -->
+</div>
+<div id="EditorFullScreen" style="display: none;">&nbsp;</div>
+<script>
+function addOptionToSelect(selectId, optionText, optionValue) {
+    const selectElement = document.getElementById(selectId);
+
+    const newOption = document.createElement("option");
+    newOption.text = optionText;
+    newOption.value = optionValue;
+
+    selectElement.add(newOption);
+	
+	// Use updateChosen() to update Chosen select options, when they are changed
+	updateChosen();
+}
+function ActionConfirmedFnc() {
+	alertMessage('OK');
+}
+
+$(document).ready(function(){
+	$('.edit-menu').find('.header').each(function(){
+		$(this).click(function() {
+			var blockSlide = $(this).next();
+			if( blockSlide.is(':hidden') ) {
+				if ('QuestionParmsId' == blockSlide.attr('id')) {
+					blockSlide.css({height: 'auto'});
+				}
+				blockSlide.slideDown();
+			} else {
+				if ('QuestionParmsId' == blockSlide.attr('id')) {
+					blockSlide.css({height: 'auto'});
+				}
+				blockSlide.slideUp();
+			}
+		});
+	});
+	$( window ).resize(function() {
+		resizeChosen();
+	});
+	resizeTestImg();
+});
+var ExamId		= 1,
+	EngLetters	= ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"],
+	EditTestPage= true;
+</script>
+	</div> <!-- /#wrapper -->
+
+<div class="modal modal-styled fade in" id="modalDlgId" style="padding-right: 16px;">
+	<div class="modal-dialog">
+		<div class="modal-content" id="modalDlgCntId">
+		</div>
+	</div>
+</div>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="heading-block">
+						<h4>---</h4>
+					</div> <!-- /.heading-block -->
+					<p>© 2016 ---</p>
+				</div> <!-- /.col -->
+
+				<div class="col-sm-9 fotter-menu">
+					<div class="heading-block">
+						<h4>Menu</h4>
+					</div> <!-- /.heading-block -->
+					<div class="col-sm-4">
+						<ul class="icons-list no-pad">
+							<li>
+								<a href="/faq.html">Support</a>
+							</li>
+							<li>
+								<a href="/privacy-policy.html">Privacy Policy</a>
+							</li>
+						</ul>
+					</div> <!-- /.col -->
+					<div class="col-sm-4">
+
+					</div> <!-- /.col -->
+					<div class="col-sm-4">
+						<!--ul class="icons-list">
+							<li>
+								<i class="icon-li fa fa-info"></i>
+								<a href="/faq.html">Support</a>
+							</li>
+						</ul-->
+					</div> <!-- /.col -->
+				</div>
+
+			</div> <!-- /.row -->
+		</div> <!-- /.container -->
+	</footer>
+<script type="text/javascript">
+$(document).ready(function() {
+	ActivateNavMenu("");
+});
+</script>
+</body>
+</html>

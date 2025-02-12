@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<title>Test Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="description" content="" />
+	<meta http-equiv="Content-Language" content="en" />
+	<meta name="revisit-after" content="45 Days" />
+
+	
+	<link rel="stylesheet" href="/css_base/oswald.css">
+	<link rel="stylesheet" href="/css_base/plugins/font-awesome.min.css">
+	<link rel="stylesheet" href="/css_base/bootstrap.min.css">
+
+	<link rel="stylesheet" href="/css_base/landing.css">
+	<link rel="stylesheet" href="/css_base/admin.css">
+	<link rel="stylesheet" href="/css_base/jquery.jgrowl.css">
+	<link rel="stylesheet" href="/css_base/uniform.default.css">
+	<link rel="stylesheet" href="/css_base/magnific-popup.css">
+	<link rel="stylesheet" href="/css_base/chosen.css">
+	<link rel="stylesheet" href="/css_base/nanoscroller.css">
+	<link rel="stylesheet" href="/css_base/custom.css">
+
+	<script type="text/javascript" src="/js_base/jq/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery-ui.min.v1.14.1.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery-migrate-selected.js"></script>
+	<script src="/js_base/bootstrap.js"></script>
+	<script src="/js_base/tpl.js"></script>
+
+	<script type="text/javascript" src="/js_base/ajax.js"></script>
+	<script type="text/javascript" src="/js_base/base.js"></script>
+	<script type="text/javascript" src="/js_base/dialog-single.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.jgrowl.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.uniform.min.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.chosen.min.js"></script>
+	<script type="text/javascript" src="/js_base/jq/jquery.nanoscroller.js"></script>
+	<script type="text/javascript" src="/js_base/spin.min.js"></script>
+	<script type="text/javascript" src="/js_base/custom.js"></script>
+	<!--[if lt IE 9]>
+	<script src="/js/plugins/html5shiv.min.js"></script>
+	<script src="/js/plugins/respond.min.js"></script>
+	<![endif]-->
+	
+	
+	<link rel="shortcut icon" href="/img/favicon.ico">
+    <meta property="og:image" content="/img/mobile.png" />
+</head>
+<body class="">
+<style>
+#wrapper {
+    margin: 0 auto -62px;
+    padding: 0 0 62px;
+}
+</style>
+	<div id="wrapper">
+		<header class="mainnav">
+			<div class="container">
+				<div class="navbar-header navbar-brand-cnt">
+					<a class="navbar-brand-img" href="/"><img src="/img/logo.png" alt=""></a>
+					<a class="navbar-brand-text" href="/">---</a>
+					<span>---</span>
+				</div> <!-- /.navbar-header -->
+			</div> <!-- /.container -->
+		</header>
+		<div class="content content-no-top">
+			<div class="container">
+				<style>
+body {
+	min-width: 500px;
+}
+</style>
+<div class="heading-block" style="margin-bottom: 15px;">
+	<h1>Question 1</h1>
+
+	<div class="navy-quest">
+	
+	
+		<a href="javascript: dn();" class="next-quest" onclick="SimulatorAnswer(1);">Question 2 &gt;&gt;</a>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6 col-md-3">
+		<div class="row-stat" style="padding: 10px 15px;">
+			<p class="row-stat-label">Question 1 of 60</p>
+			<h3 class="row-stat-value" id="TimeLeftId" data-time-left="5400">01:30:00</h3>
+		</div>
+	</div>
+	<div class="col-sm-6 col-md-3">
+		<div class="row-stat" style="padding: 10px 15px;">
+			<p class="row-stat-label">Answered / Marked</p>
+			<h3 class="row-stat-value">0 / 0</h3>
+		</div>
+	</div>
+	<div class="col-sm-6 col-md-6">
+		<h3>Test</h3>
+		<p><b>Test title</b>
+	</div>
+</div>
+
+<form method="post" name="TesterFrm" id="TesterFrm" onsubmit="return false;">
+<input name="DataFlow" type="hidden" value="1">
+<input name="direction" type="hidden" value="1">
+<input name="CurQ" type="hidden" value="0">
+
+<div class="qa-page">
+	
+
+	<div class="item-question">
+		<div class="allow-see" style="margin-bottom: 10px;">
+			<label class="scheckbox">
+				<input class="hidden" type="checkbox" name="marked"  /> Mark to Review
+			</label>
+		</div>
+
+		<div class="block-button">
+			<a href="javascript: dn();" onclick="SimulatorAnswer(2);">Review Marked</a>
+			<a href="javascript: dn();" onclick="SimulatorAnswer(5);">Go to Question List</a>
+		</div>
+
+		<p>Question text and </p>
+		<p>Drag&Drop TESTER JavaScript control content</p>
+		<img src="/img/img-example-1.png"><br>
+	</div>
+
+	<div class="meta-answers">
+		<div class="left">
+			<a href="javascript: dn();" class="btn btn-lg btn-secondary" onclick="SimulatorAnswer(1);">Next</a>
+		</div>
+		<div class="right">
+			<a href="javascript: dn();" class="btn btn-lg btn-primary" onclick="SimulatorAnswer(3);">End exam</a>
+		</div>
+	</div>
+</div>
+</form>
+
+<script>
+	QuestionType		= 1;
+	var AllowAnserSel	= true;
+    var AutoPlayMedia	= true;
+
+	$(document).ready(function() {
+		resizeTestImg();
+	});
+</script>
+			</div>
+		</div>
+	</div> <!-- /#wrapper -->
+
+	<div class="modal modal-styled fade in" id="modalDlgId" style="padding-right: 16px;">
+		<div class="modal-dialog">
+			<div class="modal-content" id="modalDlgCntId">
+			</div>
+		</div>
+	</div>
+
+	<footer class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<p>© 2016 --- </p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>
