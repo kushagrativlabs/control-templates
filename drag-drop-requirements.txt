@@ -1,0 +1,151 @@
+Drag&Drop EDITOR JavaScript control requirements:
+- Possibility to initialize control against image.
+- Possibility to initialize control against placeholder image - placeholder-image.jpg (which invites user to upload his image - drag&drop his image to the control). In this case all control should be disabled and waiting for image replacement.
+- Control should be ready for image change. Automatically using event or provide a specific method, which should be called to re-adjust the state of control.
+- Control should have a method, which returns true/false, if it is possible to change the base image or not.
+	- If new image size (width/height) is not provided: It should return false if at least one draggable/target area is already defined.
+	- If new image size (width/height) is provided: It should return false if at least one draggable/target area falls outside (considering are dimensions) of new image boundaries.
+- Possibility to define two types of areas on the image
+	- target areas, should be highlighted with yellow (configurable) dotted border. White non-transparent background.
+	- draggable areas, should be highlighted with blue (configurable) solid border.
+- To define an area user should select an area similar to "selection" tool in image editors. If Fixed width/height is enabled the width/height of the area should be set to the required one and warning message should appear:
+	- As Fixed width and height is set the area width and height is set to {N}, {M} accordingly. You can change are dimensions in the input controls.
+	- As Fixed width is set the area width is set to {N}. You can change width in the input controls.
+	- As Fixed height is set the area height is set to {M}. You can change height in the input controls.
+- The number of defined areas is not limited. However defined areas should NOT overlap.
+- Possibility to delete already defined area.
+- Possibility to match draggable areas with target areas:
+	- When user drags draggable area it should move together with underlying image part.
+	- When One-to-One matching enabled - draggable block when moved by a user should act as a "cut" and leave white background instead of image underlying the draggable area. The initial draggable area should still be highlited with blue dotted border.
+	- When One-to-One matching disabled - draggable area when moved by a user should act as a "copy" and leave same underlying image and the draggable area (solid border). User should be able to place same draggable area onto several different target ares.
+	- When drag action finished by the user and the center of the area is within one of the target areas - then two blocks (draggable and target) should be matched. Draggable block should be automatically placed to the coordinates of the target block by top left corner with small offset of 3 pixes (configurable) by x and y coordinates.
+		- If center is not within the target area - fall back method the top left corner should be within target area block.
+	- When drag action finished by the user and no match with the target area - then draggable block should return back on its original position. If it is a copy - destroyed.
+	- Target block should accept only single draggable block.
+	- If One-to-One matching disabled - one draggable block may be matched to none or several target areas.
+	- It should be possible to drag the draggable block back to its original position. Or just outside of the target area and release - for it to return it to it's own place automatically and unmatch.
+- A mouse click selects draggable/target area. Border should be thicker and solid. Additional click - deselects the area.
+	- Matched draggable block should still be selectable from it's original position (to change original position) and from matched position.
+- User should be able to move selected block position using arrows buttons on keyboard. Overlap validation might prevent position change.
+- Control should automatically react on base image resize event and recalculate/reapply positions of all areas (other controls on the image) based on resize factor. Control should consider that actual image size might be different from natural (original) image size because the image is too big and does not fit. ActualWidth/NaturalWidth and ActualHeight/NaturalHeight factors will be same, resizing image proportionally. Factor will always be <= 1, meaning actual size of the image will be equal or smaller than natural. Usually the limiting will be the width.
+- Input controls (not on top of the image, preferably under the base image):
+	- Area ID. String. Readonly. Should be auto-generated. Draggable areas should be prefixed with "drag-", target areas with "targ-" and followed by unique sequential number. For each area type - its own sequence. ID of the block (only the number) should be printed on the defined area with same color as the border.
+	- Area type. Radio (Target / Draggable). Target should be active by default. Should be disabled if block is already matched.
+	- Matched with. Drop down list. First option should be "none". If none is selected - draggable object should be positioned back to it its original place.
+		- If draggable area selected - in the list all target area ids should be available.
+		- If target area selected - in the list all draggable are ids should be available.
+		- List should be changed automatically based on the selected area type. Or if selected are type is changed by the user.
+		- When selection is changed - draggable block should be moved on relevant target area as if it was dragged by the user (without animation).
+	- X. Input, integer. Horizontal (X) position of the selected area. From top-left corner of the base image to top-left corner of the draggable/target area. When changed, should change position of the selected area. Overlap validation might prevent position change. Area should be fully visible on the base image - if not - error message and action prevented.
+	- Y. Input, integer. Vertical (Y) position of the selected area. From top-left corner of the base image to top-left corner of the draggable/target area. When changed, should change position of the selected area. Overlap validation might prevent position change. Area should be fully visible on the base image - if not - error message and action prevented.
+		- also 4 small buttons with arrows should be available acting in same way as keyboard arrows - move by pixel selected block in a selected direction.
+	- Area width. Input, integer. Default - 100 (configurable). The width of draggable and target areas. If Fixed width is ticked then all areas should be with same width. If user changes the number in the Width input - then all already defined ares, should change the width to the specified one. Minimum value is 10. If Fixed width is disabled - then should display and change the width of selected area. Area should be fully visible on the base image - if not - error message and action prevented. Should be disabled if Fixed width is disabled and no area is selected.
+	- Area height. Input, integer. Default - 15 (configurable). The height of draggable and target areas. If Fixed height is ticked then all areas should be with same height. If user changes the number in the Height input - then all already defined ares, should change the height to the specified one. Minimum value is 10. If Fixed height is disabled - then should display and change the height of selected area. Area should be fully visible on the base image - if not - error message and action prevented. Should be disabled if Fixed height is disabled and no area is selected.
+	- Points. Input, integer. Default - 0. Editable per target/draggable area. If no area selected - disabled.
+	- Delete area. Button. Should delete selected draggable/target area. Should work with confirmation. Disabled if area is not selected.
+	- Fixed width. Checkbox. If checked, then all draggable and target areas should have same width. Checked by default.
+	- Fixed height. Checkbox. If checked, then all draggable and target areas should have same height. Checked by default.
+	- X/Y/width/height inputs should show integer values based on original image size (not resized).
+	- One-to-One matching. Checkbox. Checked by default. Means that each draggable area have it is own target are, where it should be placed. If enabled then draggable area when moved by a user should act as a "cut" and leave white background instead of image underlying the draggable area. If not enabled then draggable area when moved by a user should act as a "copy" and leave same underlying image and the draggable area.
+	- Text, small: "Actual/Natural image size: {ActualWidth}/{NaturalWidth} X {ActualHeight}/{NaturalHeight}."
+	- Undo button. Should undo last action. Disabled if nothing was done.
+	- Redo button. Should redo action. Disabled if nothing was undone.
+	- Reset Matching button. Should work with confirmation. Should return draggable blocks to their original positions or destroyed if it was a copy (One-to-One matching is disabled).
+	- Reset All button. Should work with confirmation. Should reset everything (matching and all already defined areas should be cleared)
+- Resize draggable & target ares with mouse. Icon pointer should change when it is over border to a specific icon (horizontal / vertical / corner resize) and resize should occur in specific dimension. Considering Fixed width / height checkbox state - all draggable/target areas size might be changed. Validation might prevent size change.
+- When mouse is hover (or in process of drag) the draggable area - mouse pointer icon should be changed to relevant icon (grab).
+- Mouse hover the target/draggable area should slightly change target/draggable area color (shaded).
+- When draggable block while dragging is hover target area it (target area) also should slightly change its color (shaded).
+- Additional validation:
+	- There should be at least 1 target are
+	- There should be at least 2 draggable ares
+	- All target areas should be matched with draggable area
+	- If One-to-One matching enabled then each draggable block should be matched with target block.
+	- If One-to-One matching enabled then count of draggable areas should match with count of target ares.
+	- Draggable & Target areas should NOT overlap. Clear error should be presented stating which blocks are overlapping (the blocks might flash or ID should be specified on the blocks and in the message).
+	- Draggable & Target areas should be fully visible on the base image. If area boundaries fall outside of the base image - clear error should be presented stating which block falls outside of the image.
+	- When block matching is failed (draggable block was released outside of any target area) - message should be shown: Draggable block should be matched with target area, for this place it on top of the target area. If you want to change position of the draggable area - use arrow keys on your keyboard or X/Y inputs in the control section.
+	- When draggable block matched with the target area, which already matched with draggable block - message should be shown: Chosen target area is already matched.
+	- When initialized against image and unserialized from json state. Should validate that base image dimensions are same as stated in the json. If not - control should be blocked (Only reset all button available). Error: Base image dimensions ({Width}x{Height}) do not match with serialized state ({SerWidth}x{SerHeight})
+- Control should be able to serialize its state to a json string. Separate method, which returns serialized state. Base image dimensions should be serialized as well. Serialization with limited properties as it will be used by different application. Example:
+{
+	"img": {
+		"width": 800,			-- original image width (naturalWidth)
+		"height": 800			-- original image height (naturalHeight)
+	},
+	"areas": [
+		{
+			"id": "targ-1",
+			"type": 1			-- 1 - target, 2 - draggable
+			"width": 100,		-- considering original image width, not resized
+			"height": 15,		-- considering original image width, not resized
+			"x": 50,			-- X position considering original image width (naturalWidth), not resized.
+			"y": 50				-- Y position considering original image height (naturalHeight), not resized.
+		},
+		...
+	]
+	"match": [
+		{"targ-1": "drag-1"},
+		...
+	],
+	"points": [
+		{"targ-1": 40},
+		{"drag-1": 0},
+		...
+	]
+	"options": {
+		"FixedWidth": true,
+		"FixedHeight": true,
+		"OneToOneMatching": true
+	}
+}
+- Control should be able to restore the state from a json string. Initialized with json string.
+- Control should have a method to return image (binary or base64 encoded) with correct matching state of draggable blocks per target ares. But without ID numbers printed inside the areas. However with area borders.
+- There should be Save button. Should output to console json string with serialized state.
+- JavaScript code should be composed as a single object. Arrow functions should NOT be used.
+- CSS & HTML bootstrap based. Using Template page (!).
+- Separate CSS file, separate JavaScript file.
+- Test each point before sending completed (not intermediate) control.
+- JavaScript Image editor example: https://pqina.nl/pintura/ . Can be used as example and AI can be asked how it is done in specific JavaScript image editor.
+- Use alertError() / alertWarning() / alertMessage() for messages.
+- Use dialog.confirm('Confirmation', 'Dialog with confirmation message.', ActionConfirmedFnc) for confirmation dialogs.
+ 
+Drag&Drop TESTER JavaScript control requirements:
+- Should be initialized against image with serialization data from Drag&Drop EDITOR. However, should correctly work without data about correct block matching state and points (this information will not be provided, not to reveal correct answer).
+- Should also optionally accept it's own serialization state. How user matched draggable blocks with target areas and the relevant blocks should be moved to a places how user left them on previous session.
+- Should display two types of areas on the image
+	- target areas, should be highlighted with yellow (configurable) dotted border. White background.
+	- draggable areas, should be highlighted with blue (configurable) solid border.
+- Mouse hover the draggable/target area should slightly change draggable/target area color (shaded).
+- When draggable block while dragging is hover target area it (target area) also should slightly change its color (shaded)
+- A mouse click selects draggable area. Border should be thicker and solid. Additional click - deselects the area.
+- Possibility to match draggable areas with target areas by dragging:
+	- When user drags draggable area it should move together with underlying image part.
+	- When One-to-One matching enabled - draggable block when moved by a user should act as a "cut" and leave white background instead of image underlying the draggable area. The initial draggable area should still be highlited with blue dotted border.
+	- When One-to-One matching disabled - draggable area when moved by a user should act as a "copy" and leave same underlying image and the draggable area (solid border). User should be able to place same draggable area onto several different target ares.
+	- When drag action finished by the user and the center of the area is within one of the target areas - then two blocks (draggable and target) should be matched. Draggable block should be automatically placed to the coordinates of the target block by top left corner with small offset of 3 pixes (configurable) by x and y coordinates.
+		- If center is not within the target area - fall back method the top left corner should be within target area block.
+	- When drag action finished by the user and no match with the target area - then draggable block should return back on its original position. If it is a copy - destroyed.
+	- Target block should accept only single draggable block.
+	- If One-to-One matching disabled - one draggable block may be matched to none or several target areas.
+	- It should be possible to drag the draggable block back to its original position. Or just outside of the target area and release - for it to return it to it's own place automatically and unmatch.
+- Possibility to match draggable areas with target areas by clicking:
+	- user should select draggable block. And then click on the target block. This should match two blocks. Draggable block should be moved on relevant target area as if it was dragged by the user (without animation).
+	- user should be able to select the draggable block which is matched and click back on it's original draggable area to return it back (unmatch).
+	- If One-to-One matching enabled and draggable block already matched - it should NOT be possible to select initial draggable area any more. Also shaded hover on the draggable area should work only if user tries to return it back (unmatch).
+- Method should be available to reset the matching state.
+- Reset buttons should be available to reset matching state.
+- Control should automatically react on image resize event and recalculate/reapply positions of all areas (other controls on the image) based on resize factor. Control should consider that actual image size might be different from natural (original) image size because the image is too big and does not fit. ActualWidth/NaturalWidth and ActualHeight/NaturalHeight factors will be same, resizing image proportionally. Factor will always be <= 1, meaning actual size of the image will be equal or smaller than natural. Usually the limiting will be the width.
+- Additional validation:
+	- When block matching is failed (draggable block was released outside of any target area) - message should be shown: Draggable block should be matched with target area, for this place it on top of the target area.
+	- When block matched with the target area, which already matched with draggable block - message should be shown: Chosen target area is already matched.
+	- When initialized against image and unserialized from json state. Should validate that base image dimensions are same as stated in the json. If not - control should be blocked. Error: Base image dimensions ({Width}x{Height}) do not match with serialized state ({SerWidth}x{SerHeight})
+- Control should be able to serialize its state to a json string. Separate method, which returns serialized state with information about block matching (how user matched draggable blocks with target areas). Serialization with limited properties as it will be used by different application. Example:
+	[
+		{"targ-1": "drag-2"},
+		...
+	]
+- JavaScript code should be composed as a single object. Arrow functions should NOT be used.
+- CSS & HTML bootstrap based. Using Template page (!).
+- Separate CSS file (common with EDIT part), separate JavaScript file.
+- Test each point before sending completed (not intermediate) control.
