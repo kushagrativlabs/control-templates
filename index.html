@@ -121,19 +121,32 @@
 
 			.delete-btn {
 				position: absolute;
-				top: 5px;
-				right: 5px;
-				padding: 5px;
-				font-size: 12px;
+				top: 1px;
+				right: 1px;
+				font-size: 16px;
 				background-color: red;
 				color: white;
 				border: none;
 				cursor: pointer;
+				border-radius: 50%;
+				width: 24px;
+				height: 24px;
 			}
 
 			.delete-btn:hover {
 				background-color: darkred;
 			}
+
+			.resize-handle {
+    width: 10px;
+    height: 10px;
+    background: blue;
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    cursor: nwse-resize;
+}
+
 		</style>
 		<div class="content">
 			<div class="container">
@@ -198,9 +211,6 @@
 							</div>
 							<div class="alert alert-success" id="CntMessageId" style="display: none;">&nbsp;</div>
 							<div class="qa-page">
-
-								<button type="button" id="open-snip-modal" class="btn btn-secondary">Create
-									Snip</button>
 								<button type="button" id="create-target" class="btn btn-secondary">Create
 									Target</button>
 								<button type="button" id="create-draggable" class="btn btn-secondary">Create

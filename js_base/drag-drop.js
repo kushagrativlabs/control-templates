@@ -1,5 +1,7 @@
 class DragTarget {
     constructor(wrapper, imgUrl, enableEditing = true, height = 0, config = null, add_btn = true) {
+        this.dragCounter= 0;
+        this.targetCounter= 0;
         this.isPlaceHolder = true;
         this.fileInput = null;
         this.width = 0;
@@ -65,15 +67,16 @@ class DragTarget {
     handleConfigs(configs) {
         for (const config of configs.drag_configs) {
             this.addConfigSnap(config, true);
+            this.dragCounter++;
         }
 
         for (const config of configs.target_configs) {
+            this.targetCounter++;
             this.addConfigSnap(config, false);
         }
     }
 
     addConfigSnap(config, makeDraggable = false) {
-
         const snip = document.createElement('div');
         snip.classList.add("snip");
         snip.classList.add(config.classList.replace('snip', "").replace("selected","").trim());
@@ -97,17 +100,7 @@ class DragTarget {
 
         if (this.add_btn) {
             // Add a delete button to the snip
-            const deleteBtn = document.createElement('button');
-            deleteBtn.innerText = 'Delete';
-            deleteBtn.classList.add('delete-btn');
-            deleteBtn.style.position = 'absolute';
-            deleteBtn.style.right = '0';
-            deleteBtn.style.top = '0';
-            deleteBtn.style.zIndex = '1';
-            deleteBtn.style.background = 'red';
-            deleteBtn.style.color = 'white';
-            deleteBtn.style.border = 'none';
-            deleteBtn.style.cursor = 'pointer';
+           const deleteBtn = this.getDeleteButton();
 
             deleteBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -118,6 +111,16 @@ class DragTarget {
 
     }
 
+
+    getDeleteButton() {
+        const deleteBtn = Object.assign(document.createElement('button'), {
+            innerText: '×',
+            className: 'delete-btn'
+        });
+        return deleteBtn;
+    }
+    
+
     initMouseEvents() {
         this.wrapper.addEventListener('mousedown', (e) => this.startSelection(e));
         this.wrapper.addEventListener('mousemove', (e) => this.updateSelection(e));
@@ -125,29 +128,34 @@ class DragTarget {
         this.initCommonEvents();
         this.initJquery()
     }
-
     initJquery() {
         const self = this;
-        let movementSpeed = 5; // Speed of movement
+        let movementSpeed = 5;
         let interval;
         let keys = {};
+        let isResizing = false;
+    
         jQuery(document).ready(function ($) {
-            $(document).on('click', '.snip', function (e) {
+            $(document).on('click', '.snip', function () {
                 const isSelected = $(this).hasClass('selected');
                 $('.snip').removeClass('selected');
-                isSelected ? $(this).removeClass('selected') : $(this).addClass('selected');
-            });
-
-
-            $(document).keydown(function (e) {
-                if (!keys[e.which]) {
-                    keys[e.which] = true;
-                    if (!interval) {
-                        interval = setInterval(moveElement, 50); // Adjust interval for speed
-                    }
+                $('.resize-handle').remove(); // Remove old handles
+    
+                if (!isSelected) {
+                    $(this).addClass('selected');
+                    addResizeHandle($(this)); // Add resize handle
                 }
             });
-
+    
+            $(document).keydown(function (e) {
+                if ([37, 38, 39, 40].includes(e.which)) e.preventDefault();
+    
+                if (!keys[e.which]) {
+                    keys[e.which] = true;
+                    if (!interval) interval = setInterval(moveElement, 50);
+                }
+            });
+    
             $(document).keyup(function (e) {
                 delete keys[e.which];
                 if ($.isEmptyObject(keys)) {
@@ -155,29 +163,65 @@ class DragTarget {
                     interval = null;
                 }
             });
+    
             function moveElement() {
                 let $el = $('.snip.selected');
+                if (!$el.length || isResizing) return;
+    
+                let $parent = $el.parent();
                 let pos = $el.position();
-
-                if (keys[37]) { // Left Arrow
-                    $el.css('left', pos.left - movementSpeed + 'px');
-                }
-                if (keys[38]) { // Up Arrow
-                    $el.css('top', pos.top - movementSpeed + 'px');
-                }
-                if (keys[39]) { // Right Arrow
-                    $el.css('left', pos.left + movementSpeed + 'px');
-                }
-                if (keys[40]) { // Down Arrow
-                    $el.css('top', pos.top + movementSpeed + 'px');
-                }
+                let parentWidth = $parent.width();
+                let parentHeight = $parent.height();
+                let elWidth = $el.outerWidth();
+                let elHeight = $el.outerHeight();
+    
+                if (keys[37] && pos.left > 0) $el.css('left', Math.max(0, pos.left - movementSpeed) + 'px');
+                if (keys[38] && pos.top > 0) $el.css('top', Math.max(0, pos.top - movementSpeed) + 'px');
+                if (keys[39] && pos.left + elWidth < parentWidth) 
+                    $el.css('left', Math.min(parentWidth - elWidth, pos.left + movementSpeed) + 'px');
+                if (keys[40] && pos.top + elHeight < parentHeight) 
+                    $el.css('top', Math.min(parentHeight - elHeight, pos.top + movementSpeed) + 'px');
+    
                 self.updateBackgroundImage($el.get(0));
             }
-
+    
+            function addResizeHandle($el) {
+                const handle = $('<div class="resize-handle"></div>');
+                $el.append(handle);
+    
+                handle.on('mousedown', function (e) {
+                    e.preventDefault();
+                    isResizing = true;
+    
+                    $(document).on('mousemove', resizeElement);
+                    $(document).on('mouseup', stopResizing);
+                });
+            }
+    
+            function resizeElement(e) {
+                if (!isResizing) return;
+                let $el = $('.snip.selected');
+                let $parent = $el.parent();
+                let parentWidth = $parent.width();
+                let parentHeight = $parent.height();
+                
+                let newWidth = Math.min(parentWidth - $el.position().left, e.pageX - $el.offset().left);
+                let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
+    
+                $el.css({
+                    width: Math.max(20, newWidth) + 'px',
+                    height: Math.max(20, newHeight) + 'px'
+                });
+            }
+    
+            function stopResizing() {
+                isResizing = false;
+                $(document).off('mousemove', resizeElement);
+                $(document).off('mouseup', stopResizing);
+            }
         });
-
     }
-
+    
 
     initPlaceHolderEvents() {
         const self = this;  // Store reference to `this`
@@ -254,27 +298,16 @@ class DragTarget {
             reader.readAsText(file);
         });
 
-        // Open Modal on Button Click
-        document.getElementById('open-snip-modal').addEventListener('click', () => {
-            const snipModal = new bootstrap.Modal(document.getElementById('snipModal'));
-            snipModal.show();
-        });
 
         // Handle "Create Snip" Button Click
-        document.getElementById('createSnipBtn').addEventListener('click', () => {
-            const snipType = document.getElementById('snipTypeSelect').value;
-            const snipId = document.getElementById('snipIdInput').value.trim();
-
-            if (!snipId) {
-                alert("Please enter a valid snip ID!");
-                return;
-            }
-
-            this.enableSnipCreation(snipType, snipId);
-
-            // Close Modal
-            bootstrap.Modal.getInstance(document.getElementById('snipModal')).hide();
+        document.getElementById('create-target').addEventListener('click', () => {
+            this.enableSnipCreation('target', this.targetCounter++);
         });
+
+        document.getElementById('create-draggable').addEventListener('click', () => {
+            this.enableSnipCreation('draggable', this.dragCounter++);
+        });
+
 
         document.getElementById('exportSnip').addEventListener('click', (e) => this.downloadConfigAsJSON());
         document.getElementById('importSnip').addEventListener('click', (e) => {
@@ -368,7 +401,7 @@ class DragTarget {
         this.currentSnip.style.left = `${this.startX}px`;
         this.currentSnip.style.top = `${this.startY}px`;
         this.currentSnip.style.border = this.snipType == "target" ? '1px dashed yellow' : '1px solid blue';
-        this.currentSnip.id = this.snipType + "-" + this.snipId;
+        this.currentSnip.id = (this.snipType == "target" ? "targ" : "drag")  + "-" + this.snipId;
 
         this.wrapper.appendChild(this.currentSnip);
     }
@@ -411,17 +444,7 @@ class DragTarget {
                 }
                 if (this.add_btn) {
                     // Add a delete button to the snip
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.innerText = 'Delete';
-                    deleteBtn.classList.add('delete-btn');
-                    deleteBtn.style.position = 'absolute';
-                    deleteBtn.style.right = '0';
-                    deleteBtn.style.top = '0';
-                    deleteBtn.style.zIndex = '1';
-                    deleteBtn.style.background = 'red';
-                    deleteBtn.style.color = 'white';
-                    deleteBtn.style.border = 'none';
-                    deleteBtn.style.cursor = 'pointer';
+                   const deleteBtn = this.getDeleteButton();
 
                     deleteBtn.addEventListener('click', (e) => {
                         e.stopPropagation();
