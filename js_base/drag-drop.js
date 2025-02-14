@@ -103,14 +103,7 @@ class DragTarget {
         }
 
         if (this.add_btn) {
-            // Add a delete button to the snip
-           const deleteBtn = this.getDeleteButton();
-
-            deleteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.deleteSnip(e.target.parentElement);
-            });
-            snip.appendChild(deleteBtn);
+            snip.appendChild(this.getDeleteButton());
         }
 
     }
@@ -138,6 +131,7 @@ class DragTarget {
         let interval;
         let keys = {};
         let isResizing = false;
+        let deleteItem = null;
     
         jQuery(document).ready(function ($) {
             $(document).on('click', '.snip', function () {
@@ -223,6 +217,20 @@ class DragTarget {
                 $(document).off('mousemove', resizeElement);
                 $(document).off('mouseup', stopResizing);
             }
+
+            $(document).on('click','.delete-btn',function(e){
+                e.preventDefault();
+                deleteItem = $(this).parent();
+                $('#deleteModal').modal('show');
+            });
+
+            $(document).on('click','#confirmDelete',function(e){
+                if(deleteItem!=null){
+                    deleteItem.remove();
+                }
+                $('#deleteModal').modal('hide');
+                self.resetSnipCreation();
+            });
         });
     }
     
@@ -443,11 +451,11 @@ class DragTarget {
         this.isSelecting = false;
 
         if (this.currentSnip) {
-            // If the snip is too small, remove it
+
             if (this.currentSnip.offsetWidth < 10 || this.currentSnip.offsetHeight < 10) {
-                this.deleteSnip(this.currentSnip); // Ensure snip is deleted if it's too small
+                this.deleteSnip(this.currentSnip);
             } else {
-                // Snip has been created successfully
+               
                 if (this.snipType === "draggable") {
                     this.updateBackgroundImage(this.currentSnip);
                     this.makeDraggable(this.currentSnip);
@@ -455,15 +463,7 @@ class DragTarget {
                     this.enableTargetSnip(this.currentSnip);
                 }
                 if (this.add_btn) {
-                    // Add a delete button to the snip
-                   const deleteBtn = this.getDeleteButton();
-
-                    deleteBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        this.deleteSnip(e.target.parentElement);
-                    });
-
-                    this.currentSnip.appendChild(deleteBtn);
+                    this.currentSnip.appendChild(this.getDeleteButton());
                 }
             }
         }
