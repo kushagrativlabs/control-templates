@@ -1,6 +1,8 @@
 class DragTarget {
     constructor(wrapper, imgUrl, enableEditing = true, height = 0, config = null, add_btn = true) {
         this.dragCounter= 0;
+        this.singleMatchInput = document.getElementById('singleDrop');
+        this.isOneToOne = true;
         this.targetCounter= 0;
         this.isPlaceHolder = true;
         this.fileInput = null;
@@ -22,6 +24,7 @@ class DragTarget {
         this.add_btn = add_btn;
         this.configs = config;
         this.mainImage.onload = () => this.init();
+        
     }
 
     static importConfig(wrapper, configs) {
@@ -45,6 +48,7 @@ class DragTarget {
         this.wrapper.appendChild(fileInput);
 
         this.initPlaceHolderEvents();
+    
     }
 
     setMainImage() {
@@ -319,6 +323,11 @@ class DragTarget {
         importInput.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent click event from bubbling up
         });
+
+        self.singleMatchInput.addEventListener('change',function(e){
+            self.isOneToOne = self.singleMatchInput.checked;
+        })
+    
     }
 
     exportConfigs() {
@@ -359,8 +368,11 @@ class DragTarget {
             width: this.wrapper.style.width,
             height: this.wrapper.style.height,
         };
+        const options =  {
+            OneToOneMatching:this.isOneToOne
+        }
 
-        const allConfigs = { drag_configs, target_configs, wrapper_config };
+        const allConfigs = { drag_configs, target_configs, wrapper_config ,options};
         console.log(allConfigs);
         return allConfigs; // Important: Return the array!
     }
@@ -469,7 +481,7 @@ class DragTarget {
 
             snip.style.backgroundImage = `url(${this.mainImage.src})`;
             snip.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
-            snip.style.backgroundPosition = `-${left}px -${top}px`;
+            snip.style.backgroundPosition = `-${left+2}px -${top+2}px`;
         }
 
     }
