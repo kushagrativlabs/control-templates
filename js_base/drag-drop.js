@@ -1,12 +1,13 @@
 class DragTarget {
+    targetColor ='#ffe000';
+    dragColor = '#158AEB';
+
     constructor(wrapper, imgUrl, enableEditing = true, height = 0, config = null, add_btn = true) {
-        this.dragCounter= 0;
+        this.dragCounter = 0;
         this.singleMatchInput = document.getElementById('singleDrop');
         this.isOneToOne = true;
-        this.targetCounter= 0;
-        this.isPlaceHolder = true;
-        this.fileInput = null;
-        this.width = 0;
+        this.targetCounter = 0;
+        this.isPlaceHolder = true; this.width = 0;
         this.height = height;
         this.wrapper = wrapper;
         this.mainImage = new Image();
@@ -24,7 +25,7 @@ class DragTarget {
         this.add_btn = add_btn;
         this.configs = config;
         this.mainImage.onload = () => this.init();
-        
+
     }
 
     static importConfig(wrapper, configs) {
@@ -39,16 +40,10 @@ class DragTarget {
 
         const fileInput = document.createElement("input");
         fileInput.type = "file";
+        fileInput.id = "imageInput";
         fileInput.accept = "image/*"; // Only accept image files
         fileInput.style.display = "none";
-
-        this.fileInput = fileInput;
-
-
         this.wrapper.appendChild(fileInput);
-
-        this.initPlaceHolderEvents();
-    
     }
 
     setMainImage() {
@@ -83,7 +78,7 @@ class DragTarget {
     addConfigSnap(config, makeDraggable = false) {
         const snip = document.createElement('div');
         snip.classList.add("snip");
-        snip.classList.add(config.classList.replace('snip', "").replace("selected","").trim());
+        snip.classList.add(config.classList.replace('snip', "").replace("selected", "").trim());
         snip.style.position = config.style_position;
         snip.style.left = config.style_left;
         snip.style.top = config.style_top;
@@ -116,7 +111,7 @@ class DragTarget {
         });
         return deleteBtn;
     }
-    
+
 
     initMouseEvents() {
         this.wrapper.addEventListener('mousedown', (e) => this.startSelection(e));
@@ -132,28 +127,28 @@ class DragTarget {
         let keys = {};
         let isResizing = false;
         let deleteItem = null;
-    
+
         jQuery(document).ready(function ($) {
             $(document).on('click', '.snip', function () {
                 const isSelected = $(this).hasClass('selected');
                 $('.snip').removeClass('selected');
                 $('.resize-handle').remove(); // Remove old handles
-    
+
                 if (!isSelected) {
                     $(this).addClass('selected');
                     addResizeHandle($(this)); // Add resize handle
                 }
             });
-    
+
             $(document).keydown(function (e) {
                 if ([37, 38, 39, 40].includes(e.which)) e.preventDefault();
-    
+
                 if (!keys[e.which]) {
                     keys[e.which] = true;
                     if (!interval) interval = setInterval(moveElement, 50);
                 }
             });
-    
+
             $(document).keyup(function (e) {
                 delete keys[e.which];
                 if ($.isEmptyObject(keys)) {
@@ -161,107 +156,140 @@ class DragTarget {
                     interval = null;
                 }
             });
-    
+
             function moveElement() {
                 let $el = $('.snip.selected');
                 if (!$el.length || isResizing) return;
-    
+
                 let $parent = $el.parent();
                 let pos = $el.position();
                 let parentWidth = $parent.width();
                 let parentHeight = $parent.height();
                 let elWidth = $el.outerWidth();
                 let elHeight = $el.outerHeight();
-    
+
                 if (keys[37] && pos.left > 0) $el.css('left', Math.max(0, pos.left - movementSpeed) + 'px');
                 if (keys[38] && pos.top > 0) $el.css('top', Math.max(0, pos.top - movementSpeed) + 'px');
-                if (keys[39] && pos.left + elWidth < parentWidth) 
+                if (keys[39] && pos.left + elWidth < parentWidth)
                     $el.css('left', Math.min(parentWidth - elWidth, pos.left + movementSpeed) + 'px');
-                if (keys[40] && pos.top + elHeight < parentHeight) 
+                if (keys[40] && pos.top + elHeight < parentHeight)
                     $el.css('top', Math.min(parentHeight - elHeight, pos.top + movementSpeed) + 'px');
-    
+
                 self.updateBackgroundImage($el.get(0));
             }
-    
+
             function addResizeHandle($el) {
                 const handle = $('<div class="resize-handle"></div>');
                 $el.append(handle);
-    
+
                 handle.on('mousedown', function (e) {
                     e.preventDefault();
                     isResizing = true;
-    
+
                     $(document).on('mousemove', resizeElement);
                     $(document).on('mouseup', stopResizing);
                 });
             }
-    
+
             function resizeElement(e) {
                 if (!isResizing) return;
                 let $el = $('.snip.selected');
                 let $parent = $el.parent();
                 let parentWidth = $parent.width();
                 let parentHeight = $parent.height();
-                
+
                 let newWidth = Math.min(parentWidth - $el.position().left, e.pageX - $el.offset().left);
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
-    
+
                 $el.css({
                     width: Math.max(20, newWidth) + 'px',
                     height: Math.max(20, newHeight) + 'px'
                 });
             }
-    
+
             function stopResizing() {
                 isResizing = false;
                 $(document).off('mousemove', resizeElement);
                 $(document).off('mouseup', stopResizing);
             }
 
-            $(document).on('click','.delete-btn',function(e){
+            $(document).on('click', '.delete-btn', function (e) {
                 e.preventDefault();
                 deleteItem = $(this).parent();
                 $('#deleteModal').modal('show');
             });
 
-            $(document).on('click','#confirmDelete',function(e){
-                if(deleteItem!=null){
+            $(document).on('click', '#confirmDelete', function (e) {
+                if (deleteItem != null) {
                     deleteItem.remove();
                 }
                 $('#deleteModal').modal('hide');
                 self.resetSnipCreation();
             });
+
+            $(document).on('change', '#imageInput', function (e) {
+
+                var fileInput = this;
+
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = new Image();
+                        img.src = e.target.result;
+                        self.mainImage = img;
+                        img.onload = function () {
+                            self.setMainImage();
+                        };
+                        self.isPlaceHolder = false;
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+
+            });
+
+            $(document).on('click', '#changeBaseImage', function (e) {
+                if ($('.snip').length != 0) {
+                    alertWarning('Please clear all the existing snip before updating this base image');
+                    return
+                }
+                $('#imageInput').click();
+            });
+
+            $(document).on('click', '#create-draggable', function (e) {
+                if (self.isPlaceHolder) {
+                    alertWarning('Please select base image.');
+                    return
+                }
+                self.enableSnipCreation('draggable', this.dragCounter++);
+            });
+
+            $(document).on('click', '#create-target', function (e) {
+                if (self.isPlaceHolder) {
+                    alertWarning('Please select base image.');
+                    return
+                }
+                self.enableSnipCreation('target', this.targetCounter++);
+            });
+
+            $(document).on('click', '#exportSnip', function (e) {
+                if (self.isPlaceHolder) {
+                    alertWarning('Please select base image.');
+                    return
+                }
+                self.downloadConfigAsJSON();
+            });
+
+            document.getElementById('importSnip').addEventListener('click', (e) => {
+                if ($('.snip').length != 0) {
+                    alertWarning('Please clear all the existing snip before importing');
+                    return
+                }
+                $('#jsonFileInput').click(); // Trigger file input click
+            });
+
         });
     }
-    
 
-    initPlaceHolderEvents() {
-        const self = this;  // Store reference to `this`
-
-        this.wrapper.addEventListener('click', function () {
-            if (self.isPlaceHolder) {
-                self.fileInput.click();
-
-            }
-        });
-
-        this.fileInput.addEventListener('change', function () {
-            if (self.fileInput.files && self.fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const img = new Image();
-                    img.src = e.target.result;
-                    self.mainImage = img;
-                    img.onload = (e) => {
-                        self.setMainImage();
-                    }
-                    self.isPlaceHolder = false;
-                };
-
-                reader.readAsDataURL(self.fileInput.files[0]);
-            }
-        });
-    }
 
     initCommonEvents() {
         const self = this;
@@ -286,56 +314,41 @@ class DragTarget {
             let reader = new FileReader();
             reader.onload = function (e) {
                 try {
-                    
+
                     let jsonData = JSON.parse(e.target.result); // Parse JSON
                     console.log(e.target.result);
                     self.configs = jsonData;
                     self.enableEditing = true;
-                
-                        const img = new Image();
-                        img.src = jsonData.wrapper_config.backgroundImage;
-                        img.height = parseInt(jsonData.wrapper_config.height.replace("px",""));
-                        img.width =  parseInt(jsonData.wrapper_config.width.replace("px",""));
-                        self.mainImage = img;
-                        self.setMainImage();
-                        self.isPlaceHolder = false;
-                        self.handleConfigs(jsonData)
+
+                    const img = new Image();
+                    img.src = jsonData.wrapper_config.backgroundImage;
+                    img.height = parseInt(jsonData.wrapper_config.height.replace("px", ""));
+                    img.width = parseInt(jsonData.wrapper_config.width.replace("px", ""));
+                    self.mainImage = img;
+                    self.setMainImage();
+                    self.isPlaceHolder = false;
+                    self.handleConfigs(jsonData)
 
                     // DragTarget(wrapper, configs.wrapper_config.backgroundImage, true, configs.wrapper_config.height, config, false);
                 } catch (error) {
-                  console.log(error)
+                    console.log(error)
 
                 }
             };
             reader.readAsText(file);
         });
 
+     
 
-        // Handle "Create Snip" Button Click
-        document.getElementById('create-target').addEventListener('click', () => {
-            this.enableSnipCreation('target', this.targetCounter++);
-        });
-
-        document.getElementById('create-draggable').addEventListener('click', () => {
-            this.enableSnipCreation('draggable', this.dragCounter++);
-        });
-
-
-        document.getElementById('exportSnip').addEventListener('click', (e) => this.downloadConfigAsJSON());
-        document.getElementById('importSnip').addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent event bubbling
-            importInput.click(); // Trigger file input click
-        });
-        
         // Stop event propagation on file input
         importInput.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent click event from bubbling up
         });
 
-        self.singleMatchInput.addEventListener('change',function(e){
+        self.singleMatchInput.addEventListener('change', function (e) {
             self.isOneToOne = self.singleMatchInput.checked;
         })
-    
+
     }
 
     exportConfigs() {
@@ -376,11 +389,11 @@ class DragTarget {
             width: this.wrapper.style.width,
             height: this.wrapper.style.height,
         };
-        const options =  {
-            OneToOneMatching:this.isOneToOne
+        const options = {
+            OneToOneMatching: this.isOneToOne
         }
 
-        const allConfigs = { drag_configs, target_configs, wrapper_config ,options};
+        const allConfigs = { drag_configs, target_configs, wrapper_config, options };
         console.log(allConfigs);
         return allConfigs; // Important: Return the array!
     }
@@ -420,8 +433,8 @@ class DragTarget {
         this.currentSnip.style.position = 'absolute';
         this.currentSnip.style.left = `${this.startX}px`;
         this.currentSnip.style.top = `${this.startY}px`;
-        this.currentSnip.style.border = this.snipType == "target" ? '1px dashed yellow' : '1px solid blue';
-        this.currentSnip.id = (this.snipType == "target" ? "targ" : "drag")  + "-" + this.snipId;
+        this.currentSnip.style.border = this.snipType == "target" ? `2px dashed ${this.targetColor}` : `2px solid ${this.dragColor}`;
+        this.currentSnip.id = (this.snipType == "target" ? "targ" : "drag") + "-" + this.snipId;
 
         this.wrapper.appendChild(this.currentSnip);
     }
@@ -455,7 +468,7 @@ class DragTarget {
             if (this.currentSnip.offsetWidth < 10 || this.currentSnip.offsetHeight < 10) {
                 this.deleteSnip(this.currentSnip);
             } else {
-               
+
                 if (this.snipType === "draggable") {
                     this.updateBackgroundImage(this.currentSnip);
                     this.makeDraggable(this.currentSnip);
@@ -481,7 +494,7 @@ class DragTarget {
 
             snip.style.backgroundImage = `url(${this.mainImage.src})`;
             snip.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
-            snip.style.backgroundPosition = `-${left+2}px -${top+2}px`;
+            snip.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
         }
 
     }
