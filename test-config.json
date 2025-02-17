@@ -1,0 +1,31 @@
+{
+	"img": {
+		"width": 800,			
+		"height": 800			
+	},
+	"areas": [
+		{
+			"id": "targ-1",
+			"type": 1,		
+			"width": 100,		
+			"height": 15,		
+			"x": 50,		
+			"y": 50	
+		}
+		
+	],
+	"match": [
+		{"targ-1": "drag-1"}
+	
+	],
+	"points": [
+		{"targ-1": 40},
+		{"drag-1": 0}
+		
+	],
+	"options": {
+		"FixedWidth": true,
+		"FixedHeight": true,
+		"OneToOneMatching": true
+	}
+}

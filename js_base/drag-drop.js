@@ -64,15 +64,34 @@ class DragTarget {
     }
 
     handleConfigs(configs) {
-        for (const config of configs.drag_configs) {
-            this.addConfigSnap(config, true);
-            this.dragCounter++;
+        const self = this;
+        for (const config of configs.areas) {
+            const isTarget = config.type==1;
+            const snip = document.createElement('div');
+            snip.classList.add("snip");
+            snip.classList.add((isTarget ? 'target' : 'draggable'));
+            snip.style.left = config.x;
+            snip.style.top = config.y;
+            snip.id = config.id;
+            snip.style.height = config.height;
+            snip.style.width = config.width;
+            this.wrapper.appendChild(snip);
+    
+            if (!isTarget) {
+                snip.style.backgroundImage = `url(${this.mainImage.src})`;
+                snip.style.backgroundSize = config.backgroundSize;
+                snip.style.backgroundPosition = config.backgroundPosition;
+                self.makeDraggable(snip)
+            } else {
+                self.enableTargetSnip(snip);
+            }
+    
+            if (this.add_btn) {
+                snip.appendChild(this.getDeleteButton());
+            }
         }
 
-        for (const config of configs.target_configs) {
-            this.targetCounter++;
-            this.addConfigSnap(config, false);
-        }
+      
     }
 
     addConfigSnap(config, makeDraggable = false) {
@@ -241,6 +260,7 @@ class DragTarget {
                             self.setMainImage();
                         };
                         self.isPlaceHolder = false;
+                        self.configs = null;
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 }
@@ -260,7 +280,7 @@ class DragTarget {
                     alertWarning('Please select base image.');
                     return
                 }
-                self.enableSnipCreation('draggable', this.dragCounter++);
+                self.enableSnipCreation('draggable');
             });
 
             $(document).on('click', '#create-target', function (e) {
@@ -268,7 +288,8 @@ class DragTarget {
                     alertWarning('Please select base image.');
                     return
                 }
-                self.enableSnipCreation('target', this.targetCounter++);
+                
+                self.enableSnipCreation('target');
             });
 
             $(document).on('click', '#exportSnip', function (e) {
@@ -316,7 +337,6 @@ class DragTarget {
                 try {
 
                     let jsonData = JSON.parse(e.target.result); // Parse JSON
-                    console.log(e.target.result);
                     self.configs = jsonData;
                     self.enableEditing = true;
 
@@ -356,13 +376,22 @@ class DragTarget {
         const drag_configs = [];
         const target_configs = [];
 
+        const areas = [];
+
         for (const draggable of draggables) {
             const dragConfig = {};
+            const area = {};
+            area.id = draggable.id;
+            area.type = draggable.className.includes('target') ? 1 : 2;
+            area.height = draggable.style.height;
+            area.width = draggable.style.width;
+            area.x=draggable.style.left;
+            area.y = draggable.style.top;
+        
 
-            // Correctly store class names.  classList returns a DOMTokenList, not a string.  Use className.
-            dragConfig.classList = draggable.className; // or draggable.classList.toString();
+            dragConfig.classList = draggable.className;
             dragConfig.style_position = draggable.style.position;
-            dragConfig.style_left = draggable.style.left;
+            dragConfig.style_left =draggable.style.left ;
             dragConfig.style_top = draggable.style.top;
             dragConfig.style_border = draggable.style.border;
             dragConfig.style_height = draggable.style.height;
@@ -378,11 +407,14 @@ class DragTarget {
                 dragConfig.backgroundPosition = `-${left}px -${top}px`;
                 dragConfig.border = '1px solid black';
                 drag_configs.push(dragConfig);
+                area.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
+                area.backgroundPosition = `-${left}px -${top}px`;
             }
+            areas.push(area);
 
         }
         const wrapper_config = {
-            backgroundImage: this.getBase64Image(this.mainImage),  // Convert image to Base64
+            backgroundImage: this.configs!=null ? this.configs.wrapper_config.backgroundImage : this.getBase64Image(this.mainImage),  // Convert image to Base64
             backgroundSize: this.wrapper.style.backgroundSize,
             backgroundRepeat: this.wrapper.style.backgroundRepeat,
             position: this.wrapper.style.position,
@@ -393,7 +425,7 @@ class DragTarget {
             OneToOneMatching: this.isOneToOne
         }
 
-        const allConfigs = { drag_configs, target_configs, wrapper_config, options };
+        const allConfigs = {wrapper_config, areas, options };
         console.log(allConfigs);
         return allConfigs; // Important: Return the array!
     }
@@ -410,6 +442,13 @@ class DragTarget {
         document.body.removeChild(link);
     }
     getBase64Image(img) {
+
+        const bgImage = img.src;
+        console.log(bgImage);
+        if (bgImage.startsWith('url("data:image')) {
+            return bgImage; // Extract the actual data URL
+        }
+        
         const canvas = document.createElement("canvas");
         canvas.width = img.width;
         canvas.height = img.height;
@@ -434,7 +473,7 @@ class DragTarget {
         this.currentSnip.style.left = `${this.startX}px`;
         this.currentSnip.style.top = `${this.startY}px`;
         this.currentSnip.style.border = this.snipType == "target" ? `2px dashed ${this.targetColor}` : `2px solid ${this.dragColor}`;
-        this.currentSnip.id = (this.snipType == "target" ? "targ" : "drag") + "-" + this.snipId;
+        this.currentSnip.id = (this.snipType == "target" ? ("targ-"+this.targetCounter++) : ("drag-"+this.dragCounter++));
 
         this.wrapper.appendChild(this.currentSnip);
     }
@@ -510,8 +549,7 @@ class DragTarget {
         this.resetCursor(); // Reset the cursor when snip is finished or deleted
     }
 
-    enableSnipCreation(type, snipId) {
-        this.snipId = snipId;
+    enableSnipCreation(type) {
         if (this.isCreatingSnip) {
             this.resetSnipCreation(); // Reset any ongoing snip creation
         }
@@ -558,9 +596,13 @@ class DragTarget {
         event.preventDefault();
         const snipId = event.dataTransfer.getData("text");
         const draggedSnip = document.getElementById(snipId);
-        console.log(snipId);
+        if (targetWrapper.querySelector('.value')) {
+            return;
+        }
         if (draggedSnip) {
             const clonedSnip = draggedSnip.cloneNode(true);
+            clonedSnip.classList.remove('snip','draggable');
+            clonedSnip.classList.add('value');
             clonedSnip.style.left = `auto`;
             clonedSnip.style.top = `auto`;
             clonedSnip.style.border = 'none';
