@@ -161,9 +161,16 @@
 				cursor: nwse-resize;
 			}
 
-			#singleDrop {
+			.showCheckbox {
 				opacity: 1 !important;
 				margin: 0px !important;
+			}
+			.check-box-wrapper{
+				display: flex;
+				gap: 16px;
+			}
+			.check-box-wrapper label{
+				display: flex;
 			}
 		</style>
 		<div class="content">
@@ -244,11 +251,13 @@
 								<button type="button" id="importSnip" class="btn btn-secondary">Import Configs</button>
 
 								<br><br><br>
-								<label><input type="checkbox" id="singleDrop" name="singleDrop" checked>ONE TO
-									ONE</label><br><br>
-								<!-- <label><input type="checkbox" id="fixedHeight"  name="fixedHeight" checked>Fixed Height</label><br><br>
-								<label><input type="checkbox" id="fixedWidth"  name="fixedWidth" checked>Fixed Width</label><br><br> -->
-
+								<div class="check-box-wrapper">
+									<label><input type="checkbox" id="singleDrop" name="singleDrop" checked class="showCheckbox">ONE TO
+										ONE</label><br><br>
+									<label><input type="checkbox" id="fixedHeight"  name="fixedHeight" checked class="showCheckbox" >Fixed Height</label><br><br>
+									<label><input type="checkbox" id="fixedWidth"  name="fixedWidth" checked class="showCheckbox">Fixed Width</label><br><br>
+	
+								</div>
 							</div>
 						</div>
 						<div id="deleteModal" class="modal fade" role="dialog">

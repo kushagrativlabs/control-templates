@@ -5,6 +5,10 @@ class DragTarget {
     constructor(wrapper, imgUrl, enableEditing = true, height = 0, config = null, add_btn = true) {
         this.dragCounter = 0;
         this.singleMatchInput = document.getElementById('singleDrop');
+        this.fixedHeight = true;
+        this.fixedWidth = true;
+        this.fixedHeightInput = document.getElementById('fixedHeight');
+        this.fixedWidthInput = document.getElementById('fixedWidth');
         this.isOneToOne = true;
         this.targetCounter = 0;
         this.isPlaceHolder = true; this.width = 0;
@@ -92,7 +96,14 @@ class DragTarget {
         }
         
         self.isOneToOne  = configs.options.OneToOneMatching;
-        self.singleMatchInput.checked = self.isOneToOne;      
+        self.singleMatchInput.checked = self.isOneToOne;   
+        
+
+        self.fixedHeight  = configs.options.FixedHeight;
+        self.fixedHeightInput.checked = self.fixedHeight;   
+
+        self.fixedWidth  = configs.options.FixedWidth;
+        self.fixedWidthInput.checked = self.fixedWidth;   
     }
 
     addConfigSnap(config, makeDraggable = false) {
@@ -213,18 +224,38 @@ class DragTarget {
 
             function resizeElement(e) {
                 if (!isResizing) return;
+            
                 let $el = $('.snip.selected');
                 let $parent = $el.parent();
                 let parentWidth = $parent.width();
                 let parentHeight = $parent.height();
-
+            
+                // Get the current width and height based on mouse position
                 let newWidth = Math.min(parentWidth - $el.position().left, e.pageX - $el.offset().left);
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
-
-                $el.css({
-                    width: Math.max(20, newWidth) + 'px',
-                    height: Math.max(20, newHeight) + 'px'
-                });
+            
+                // If both fixedWidth and fixedHeight are false, allow resizing based on height
+                if (!self.fixedHeight && !self.fixedWidth) {
+                    $el.css({
+                        width: Math.max(20, newWidth) + 'px', // Allow resizing width
+                        height: Math.max(20, newHeight) + 'px' // Allow resizing height
+                    });
+                }
+                // If fixedWidth is false, allow resizing width based on mouse position
+                else if (!self.fixedWidth) {
+                    $el.css({
+                        width: Math.max(20, newWidth) + 'px' // Allow resizing width
+                    });
+                }
+                // If fixedHeight is false, allow resizing height based on mouse position
+                else if (!self.fixedHeight) {
+                    $el.css({
+                        height: Math.max(20, newHeight) + 'px' // Allow resizing height
+                    });
+                }
+                if(self.fixedHeight && self.fixedWidth){
+                    alertWarning('Fixed height and width enabled. You cannot resize the area');
+                }
             }
 
             function stopResizing() {
@@ -368,7 +399,14 @@ class DragTarget {
 
         self.singleMatchInput.addEventListener('change', function (e) {
             self.isOneToOne = self.singleMatchInput.checked;
-        })
+        });
+
+        self.fixedHeightInput.addEventListener('change', function (e) {
+            self.fixedHeight = self.fixedHeightInput.checked;
+        });
+        self.fixedWidthInput.addEventListener('change', function (e) {
+            self.fixedWidth = self.fixedWidthInput.checked;
+        });
 
     }
 
@@ -423,7 +461,10 @@ class DragTarget {
             height: this.wrapper.style.height,
         };
         const options = {
-            OneToOneMatching: this.isOneToOne
+            OneToOneMatching: this.isOneToOne,
+            FixedHeight:this.fixedHeight,
+            FixedWidth:this.fixedWidth
+
         }
 
         const allConfigs = {wrapper_config, areas, options };
