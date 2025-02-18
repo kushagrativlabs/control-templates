@@ -90,8 +90,9 @@ class DragTarget {
                 snip.appendChild(this.getDeleteButton());
             }
         }
-
-      
+        
+        self.isOneToOne  = configs.options.OneToOneMatching;
+        self.singleMatchInput.checked = self.isOneToOne;      
     }
 
     addConfigSnap(config, makeDraggable = false) {
@@ -619,7 +620,11 @@ class DragTarget {
                 }
             });
             wrapper.dispatchEvent(dropEvent);
-            targetWrapper.appendChild(clonedSnip);  // Add cloned snip to target wrapper
+            targetWrapper.appendChild(clonedSnip);
+            if(this.isOneToOne){
+                draggedSnip.style.display = "none";
+                draggedSnip.classList.addClass="is_dragged";
+            }
         }
     }
 
