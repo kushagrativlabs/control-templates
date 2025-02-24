@@ -1,5 +1,5 @@
 class DragTarget {
-    targetColor ='#ffe000';
+    targetColor = '#ffe000';
     dragColor = '#158AEB';
 
     constructor(wrapper, imgUrl, enableEditing = true, height = 0, config = null, add_btn = true) {
@@ -9,8 +9,13 @@ class DragTarget {
         this.fixedWidth = true;
         this.fixedHeightInput = document.getElementById('fixedHeight');
         this.fixedWidthInput = document.getElementById('fixedWidth');
-        this.mapItem  = false;
-        this.map={};
+        this.undoBtn = document.getElementById('undoBtn');
+        this.redoBtn = document.getElementById('redoBtn');
+        this.currentDrag = "";
+        this.undo = [];
+        this.redo = [];
+        this.mapItem = false;
+        this.map = {};
         this.isOneToOne = true;
         this.targetCounter = 0;
         this.isPlaceHolder = true; this.width = 0;
@@ -33,6 +38,36 @@ class DragTarget {
         this.mainImage.onload = () => this.init();
 
     }
+
+    addUndo(data) {
+        this.undo.push(data);
+        this.undoBtn.style.display = this.undo.length != 0 ? "block" : "none";
+    }
+
+    removeUndo() {
+        if (this.undo.length === 0) return null; // Return null if no items exist
+
+        const lastItem = this.undo.pop(); // Remove and get last item
+        this.undoBtn.style.display = this.undo.length !== 0 ? "block" : "none";
+        this.addRedo(lastItem);
+        return lastItem; // Return the removed item
+    }
+
+    addRedo(data) {
+        this.redo.push(data);
+        this.redoBtn.style.display = this.redo.length != 0 ? "block" : "none";
+    }
+
+    removeRedo() {
+        if (this.redo.length === 0) return null; // Return null if no items exist
+
+        const lastItem = this.redo.pop(); // Remove and get last item
+        this.redoBtn.style.display = this.redo.length !== 0 ? "block" : "none";
+        this.addUndo(lastItem);
+        return lastItem; // Return the removed item
+    }
+
+
 
     static importConfig(wrapper, configs) {
         return new DragTarget(wrapper, configs.wrapper_config.backgroundImage, true, configs.wrapper_config.height, config, false);
@@ -72,7 +107,7 @@ class DragTarget {
     handleConfigs(configs) {
         const self = this;
         for (const config of configs.areas) {
-            const isTarget = config.type==1;
+            const isTarget = config.type == 1;
             const snip = document.createElement('div');
             snip.classList.add("snip");
             snip.classList.add((isTarget ? 'target' : 'draggable'));
@@ -82,7 +117,7 @@ class DragTarget {
             snip.style.height = config.height;
             snip.style.width = config.width;
             this.wrapper.appendChild(snip);
-    
+
             if (!isTarget) {
                 snip.style.backgroundImage = `url(${this.mainImage.src})`;
                 snip.style.backgroundSize = config.backgroundSize;
@@ -91,21 +126,21 @@ class DragTarget {
             } else {
                 self.enableTargetSnip(snip);
             }
-    
+
             if (this.add_btn) {
                 snip.appendChild(this.getDeleteButton());
             }
         }
-        
-        self.isOneToOne  = configs.options.OneToOneMatching;
-        self.singleMatchInput.checked = self.isOneToOne;   
-        
 
-        self.fixedHeight  = configs.options.FixedHeight;
-        self.fixedHeightInput.checked = self.fixedHeight;   
+        self.isOneToOne = configs.options.OneToOneMatching;
+        self.singleMatchInput.checked = self.isOneToOne;
 
-        self.fixedWidth  = configs.options.FixedWidth;
-        self.fixedWidthInput.checked = self.fixedWidth;   
+
+        self.fixedHeight = configs.options.FixedHeight;
+        self.fixedHeightInput.checked = self.fixedHeight;
+
+        self.fixedWidth = configs.options.FixedWidth;
+        self.fixedWidthInput.checked = self.fixedWidth;
     }
 
     addConfigSnap(config, makeDraggable = false) {
@@ -226,16 +261,16 @@ class DragTarget {
 
             function resizeElement(e) {
                 if (!isResizing) return;
-            
+
                 let $el = $('.snip.selected');
                 let $parent = $el.parent();
                 let parentWidth = $parent.width();
                 let parentHeight = $parent.height();
-            
+
                 // Get the current width and height based on mouse position
                 let newWidth = Math.min(parentWidth - $el.position().left, e.pageX - $el.offset().left);
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
-            
+
                 // If both fixedWidth and fixedHeight are false, allow resizing based on height
                 if (!self.fixedHeight && !self.fixedWidth) {
                     $el.css({
@@ -255,7 +290,7 @@ class DragTarget {
                         height: Math.max(20, newHeight) + 'px' // Allow resizing height
                     });
                 }
-                if(self.fixedHeight && self.fixedWidth){
+                if (self.fixedHeight && self.fixedWidth) {
                     alertWarning('Fixed height and width enabled. You cannot resize the area');
                 }
             }
@@ -322,7 +357,7 @@ class DragTarget {
                     alertWarning('Please select base image.');
                     return
                 }
-                
+
                 self.enableSnipCreation('target');
             });
 
@@ -330,36 +365,39 @@ class DragTarget {
                 if (self.isPlaceHolder) {
                     alertWarning('Please select base image.');
                     return
+                }else if ($('.snip.target').length < 1 || $('.snip.draggable').length < 2) {
+                    alertWarning('At least 1 target and 2 draggable areas required.');
+                    return
                 }
                 self.downloadConfigAsJSON();
             });
 
-            $(document).on('click','#resetAllConfig',function(e){
-                $('.snip').each(function(index,element){
+            $(document).on('click', '#resetAllConfig', function (e) {
+                $('.snip').each(function (index, element) {
                     $(element).remove();
                 });
             });
 
-            $(document).on('click','#resetValues',function(e){
-                $('.snip.draggable').each(function(index,element){
+            $(document).on('click', '#resetValues', function (e) {
+                $('.snip.draggable').each(function (index, element) {
                     $(element).show();
                 });
 
-                $('.snip.target').each(function(index,element){
+                $('.snip.target').each(function (index, element) {
                     $(element).find('.value').remove();
                 });
             });
 
-            $(document).on('click',"#mapItems",function(e){
+            $(document).on('click', "#mapItems", function (e) {
                 self.mapItem = $(this).prop('checked');
                 const isEnabled = self.mapItem;
                 isEnabled ? $('body').addClass('map') : $('body').removeClass('map');
-                if(!isEnabled){
-                    $('.snip.draggable').each(function(index,element){
+                if (!isEnabled) {
+                    $('.snip.draggable').each(function (index, element) {
                         $(element).show();
                     });
-    
-                    $('.snip.target').each(function(index,element){
+
+                    $('.snip.target').each(function (index, element) {
                         $(element).find('.value').remove();
                     });
                 }
@@ -373,9 +411,48 @@ class DragTarget {
                 $('#jsonFileInput').click(); // Trigger file input click
             });
 
+            $(self.undoBtn).on('click', function (e) {
+                const lastChild = self.removeUndo();
+                const target = $(`#${lastChild.target}`);
+                const draggable = $(`#${lastChild.draggable}`);
+                const beforeHtml = lastChild.beforeHtml;
+                target.html(beforeHtml);
+                draggable.show();
+
+            });
+
+            $(self.redoBtn).on('click', function (e) {
+                const lastChild = self.removeRedo();
+                const target = $(`#${lastChild.target}`);
+                const draggable = $(`#${lastChild.draggable}`);
+                const afterHtml = lastChild.afterHtml;
+                target.html(afterHtml);
+                lastChild.shouldHide ? draggable.hide() : draggable.show();
+
+            });
+            $(document).on('click', '.snip.draggable', function (e) {
+                e.stopPropagation();
+                self.currentDrag = this.id;
+            });
+
+            $(document).on('click', '.snip.target', function (e) {
+                e.stopPropagation();
+                const target = document.getElementById(this.id);
+                if (self.currentDrag != "") {
+                    $(this).removeClass('selected');
+                    $(this).find('.resize-handle').remove();
+                    self.handleDrop(self.currentDrag, target);
+
+                }
+            });
+            $(document).on('click', 'html', function (e) {
+                self.currentDrag = '';
+
+            });
 
 
         });
+
     }
 
 
@@ -425,7 +502,7 @@ class DragTarget {
             reader.readAsText(file);
         });
 
-     
+
 
         // Stop event propagation on file input
         importInput.addEventListener('click', (e) => {
@@ -459,13 +536,13 @@ class DragTarget {
             area.type = draggable.className.includes('target') ? 1 : 2;
             area.height = draggable.style.height;
             area.width = draggable.style.width;
-            area.x=draggable.style.left;
+            area.x = draggable.style.left;
             area.y = draggable.style.top;
-        
+
 
             dragConfig.classList = draggable.className;
             dragConfig.style_position = draggable.style.position;
-            dragConfig.style_left =draggable.style.left ;
+            dragConfig.style_left = draggable.style.left;
             dragConfig.style_top = draggable.style.top;
             dragConfig.style_border = draggable.style.border;
             dragConfig.style_height = draggable.style.height;
@@ -488,7 +565,7 @@ class DragTarget {
 
         }
         const wrapper_config = {
-            backgroundImage: this.configs!=null ? this.configs.wrapper_config.backgroundImage : this.getBase64Image(this.mainImage),  // Convert image to Base64
+            backgroundImage: this.configs != null ? this.configs.wrapper_config.backgroundImage : this.getBase64Image(this.mainImage),  // Convert image to Base64
             backgroundSize: this.wrapper.style.backgroundSize,
             backgroundRepeat: this.wrapper.style.backgroundRepeat,
             position: this.wrapper.style.position,
@@ -497,18 +574,18 @@ class DragTarget {
         };
         const options = {
             OneToOneMatching: this.isOneToOne,
-            FixedHeight:this.fixedHeight,
-            FixedWidth:this.fixedWidth
+            FixedHeight: this.fixedHeight,
+            FixedWidth: this.fixedWidth
 
         }
         const matching = [];
         const keys = Object.keys(this.map);
         keys.forEach(key => {
             const obj = {};
-            obj[key] =  this.map[key];
+            obj[key] = this.map[key];
             matching.push(obj);
         });
-        const allConfigs = {wrapper_config, areas, options,matching };
+        const allConfigs = { wrapper_config, areas, options, matching };
         return allConfigs; // Important: Return the array!
     }
     downloadConfigAsJSON() {
@@ -526,11 +603,10 @@ class DragTarget {
     getBase64Image(img) {
 
         const bgImage = img.src;
-        console.log(bgImage);
         if (bgImage.startsWith('url("data:image')) {
             return bgImage; // Extract the actual data URL
         }
-        
+
         const canvas = document.createElement("canvas");
         canvas.width = img.width;
         canvas.height = img.height;
@@ -555,7 +631,7 @@ class DragTarget {
         this.currentSnip.style.left = `${this.startX}px`;
         this.currentSnip.style.top = `${this.startY}px`;
         this.currentSnip.style.border = this.snipType == "target" ? `2px dashed ${this.targetColor}` : `2px solid ${this.dragColor}`;
-        this.currentSnip.id = (this.snipType == "target" ? ("targ-"+this.targetCounter++) : ("drag-"+this.dragCounter++));
+        this.currentSnip.id = (this.snipType == "target" ? ("targ-" + this.targetCounter++) : ("drag-" + this.dragCounter++));
 
         this.wrapper.appendChild(this.currentSnip);
     }
@@ -676,22 +752,28 @@ class DragTarget {
     onDrop(event, targetWrapper) {
         event.preventDefault();
         const snipId = event.dataTransfer.getData("text");
-        const draggedSnip = document.getElementById(snipId);
+        this.handleDrop(snipId, targetWrapper);
+    }
 
-        if(this.mapItem){
+
+    handleDrop(snipId, targetWrapper) {
+        const draggedSnip = document.getElementById(snipId);
+        if (this.mapItem) {
             const id = targetWrapper.id;
             this.map[id] = snipId;
         }
+        let beforeHtml = targetWrapper.innerHTML;
         if (targetWrapper.querySelector('.value') && !this.mapItem) {
             return;
         }
         if (draggedSnip) {
             const clonedSnip = draggedSnip.cloneNode(true);
-            clonedSnip.classList.remove('snip','draggable');
+            clonedSnip.classList.remove('snip', 'draggable');
             clonedSnip.classList.add('value');
             clonedSnip.style.left = `auto`;
             clonedSnip.style.top = `auto`;
             clonedSnip.style.border = 'none';
+            clonedSnip.style.opacity = "0.5";
             try {
                 clonedSnip.querySelector('.delete-btn').remove();
             } catch (error) {
@@ -706,11 +788,17 @@ class DragTarget {
             });
             wrapper.dispatchEvent(dropEvent);
             targetWrapper.appendChild(clonedSnip);
-            if(this.isOneToOne && !this.mapItem){
+            let shouldHide = false
+            if (this.isOneToOne && !this.mapItem) {
                 draggedSnip.style.display = "none";
-                draggedSnip.classList.addClass="is_dragged";
+                draggedSnip.classList.addClass = "is_dragged";
+                shouldHide = true;
             }
+            const afterHtml = targetWrapper.innerHTML;
+            this.addUndo({ draggable: draggedSnip.id, target: targetWrapper.id, shouldHide, beforeHtml, afterHtml });
+
         }
+
     }
 
     getAllValues() {

@@ -190,6 +190,13 @@
 			.check-box-wrapper label{
 				display: flex;
 			}
+			.buttons-wrapper{
+				display:flex;
+				/* justify-content: space-between; */
+				align-items: center;
+				gap: 10px;
+				flex-wrap: wrap;
+			}
 		</style>
 		<div class="content">
 			<div class="container">
@@ -259,17 +266,21 @@
 								</div>
 								<!-- <img src="/drag-drop/img/drag-drop/img-example-1.png" nozoom="1"> -->
 								<br><br>
-								<button type="button" id="changeBaseImage" class="btn btn-secondary">Update
-									Image</button>
-								<button type="button" id="create-target" class="btn btn-secondary">Create
-									Target</button>
-								<button type="button" id="create-draggable" class="btn btn-secondary">Create
-									Draggable</button>
-								<button type="button" id="exportSnip" class="btn btn-secondary">Export Configs</button>
-								<button type="button" id="importSnip" class="btn btn-secondary">Import Configs</button>
-								<button type="button" id="resetValues" class="btn btn-secondary">Reset Value</button>
-								<button type="button" id="resetAllConfig" class="btn btn-secondary">Reset All Configs</button>
-
+								<div class="buttons-wrapper">
+									<button type="button" id="changeBaseImage" class="btn btn-secondary">Update
+										Image</button>
+									<button type="button" id="create-target" class="btn btn-secondary">Create
+										Target</button>
+									<button type="button" id="create-draggable" class="btn btn-secondary">Create
+										Draggable</button>
+									<button type="button" id="exportSnip" class="btn btn-secondary">Export Configs</button>
+									<button type="button" id="importSnip" class="btn btn-secondary">Import Configs</button>
+									<button type="button" id="resetValues" class="btn btn-secondary">Reset Value</button>
+									<button type="button" id="resetAllConfig" class="btn btn-secondary">Reset All Configs</button>
+	
+									<button type="button" id="undoBtn" class="btn btn-secondary" style="display: none;">Undo</button>
+									<button type="button" id="redoBtn" class="btn btn-secondary" style="display: none;">Redo</button>
+								</div>
 								<br><br><br>
 								<div class="check-box-wrapper">
 									<label><input type="checkbox" id="singleDrop" name="singleDrop" checked class="showCheckbox">ONE TO
