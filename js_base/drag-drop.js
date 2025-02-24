@@ -116,6 +116,7 @@ class DragTarget {
             snip.id = config.id;
             snip.style.height = config.height;
             snip.style.width = config.width;
+            snip.setAttribute('data-points',config.points)
             this.wrapper.appendChild(snip);
 
             if (!isTarget) {
@@ -199,12 +200,18 @@ class DragTarget {
         jQuery(document).ready(function ($) {
             $(document).on('click', '.snip', function () {
                 const isSelected = $(this).hasClass('selected');
+                const points = $(this).attr('data-points') || 0;
+                $('#pointsInput').val(points);
+                const label = $('.points-label');
                 $('.snip').removeClass('selected');
                 $('.resize-handle').remove(); // Remove old handles
-
+        
                 if (!isSelected) {
                     $(this).addClass('selected');
                     addResizeHandle($(this)); // Add resize handle
+                    label.show();
+                }else{
+                    label.hide();
                 }
             });
 
@@ -450,6 +457,16 @@ class DragTarget {
 
             });
 
+            $(document).on('input','#pointsInput',function(e){
+                e.preventDefault();
+                let value = $(this).val();
+                let $el = $('.snip.selected');
+                if($el.length==0){
+                    alertWarning('Please Select an area to assign points');
+                }
+                $el.attr('data-points',value);
+            });
+
 
         });
 
@@ -527,17 +544,24 @@ class DragTarget {
         const drag_configs = [];
         const target_configs = [];
 
+        const pointsObj = {};
+
         const areas = [];
 
         for (const draggable of draggables) {
             const dragConfig = {};
             const area = {};
+            const point = draggable.getAttribute('data-points') ?? 0;
+            console.log(point);
             area.id = draggable.id;
             area.type = draggable.className.includes('target') ? 1 : 2;
             area.height = draggable.style.height;
             area.width = draggable.style.width;
             area.x = draggable.style.left;
             area.y = draggable.style.top;
+            area.points = point;
+
+            pointsObj[area.id] = point;
 
 
             dragConfig.classList = draggable.className;
@@ -562,6 +586,7 @@ class DragTarget {
                 area.backgroundPosition = `-${left}px -${top}px`;
             }
             areas.push(area);
+            pointsObj[area.id] = point;
 
         }
         const wrapper_config = {
@@ -580,12 +605,22 @@ class DragTarget {
         }
         const matching = [];
         const keys = Object.keys(this.map);
+        console.log(pointsObj);
         keys.forEach(key => {
             const obj = {};
             obj[key] = this.map[key];
             matching.push(obj);
         });
-        const allConfigs = { wrapper_config, areas, options, matching };
+        const points = [];
+
+        const pointsKey = Object.keys(pointsObj);
+        pointsKey.forEach(key => {
+            const obj = {};
+            obj[key] = pointsObj[key];
+            points.push(obj);
+        });
+
+        const allConfigs = { wrapper_config, areas, options, matching,points };
         return allConfigs; // Important: Return the array!
     }
     downloadConfigAsJSON() {

@@ -185,10 +185,13 @@
 			}
 			.check-box-wrapper{
 				display: flex;
-				gap: 16px;
+				gap: 10px;
+				align-items: center;
 			}
 			.check-box-wrapper label{
 				display: flex;
+				gap: 10px;
+				align-items: center;
 			}
 			.buttons-wrapper{
 				display:flex;
@@ -197,6 +200,7 @@
 				gap: 10px;
 				flex-wrap: wrap;
 			}
+	
 		</style>
 		<div class="content">
 			<div class="container">
@@ -288,6 +292,8 @@
 									<label><input type="checkbox" id="fixedHeight"  name="fixedHeight" checked class="showCheckbox" >Fixed Height</label><br><br>
 									<label><input type="checkbox" id="fixedWidth"  name="fixedWidth" checked class="showCheckbox">Fixed Width</label><br><br>
 									<label><input type="checkbox" id="mapItems"  name="mapItems" class="showCheckbox">Map Element</label><br><br>
+
+									<label class="points-label" style="display: none;"><input type="number" id="pointsInput"  name="pointsInput" class="points">Points</label><br><br>
 								</div>
 							</div>
 						</div>
