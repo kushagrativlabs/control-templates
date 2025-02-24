@@ -119,10 +119,28 @@
 			.snip.target {
 				border: 2px dotted #ffe000 !important;
 			}
+			
 
 			.snip.draggable {
 				border: 2px solid #158AEB !important;
 				cursor: grab;
+			}
+
+			.map .snip.target::before {
+				content: 'Drop Draggable Here';
+				position: absolute;
+				top: -3px;
+				font-size: 12px;
+				font-weight: bold;
+				color: #ffe000;
+			}
+			.map .snip.draggable::before {
+				content: 'Drop this to target';
+				position: absolute;
+				top: -3px;
+				font-size: 12px;
+				font-weight: bold;
+				color: #158AEB;
 			}
 			
 			.snip:hover{

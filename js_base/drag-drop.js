@@ -10,6 +10,7 @@ class DragTarget {
         this.fixedHeightInput = document.getElementById('fixedHeight');
         this.fixedWidthInput = document.getElementById('fixedWidth');
         this.mapItem  = false;
+        this.map={};
         this.isOneToOne = true;
         this.targetCounter = 0;
         this.isPlaceHolder = true; this.width = 0;
@@ -351,7 +352,17 @@ class DragTarget {
 
             $(document).on('click',"#mapItems",function(e){
                 self.mapItem = $(this).prop('checked');
-                console.log(self.mapItem);
+                const isEnabled = self.mapItem;
+                isEnabled ? $('body').addClass('map') : $('body').removeClass('map');
+                if(!isEnabled){
+                    $('.snip.draggable').each(function(index,element){
+                        $(element).show();
+                    });
+    
+                    $('.snip.target').each(function(index,element){
+                        $(element).find('.value').remove();
+                    });
+                }
             });
 
             document.getElementById('importSnip').addEventListener('click', (e) => {
@@ -490,9 +501,14 @@ class DragTarget {
             FixedWidth:this.fixedWidth
 
         }
-
-        const allConfigs = {wrapper_config, areas, options };
-        console.log(allConfigs);
+        const matching = [];
+        const keys = Object.keys(this.map);
+        keys.forEach(key => {
+            const obj = {};
+            obj[key] =  this.map[key];
+            matching.push(obj);
+        });
+        const allConfigs = {wrapper_config, areas, options,matching };
         return allConfigs; // Important: Return the array!
     }
     downloadConfigAsJSON() {
@@ -661,7 +677,12 @@ class DragTarget {
         event.preventDefault();
         const snipId = event.dataTransfer.getData("text");
         const draggedSnip = document.getElementById(snipId);
-        if (targetWrapper.querySelector('.value')) {
+
+        if(this.mapItem){
+            const id = targetWrapper.id;
+            this.map[id] = snipId;
+        }
+        if (targetWrapper.querySelector('.value') && !this.mapItem) {
             return;
         }
         if (draggedSnip) {
@@ -685,7 +706,7 @@ class DragTarget {
             });
             wrapper.dispatchEvent(dropEvent);
             targetWrapper.appendChild(clonedSnip);
-            if(this.isOneToOne){
+            if(this.isOneToOne && !this.mapItem){
                 draggedSnip.style.display = "none";
                 draggedSnip.classList.addClass="is_dragged";
             }
