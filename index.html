@@ -188,7 +188,13 @@
 				gap: 10px;
 				align-items: center;
 			}
-			.check-box-wrapper label{
+			.inputs-wrapper{
+				margin-top: 10px;
+				display: flex;
+				gap: 10px;
+				flex-direction: column;
+			}
+			.check-box-wrapper label, .inputs-wrapper label{
 				display: flex;
 				gap: 10px;
 				align-items: center;
@@ -292,8 +298,11 @@
 									<label><input type="checkbox" id="fixedHeight"  name="fixedHeight" checked class="showCheckbox" >Fixed Height</label><br><br>
 									<label><input type="checkbox" id="fixedWidth"  name="fixedWidth" checked class="showCheckbox">Fixed Width</label><br><br>
 									<label><input type="checkbox" id="mapItems"  name="mapItems" class="showCheckbox">Map Element</label><br><br>
-
-									<label class="points-label" style="display: none;"><input type="number" id="pointsInput"  name="pointsInput" class="points">Points</label><br><br>
+								</div>
+								<div class="inputs-wrapper">
+									<label class="points-label" style="display: none;"><input type="number" id="pointsInput"  name="pointsInput" class="points">Points</label>
+									<label class="area-height" style="display: none;"><input type="number" id="areaHeight"  name="areaHeight" class="points">Area Height</label>
+									<label class="area-width" style="display: none;"><input type="number" id="areaWidth"  name="areaWidth" class="points">Area Width</label>
 								</div>
 							</div>
 						</div>

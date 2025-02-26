@@ -7,8 +7,11 @@ class DragTarget {
         this.singleMatchInput = document.getElementById('singleDrop');
         this.fixedHeight = true;
         this.fixedWidth = true;
-        this.fixedHeightInput = document.getElementById('fixedHeight');
-        this.fixedWidthInput = document.getElementById('fixedWidth');
+        this.fixedHeightCheckbox = document.getElementById('fixedHeight');
+        this.fixedWidthCheckbox = document.getElementById('fixedWidth');
+        this.areaHeight = 0;
+        this.areaWidth = 0;
+
         this.undoBtn = document.getElementById('undoBtn');
         this.redoBtn = document.getElementById('redoBtn');
         this.currentDrag = "";
@@ -116,7 +119,7 @@ class DragTarget {
             snip.id = config.id;
             snip.style.height = config.height;
             snip.style.width = config.width;
-            snip.setAttribute('data-points',config.points)
+            snip.setAttribute('data-points', config.points)
             this.wrapper.appendChild(snip);
 
             if (!isTarget) {
@@ -138,10 +141,15 @@ class DragTarget {
 
 
         self.fixedHeight = configs.options.FixedHeight;
-        self.fixedHeightInput.checked = self.fixedHeight;
+        self.fixedHeightCheckbox.checked = self.fixedHeight;
 
         self.fixedWidth = configs.options.FixedWidth;
-        self.fixedWidthInput.checked = self.fixedWidth;
+        self.fixedWidthCheckbox.checked = self.fixedWidth;
+
+        document.querySelector('.area-height').style.display = self.fixedHeightCheckbox.checked ? "flex" : "none";
+        document.querySelector('.area-width').style.display = self.fixedWidthCheckbox.checked ? "flex" : "none";
+        document.getElementById('areaHeight').value =  configs.options.AreaHeight;
+        document.getElementById('areaWidth').value =  configs.options.AreaWidth;
     }
 
     addConfigSnap(config, makeDraggable = false) {
@@ -205,12 +213,12 @@ class DragTarget {
                 const label = $('.points-label');
                 $('.snip').removeClass('selected');
                 $('.resize-handle').remove(); // Remove old handles
-        
+
                 if (!isSelected) {
                     $(this).addClass('selected');
                     addResizeHandle($(this)); // Add resize handle
                     label.show();
-                }else{
+                } else {
                     label.hide();
                 }
             });
@@ -372,7 +380,7 @@ class DragTarget {
                 if (self.isPlaceHolder) {
                     alertWarning('Please select base image.');
                     return
-                }else if ($('.snip.target').length < 1 || $('.snip.draggable').length < 2) {
+                } else if ($('.snip.target').length < 1 || $('.snip.draggable').length < 2) {
                     alertWarning('At least 1 target and 2 draggable areas required.');
                     return
                 }
@@ -457,16 +465,21 @@ class DragTarget {
 
             });
 
-            $(document).on('input','#pointsInput',function(e){
+            $(document).on('input', '#pointsInput', function (e) {
                 e.preventDefault();
                 let value = $(this).val();
                 let $el = $('.snip.selected');
-                if($el.length==0){
+                if ($el.length == 0) {
                     alertWarning('Please Select an area to assign points');
                 }
-                $el.attr('data-points',value);
+                $el.attr('data-points', value);
             });
 
+            $(document).on('input','#areaHeight,#areaWidth',function(e){
+                const snips = $('.snip');
+                const val = $(this).val();
+                this.id == "areaHeight" ? snips.height(val) : snips.width(val);
+            });
 
         });
 
@@ -530,13 +543,16 @@ class DragTarget {
             self.isOneToOne = self.singleMatchInput.checked;
         });
 
-        self.fixedHeightInput.addEventListener('change', function (e) {
-            self.fixedHeight = self.fixedHeightInput.checked;
+        self.fixedHeightCheckbox.addEventListener('change', function (e) {
+            self.fixedHeight = self.fixedHeightCheckbox.checked;
+            document.querySelector('.area-height').style.display = self.fixedHeight ? "flex" : "none";
         });
-        self.fixedWidthInput.addEventListener('change', function (e) {
-            self.fixedWidth = self.fixedWidthInput.checked;
+        self.fixedWidthCheckbox.addEventListener('change', function (e) {
+            self.fixedWidth = self.fixedWidthCheckbox.checked;
+            document.querySelector('.area-width').style.display = self.fixedHeight ? "flex" : "none";
         });
-
+        document.querySelector('.area-height').style.display = self.fixedHeightCheckbox.checked ? "flex" : "none";
+        document.querySelector('.area-width').style.display = self.fixedWidthCheckbox.checked ? "flex" : "none";
     }
 
     exportConfigs() {
@@ -600,7 +616,9 @@ class DragTarget {
         const options = {
             OneToOneMatching: this.isOneToOne,
             FixedHeight: this.fixedHeight,
-            FixedWidth: this.fixedWidth
+            FixedWidth: this.fixedWidth,
+            AreaHeight : $('#areaHeight').val(),
+            AreaWidth :  $('#areaWidth').val()
 
         }
         const matching = [];
@@ -620,7 +638,7 @@ class DragTarget {
             points.push(obj);
         });
 
-        const allConfigs = { wrapper_config, areas, options, matching,points };
+        const allConfigs = { wrapper_config, areas, options, matching, points };
         return allConfigs; // Important: Return the array!
     }
     downloadConfigAsJSON() {
@@ -710,10 +728,34 @@ class DragTarget {
                 if (this.add_btn) {
                     this.currentSnip.appendChild(this.getDeleteButton());
                 }
+                this.handleHeightWidth(this.currentSnip);
             }
         }
 
         this.resetSnipCreation();
+    }
+
+    handleHeightWidth(currentSnip) {
+        if (!this.fixedHeight && !this.fixedWidth) return;
+    
+        const length = document.querySelectorAll('.snip').length;
+        const isSingle = length === 1;
+    
+        if (this.fixedHeight) {
+            if (isSingle) {
+                $('#areaHeight').val(parseFloat(currentSnip.style.height) || 0);
+            } else {
+                currentSnip.style.height = `${$('#areaHeight').val()}px`;
+            }
+        }
+    
+        if (this.fixedWidth) {
+            if (isSingle) {
+                $('#areaWidth').val(parseFloat(currentSnip.style.width) || 0);
+            } else {
+                currentSnip.style.width = `${$('#areaWidth').val()}px`;
+            }
+        }
     }
     updateBackgroundImage(snip) {
         if (snip) {
