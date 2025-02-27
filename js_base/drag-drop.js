@@ -122,8 +122,6 @@ class DragTarget {
         self.fixedHeightCheckbox.checked = self.fixedHeight;
         self.fixedWidth = configs.options.FixedWidth;
         self.fixedWidthCheckbox.checked = self.fixedWidth;
-        document.querySelector('.area-height').style.display = self.fixedHeightCheckbox.checked ? "flex" : "none";
-        document.querySelector('.area-width').style.display = self.fixedWidthCheckbox.checked ? "flex" : "none";
         document.getElementById('areaHeight').value =  configs.options.AreaHeight;
         document.getElementById('areaWidth').value =  configs.options.AreaWidth;
     }
@@ -181,6 +179,7 @@ class DragTarget {
             rect1 = element.getBoundingClientRect();
             tries++;
         }
+        this.updateBackgroundImage();
     }
     isOverlapping(element) {
         let snips = document.querySelectorAll('.snip');
@@ -235,9 +234,14 @@ class DragTarget {
                     $(this).addClass('selected');
                     addResizeHandle($(this)); // Add resize handle
                     label.show();
+                    $('#areaHeight').val($(this).height());
+                    $('#areaWidth').val($(this).width());
                 } else {
                     label.hide();
+                    $('#areaHeight').val(0);
+                    $('#areaWidth').val(0);
                 }
+            
             });
             $(document).keydown(function (e) {
                 if ([37, 38, 39, 40].includes(e.which)) e.preventDefault();
@@ -269,7 +273,7 @@ class DragTarget {
                     $el.css('left', Math.min(parentWidth - elWidth, pos.left + movementSpeed) + 'px');
                 if (keys[40] && pos.top + elHeight < parentHeight)
                     $el.css('top', Math.min(parentHeight - elHeight, pos.top + movementSpeed) + 'px');
-                self.updateBackgroundImage($el.get(0));
+                self.updateBackgroundImage();
             }
 
             function addResizeHandle($el) {
@@ -301,12 +305,7 @@ class DragTarget {
                 }else{
                     $el.height(Math.max(20, newHeight));
                 }
-
-                $('.snip').each(function(idx,el){
-                    if (self.isOverlapping(el) && el!= document.querySelector('.snip.selected')) {
-                        self.shiftToPreventOverlap(el);
-                    }
-                });
+                self.handleOverlapping();
             }
             function stopResizing() {
                 isResizing = false;
@@ -451,7 +450,12 @@ class DragTarget {
             $(document).on('input','#areaHeight,#areaWidth',function(e){
                 const snips = $('.snip');
                 const val = $(this).val();
-                this.id == "areaHeight" ? snips.height(val) : snips.width(val);
+                if(this.id == "areaHeight"){
+                    self.fixedHeight ? snips.height(val) : $('.snip.selected').height(val);
+                }else{
+                    self.fixedHeight ? snips.width(val) : $('.snip.selected').width(val);
+                }
+                self.handleOverlapping();
             });
             $(document).on('click', '#validateBtn', function () {
                 let hasError = $('.snip.target').toArray().some(element => 
@@ -459,6 +463,14 @@ class DragTarget {
                 );
                 hasError ?  alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
             });
+        });
+    }
+    handleOverlapping(){
+        const self = this;
+        $('.snip').each(function(idx,el){
+            if (self.isOverlapping(el) && el!= document.querySelector('.snip.selected')) {
+                self.shiftToPreventOverlap(el);
+            }
         });
     }
     initCommonEvents() {
@@ -503,14 +515,12 @@ class DragTarget {
         });
         self.fixedHeightCheckbox.addEventListener('change', function (e) {
             self.fixedHeight = self.fixedHeightCheckbox.checked;
-            document.querySelector('.area-height').style.display = self.fixedHeight ? "flex" : "none";
+           
         });
         self.fixedWidthCheckbox.addEventListener('change', function (e) {
             self.fixedWidth = self.fixedWidthCheckbox.checked;
-            document.querySelector('.area-width').style.display = self.fixedHeight ? "flex" : "none";
+          
         });
-        document.querySelector('.area-height').style.display = self.fixedHeightCheckbox.checked ? "flex" : "none";
-        document.querySelector('.area-width').style.display = self.fixedWidthCheckbox.checked ? "flex" : "none";
     }
     exportConfigs() {
         const draggables = document.querySelectorAll('.snip');
@@ -655,7 +665,7 @@ class DragTarget {
                 this.deleteSnip(this.currentSnip);
             } else {
                 if (this.snipType === "draggable") {
-                    this.updateBackgroundImage(this.currentSnip);
+                    this.updateBackgroundImage();
                     this.makeDraggable(this.currentSnip);
                 } else {
                     this.enableTargetSnip(this.currentSnip);
@@ -687,16 +697,16 @@ class DragTarget {
             }
         }
     }
-    updateBackgroundImage(snip) {
-        if (snip) {
-            const wrapperRect = this.wrapper.getBoundingClientRect();
+    updateBackgroundImage() {
+        const wrapperRect = this.wrapper.getBoundingClientRect();
+        const url = this.mainImage.src;
+        $('.snip.draggable').each(function(idx,snip){   
             const left = parseFloat(snip.style.left);
             const top = parseFloat(snip.style.top);
-            snip.style.backgroundImage = `url(${this.mainImage.src})`;
+            snip.style.backgroundImage = `url(${url})`;
             snip.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
             snip.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
-        }
-
+        });
     }
     deleteSnip(snip) {
         if (snip) snip.remove();
