@@ -386,19 +386,19 @@ class DragTarget {
                     $(element).find('.value').remove();
                 });
             });
-            $(document).on('click', "#mapItems", function (e) {
-                self.mapItem = $(this).prop('checked');
-                const isEnabled = self.mapItem;
-                isEnabled ? $('body').addClass('map') : $('body').removeClass('map');
-                if (!isEnabled) {
-                    $('.snip.draggable').each(function (index, element) {
-                        $(element).show();
-                    });
-                    $('.snip.target').each(function (index, element) {
-                        $(element).find('.value').remove();
-                    });
-                }
-            });
+            // $(document).on('click', "#mapItems", function (e) {
+            //     self.mapItem = $(this).prop('checked');
+            //     const isEnabled = self.mapItem;
+            //     isEnabled ? $('body').addClass('map') : $('body').removeClass('map');
+            //     if (!isEnabled) {
+            //         $('.snip.draggable').each(function (index, element) {
+            //             $(element).show();
+            //         });
+            //         $('.snip.target').each(function (index, element) {
+            //             $(element).find('.value').remove();
+            //         });
+            //     }
+            // });
             document.getElementById('importSnip').addEventListener('click', (e) => {
                 if ($('.snip').length != 0) {
                     alertWarning('Please clear all the existing snip before importing');
