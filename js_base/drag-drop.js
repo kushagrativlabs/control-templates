@@ -277,6 +277,8 @@ class DragTarget {
             function resizeElement(e) {
                 if (!isResizing) return;
 
+                console.log('heheh')
+
                 let $el = $('.snip.selected');
                 let $parent = $el.parent();
                 let parentWidth = $parent.width();
@@ -287,26 +289,18 @@ class DragTarget {
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
 
                 // If both fixedWidth and fixedHeight are false, allow resizing based on height
-                if (!self.fixedHeight && !self.fixedWidth) {
-                    $el.css({
-                        width: Math.max(20, newWidth) + 'px', // Allow resizing width
-                        height: Math.max(20, newHeight) + 'px' // Allow resizing height
-                    });
-                }
+   
                 // If fixedWidth is false, allow resizing width based on mouse position
-                else if (!self.fixedWidth) {
-                    $el.css({
-                        width: Math.max(20, newWidth) + 'px' // Allow resizing width
-                    });
+                if (self.fixedWidth) {
+                    $('.snip').width(Math.max(20, newWidth));
+                }else{
+                    $el.width(Math.max(20, newWidth));
                 }
                 // If fixedHeight is false, allow resizing height based on mouse position
-                else if (!self.fixedHeight) {
-                    $el.css({
-                        height: Math.max(20, newHeight) + 'px' // Allow resizing height
-                    });
-                }
-                if (self.fixedHeight && self.fixedWidth) {
-                    alertWarning('Fixed height and width enabled. You cannot resize the area');
+                if (self.fixedHeight) {
+                    $('.snip').height(Math.max(20, newHeight));
+                }else{
+                    $el.height(Math.max(20, newHeight));
                 }
             }
 
