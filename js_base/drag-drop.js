@@ -481,6 +481,15 @@ class DragTarget {
                 this.id == "areaHeight" ? snips.height(val) : snips.width(val);
             });
 
+            $(document).on('click', '#validateBtn', function () {
+                let hasError = $('.snip.target').toArray().some(element => 
+                    !(element.id in self.map) || self.map[element.id] === ""
+                );
+
+                hasError ?  alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
+                
+            });
+
         });
 
     }
