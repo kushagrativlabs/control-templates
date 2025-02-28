@@ -122,8 +122,8 @@ class DragTarget {
         self.fixedHeightCheckbox.checked = self.fixedHeight;
         self.fixedWidth = configs.options.FixedWidth;
         self.fixedWidthCheckbox.checked = self.fixedWidth;
-        document.getElementById('areaHeight').value =  configs.options.AreaHeight;
-        document.getElementById('areaWidth').value =  configs.options.AreaWidth;
+        document.getElementById('areaHeight').value = configs.options.AreaHeight;
+        document.getElementById('areaWidth').value = configs.options.AreaWidth;
     }
     addConfigSnap(config, makeDraggable = false) {
         const snip = document.createElement('div');
@@ -152,16 +152,16 @@ class DragTarget {
     shiftToPreventOverlap(element) {
         let rect1 = element.getBoundingClientRect();
         let step = 10; // Pixels to move per step
-    
+
         let maxWidth = window.innerWidth;
         let maxHeight = window.innerHeight;
-    
+
         let tries = 0, maxTries = 50; // Limit attempts to prevent infinite loops
-    
+
         while (this.isOverlapping(element) && tries < maxTries) {
             let currentTop = parseInt(element.style.top || 0);
             let currentLeft = parseInt(element.style.left || 0);
-    
+
             if (rect1.bottom + step < maxHeight) {
                 // Move Down
                 element.style.top = `${currentTop + step}px`;
@@ -175,7 +175,7 @@ class DragTarget {
                 // If no space is available, break the loop
                 break;
             }
-    
+
             rect1 = element.getBoundingClientRect();
             tries++;
         }
@@ -184,12 +184,12 @@ class DragTarget {
     isOverlapping(element) {
         let snips = document.querySelectorAll('.snip');
         let rect1 = element.getBoundingClientRect();
-        
+
         for (let snip of snips) {
             if (snip === element) continue; // Skip self
-            
+
             let rect2 = snip.getBoundingClientRect();
-            
+
             if (
                 rect1.left < rect2.right &&
                 rect1.right > rect2.left &&
@@ -241,7 +241,7 @@ class DragTarget {
                     $('#areaHeight').val(0);
                     $('#areaWidth').val(0);
                 }
-            
+
             });
             $(document).keydown(function (e) {
                 if ([37, 38, 39, 40].includes(e.which)) e.preventDefault();
@@ -284,7 +284,7 @@ class DragTarget {
                     isResizing = true;
                     $(document).on('mousemove', resizeElement);
                     $(document).on('mouseup', stopResizing);
-                    
+
                 });
             }
             function resizeElement(e) {
@@ -297,12 +297,12 @@ class DragTarget {
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
                 if (self.fixedWidth) {
                     $('.snip').width(Math.max(20, newWidth));
-                }else{
+                } else {
                     $el.width(Math.max(20, newWidth));
                 }
                 if (self.fixedHeight) {
                     $('.snip').height(Math.max(20, newHeight));
-                }else{
+                } else {
                     $el.height(Math.max(20, newHeight));
                 }
                 self.handleOverlapping();
@@ -447,28 +447,32 @@ class DragTarget {
                 }
                 $el.attr('data-points', value);
             });
-            $(document).on('input','#areaHeight,#areaWidth',function(e){
+            $(document).on('input', '#areaHeight,#areaWidth', function (e) {
                 const snips = $('.snip');
                 const val = $(this).val();
-                if(this.id == "areaHeight"){
+                if (this.id == "areaHeight") {
                     self.fixedHeight ? snips.height(val) : $('.snip.selected').height(val);
-                }else{
+                } else {
                     self.fixedHeight ? snips.width(val) : $('.snip.selected').width(val);
                 }
                 self.handleOverlapping();
             });
             $(document).on('click', '#validateBtn', function () {
-                let hasError = $('.snip.target').toArray().some(element => 
+                let hasError = $('.snip.target').toArray().some(element =>
                     !(element.id in self.map) || self.map[element.id] === ""
                 );
-                hasError ?  alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
+                hasError ? alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
             });
+
+            $(document).on('click','#drag-select',function(e){
+                
+            })
         });
     }
-    handleOverlapping(){
+    handleOverlapping() {
         const self = this;
-        $('.snip').each(function(idx,el){
-            if (self.isOverlapping(el) && el!= document.querySelector('.snip.selected')) {
+        $('.snip').each(function (idx, el) {
+            if (self.isOverlapping(el) && el != document.querySelector('.snip.selected')) {
                 self.shiftToPreventOverlap(el);
             }
         });
@@ -515,11 +519,11 @@ class DragTarget {
         });
         self.fixedHeightCheckbox.addEventListener('change', function (e) {
             self.fixedHeight = self.fixedHeightCheckbox.checked;
-           
+
         });
         self.fixedWidthCheckbox.addEventListener('change', function (e) {
             self.fixedWidth = self.fixedWidthCheckbox.checked;
-          
+
         });
     }
     exportConfigs() {
@@ -578,8 +582,8 @@ class DragTarget {
             OneToOneMatching: this.isOneToOne,
             FixedHeight: this.fixedHeight,
             FixedWidth: this.fixedWidth,
-            AreaHeight : $('#areaHeight').val(),
-            AreaWidth :  $('#areaWidth').val()
+            AreaHeight: $('#areaHeight').val(),
+            AreaWidth: $('#areaWidth').val()
 
         }
         const matching = [];
@@ -700,7 +704,7 @@ class DragTarget {
     updateBackgroundImage() {
         const wrapperRect = this.wrapper.getBoundingClientRect();
         const url = this.mainImage.src;
-        $('.snip.draggable').each(function(idx,snip){   
+        $('.snip.draggable').each(function (idx, snip) {
             const left = parseFloat(snip.style.left);
             const top = parseFloat(snip.style.top);
             snip.style.backgroundImage = `url(${url})`;
@@ -710,12 +714,12 @@ class DragTarget {
     }
     deleteSnip(snip) {
         if (snip) snip.remove();
-        this.resetSnipCreation(); 
+        this.resetSnipCreation();
     }
     resetSnipCreation() {
         this.isButtonClicked = false;
-        this.isCreatingSnip = false; 
-        this.currentSnip = null; 
+        this.isCreatingSnip = false;
+        this.currentSnip = null;
         this.resetCursor();
     }
     enableSnipCreation(type) {
@@ -738,6 +742,7 @@ class DragTarget {
         snip.addEventListener("dragstart", (e) => this.onDragStart(e, snip));
         snip.addEventListener("dragend", (e) => this.onDragEnd(e, snip));
     }
+
     onDragStart(event, snip) {
         event.dataTransfer.setData("text", snip.id);
         snip.style.opacity = "0.5";  // Make the snip semi-transparent during dragging
@@ -749,6 +754,10 @@ class DragTarget {
         targetWrapper.addEventListener("dragover", (e) => this.onDragOver(e, targetWrapper));
         targetWrapper.addEventListener("drop", (e) => this.onDrop(e, targetWrapper));
     }
+    disableTargetSnip(targetWrapper) {
+        targetWrapper.removeEventListener("dragover", (e) => this.onDragOver(e, targetWrapper));
+        targetWrapper.removeEventListener("drop", (e) => this.onDrop(e, targetWrapper));
+    }
     onDragOver(event, targetWrapper) {
         event.preventDefault();
     }
@@ -759,43 +768,58 @@ class DragTarget {
     }
     handleDrop(snipId, targetWrapper) {
         const draggedSnip = document.getElementById(snipId);
-        if (this.mapItem) {
-            const id = targetWrapper.id;
-            this.map[id] = snipId;
-        }
-        let beforeHtml = targetWrapper.innerHTML;
-        if (targetWrapper.querySelector('.value') && !this.mapItem) {
-            return;
-        }
-        if (draggedSnip) {
-            const clonedSnip = draggedSnip.cloneNode(true);
-            clonedSnip.classList.remove('snip', 'draggable');
-            clonedSnip.classList.add('value');
-            clonedSnip.style.left = `auto`;
-            clonedSnip.style.top = `auto`;
-            clonedSnip.style.border = 'none';
-            clonedSnip.style.opacity = "0.5";
-            try {
-                clonedSnip.querySelector('.delete-btn').remove();
-            } catch (error) {
+        if (!targetWrapper.className.includes('is_dragged')) {
+            if (this.mapItem) {
+                const id = targetWrapper.id;
+                this.map[id] = snipId;
+            }
+            let beforeHtml = targetWrapper.innerHTML;
+            if (targetWrapper.querySelector('.value') && !this.mapItem) {
+                return;
+            }
+            if (draggedSnip) {
+                const clonedSnip = draggedSnip.cloneNode(true);
+                clonedSnip.classList.remove('snip', 'draggable');
+                clonedSnip.classList.add('value');
+                clonedSnip.style.left = `auto`;
+                clonedSnip.style.top = `auto`;
+                clonedSnip.style.border = 'none';
+                clonedSnip.style.opacity = "0.5";
+                clonedSnip.id = 'dragged-'+clonedSnip.id;
+                try {
+                    clonedSnip.querySelector('.delete-btn').remove();
+                } catch (error) {
 
-            }
-            const dropEvent = new CustomEvent("on-dropped", {
-                detail: {
-                    parent: targetWrapper.id,
-                    value: snipId,
                 }
-            });
-            wrapper.dispatchEvent(dropEvent);
-            targetWrapper.appendChild(clonedSnip);
-            let shouldHide = false
-            if (this.isOneToOne && !this.mapItem) {
-                draggedSnip.style.display = "none";
-                draggedSnip.classList.addClass = "is_dragged";
-                shouldHide = true;
+                const dropEvent = new CustomEvent("on-dropped", {
+                    detail: {
+                        parent: targetWrapper.id,
+                        value: snipId,
+                    }
+                });
+                wrapper.dispatchEvent(dropEvent);
+                targetWrapper.appendChild(clonedSnip);
+                let shouldHide = false
+                if (this.isOneToOne) {
+                    draggedSnip.classList.add('is_dragged');
+                    shouldHide = true;
+                    this.enableTargetSnip(draggedSnip);
+                }
+
+                this.makeDraggable(clonedSnip);
+                const afterHtml = targetWrapper.innerHTML;
+                this.addUndo({ draggable: draggedSnip.id, target: targetWrapper.id, shouldHide, beforeHtml, afterHtml });
             }
-            const afterHtml = targetWrapper.innerHTML;
-            this.addUndo({ draggable: draggedSnip.id, target: targetWrapper.id, shouldHide, beforeHtml, afterHtml });
+        }else{
+            const targetID = targetWrapper.id;
+            const dragID = draggedSnip.id.replace('dragged-','');
+            if(targetID==dragID){
+                targetWrapper.classList.remove('is_dragged');
+                draggedSnip.remove();
+                // this.disableTargetSnip(targetWrapper);
+                this.updateBackgroundImage();
+            }
         }
     }
+
 }
