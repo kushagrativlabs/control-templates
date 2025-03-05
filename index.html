@@ -327,9 +327,9 @@
 										Configs</button>
 
 									<button type="button" id="undoBtn" class="btn btn-secondary"
-										style="display: none;">Undo</button>
+									disabled>Undo</button>
 									<button type="button" id="redoBtn" class="btn btn-secondary"
-										style="display: none;">Redo</button>
+									disabled>Redo</button>
 								</div>
 								<br><br><br>
 								<div class="check-box-wrapper">
@@ -345,7 +345,7 @@
 								</div>
 								<p>Map Areas</p>
 								<div class="select-wrapper">
-									<select name="drag-select" id="drag-select" class="form-select">
+									<select name="drag-select" id="drag-select" class="form-select" >
 										<option value="" disabled selected>Choose an option</option>
 									</select>
 
@@ -355,12 +355,16 @@
 
 								</div>
 								<div class="inputs-wrapper">
-									<label class="points-label" style="display: none;"><input type="number"
-											id="pointsInput" name="pointsInput" class="points">Points</label>
+									<label class="points-label"><input type="number"
+											id="pointsInput" name="pointsInput" class="points" disabled>Points</label>
 									<label class="area-height"><input type="number" id="areaHeight" name="areaHeight"
 											class="points">Area Height</label>
 									<label class="area-width"><input type="number" id="areaWidth" name="areaWidth"
 											class="points">Area Width</label>
+									<label class="area-height"><input type="number" id="snipX" name="areaHeight"
+										class="points" disabled>X</label>
+								<label class="area-width"><input type="number" id="snipY" name="areaWidth"
+										class="points" disabled>Y</label>
 								</div>
 							</div>
 						</div>
