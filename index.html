@@ -51,6 +51,10 @@
 		crossorigin="anonymous"></script> -->
 	<link rel="shortcut icon" href="/drag-drop/img/favicon.ico">
 	<meta property="og:image" content="/drag-drop/img/mobile.png" />
+
+
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	
 </head>
 
 <body class="">
@@ -119,6 +123,7 @@
 			.snip.target {
 				border: 2px dotted #ffe000 !important;
 			}
+
 			.snip.draggable {
 				border: 2px solid #158AEB !important;
 				cursor: grab;
@@ -136,7 +141,7 @@
 			}
 
 
-			
+
 
 			.map .snip.target::before {
 				content: 'Drop Draggable Here';
@@ -224,8 +229,16 @@
 				gap: 10px;
 				flex-wrap: wrap;
 			}
-
-		
+			.select-wrapper{
+				margin-top: 10px;
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				width: 200px;
+			}
+			.select-wrapper select{
+				/* width: 120px; */
+			}
 		</style>
 		<div class="content">
 			<div class="container">
@@ -331,21 +344,23 @@
 										Element</label><br><br> -->
 								</div>
 								<p>Map Areas</p>
-								<div class="check-box-wrapper select-wrapper">
-								<select name="target-select" id="target-select" class="target-select form-select">
-									<option value="">None</option>
-								</select>
-								<select name="drag-select" id="drag-select" class="form-select">
-									<option value="">None</option>
-								</select>
+								<div class="select-wrapper">
+									<select name="drag-select" id="drag-select" class="form-select">
+										<option value="" disabled selected>Choose an option</option>
+									</select>
+
+									<select id="target-select" class="target-select form-select" style="display: block;">
+										<option value="" disabled selected>Choose an option</option>
+									</select>
+
 								</div>
 								<div class="inputs-wrapper">
 									<label class="points-label" style="display: none;"><input type="number"
 											id="pointsInput" name="pointsInput" class="points">Points</label>
-									<label class="area-height"><input type="number"
-											id="areaHeight" name="areaHeight" class="points">Area Height</label>
-									<label class="area-width"><input type="number" id="areaWidth"
-											name="areaWidth" class="points">Area Width</label>
+									<label class="area-height"><input type="number" id="areaHeight" name="areaHeight"
+											class="points">Area Height</label>
+									<label class="area-width"><input type="number" id="areaWidth" name="areaWidth"
+											class="points">Area Width</label>
 								</div>
 							</div>
 						</div>
@@ -433,7 +448,7 @@
 			ActivateNavMenu("");
 		});
 	</script>
-
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </body>
 
