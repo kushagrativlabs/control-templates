@@ -134,6 +134,7 @@
 				/* pointer-events: none; */
 				background-image: none !important;
 				display: block !important;
+				background: #ffffff91;
 			}
 
 			.snip.draggable.is_dragged .delete-btn {
@@ -201,7 +202,26 @@
 				opacity: 1 !important;
 				margin: 0px !important;
 			}
+			.snip::after, .value::after{
+				position: absolute;
+				content: attr(id);
+				font-size: 10px;
+			}
+			.value::after{
+				content: attr(data-id);
+				color: #158AEB;
+			}
+			.snip.draggable::after,.value.draggable::after {
+				top: 0;
+				left: 0;
+				color: #158AEB;
+			}
 
+			.snip.snip.target::after {
+				bottom: 0;
+				left: 0;
+				color: #ffe000;
+			}
 			.check-box-wrapper {
 				display: flex;
 				gap: 10px;
@@ -345,12 +365,12 @@
 								</div>
 								<p>Map Areas</p>
 								<div class="select-wrapper">
-									<select name="drag-select" id="drag-select" class="form-select" >
+									<select name="drag-select" id="drag-select" class="form-select" style="display: none !important;">
 										<option value="" disabled selected>Choose an option</option>
 									</select>
 
-									<select id="target-select" class="target-select form-select" style="display: block;">
-										<option value="" disabled selected>Choose an option</option>
+									<select id="target-select" class="target-select form-select chzn-select" style="display: block;">
+										<option value="">None</option>
 									</select>
 
 								</div>

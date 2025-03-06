@@ -335,7 +335,7 @@ class DragTarget {
         if (!parent) return true; // If no parent, assume it's out of bounds
 
         let parentRect = parent.getBoundingClientRect();
-        let margin = 2; // Margin for overlap detection
+        let margin = 0.1; // Margin for overlap detection
 
         // Check if element is going outside of parent boundaries
         if (
@@ -390,7 +390,7 @@ class DragTarget {
     }
     initJquery() {
         const self = this;
-        let movementSpeed = 5;
+        let movementSpeed = 2;
         let interval;
         let keys = {};
         let isResizing = false;
@@ -400,7 +400,7 @@ class DragTarget {
                 const isSelected = $(this).hasClass('selected');
                 const points = $(this).attr('data-points') || 0;
                 $('#pointsInput').val(points);
-                
+
                 $('.snip').removeClass('selected');
                 $('.resize-handle').remove(); // Remove old handles
                 if (!isSelected) {
@@ -408,14 +408,14 @@ class DragTarget {
                     addResizeHandle($(this)); // Add resize handle
                     $('#areaHeight').val($(this).height());
                     $('#areaWidth').val($(this).width());
-                    $('#snipX').val(parseFloat($(this).css('left')));
-                    $('#snipY').val(parseFloat($(this).css('top')));
-                 
+                    $('#snipX').val(parseInt($(this).css('left')));
+                    $('#snipY').val(parseInt($(this).css('top')));
+
                 }
 
-                $('#pointsInput').prop('disabled',isSelected);
-                $('#snipX').prop('disabled',isSelected);
-                $('#snipY').prop('disabled',isSelected);
+                $('#pointsInput').prop('disabled', isSelected);
+                $('#snipX').prop('disabled', isSelected);
+                $('#snipY').prop('disabled', isSelected);
 
                 self.updateAttrs();
                 self.updateTarget();
@@ -665,7 +665,7 @@ class DragTarget {
                 }
 
                 self.handleOverlapping() ? input.val(input.data('prevValue')) : input.data('prevValue', val);
-               
+
             });
 
 
@@ -679,28 +679,23 @@ class DragTarget {
                 }
 
                 if (this.id == "snipX") {
-                    $('.snip.selected').css('left',val+"px");
+                    $('.snip.selected').css('left', val + "px");
                 } else {
-                    $('.snip.selected').css('top',val+"px");
+                    $('.snip.selected').css('top', val + "px");
                 }
 
                 self.handleOverlapping() ? input.val(input.data('prevValue')) : input.data('prevValue', val);
-               
+
             });
-
-
-
 
             $(document).on('click', '#validateBtn', function () {
                 const emptyElements = $('.snip.target')
-                        .toArray()
-                        .filter(element => {
-                            let drag = $(element).attr('dragged') ?? '';
-                            console.log(drag); // To log and verify the dragged value
-                            return drag === ''; // Filter elements where 'dragged' is empty
-                        });
-                        console.log(emptyElements);
-                emptyElements.length!=0 ? alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
+                    .toArray()
+                    .filter(element => {
+                        let drag = $(element).attr('dragged') ?? '';
+                        return drag === ''; // Filter elements where 'dragged' is empty
+                    });
+                emptyElements.length != 0 ? alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
             });
 
             $(self.singleMatchInput).on('change', function (e) {
@@ -760,38 +755,43 @@ class DragTarget {
 
             $(document).on('change', '#target-select', function (e) {
                 let selectedTargets = $(this).val();
-
                 // Ensure selectedTargets is always an array
                 if (!Array.isArray(selectedTargets)) {
                     selectedTargets = [selectedTargets];
                 }
+                const dragSnip = $('.snip.draggable.selected').attr('id');
+
+                const oldTargets = $(`.snip.target[dragged="${dragSnip}"]`);
+
+                if (oldTargets.length != 0) {
+                    oldTargets.attr('dragged', '');
+                    oldTargets.find('.value').remove();
+                }
 
                 if (selectedTargets.length > 0) {
-                    const dragSnip = $('.snip.draggable.selected').attr('id');
-        
-                    const oldTargets = $(`.snip.target[dragged="${dragSnip}"]`);
-                    if (oldTargets.length != 0) {
-                        oldTargets.attr('dragged', '');
-                        oldTargets.find('.value').remove();
-                    }
+
                     // Loop through each selected target and handle the drag-and-drop behavior
                     selectedTargets.forEach(function (target) {
-
-                        const draggedAttr = $(`#${target}`).attr('dragged');
-                        const isEmpty = !draggedAttr || draggedAttr.length === 0;
-                        if (isEmpty) {
-                            if (self.isOneToOne) {
-                                self.handleDrop(dragSnip, document.getElementById(target));
+                        try {
+                            const draggedAttr = $(`#${target}`).attr('dragged');
+                            const isEmpty = !draggedAttr || draggedAttr.length === 0;
+                            if (isEmpty) {
+                                if (self.isOneToOne) {
+                                    self.handleDrop(dragSnip, document.getElementById(target));
+                                } else {
+                                    self.handleDrop(dragSnip, document.getElementById(target));
+                                }
                             } else {
+
+                                self.restoreDraggable(draggedAttr);
                                 self.handleDrop(dragSnip, document.getElementById(target));
                             }
-                        } else {
+                        } catch (error) {
 
-                            self.restoreDraggable(draggedAttr);
-                            self.handleDrop(dragSnip, document.getElementById(target));
                         }
-
-
+                        if(target==""){
+                            self.restoreDraggable(dragSnip);
+                        }
                     });
                 }
             });
@@ -799,34 +799,21 @@ class DragTarget {
 
             function initSelect() {
                 // Check if `self.isOneToOne` and initialize `#target-select` accordingly
-                if (self.isOneToOne) {
-                    $('#target-select').select2({
-                        minimumResultsForSearch: -1,
-                        multiple: false,
-                        placeholder: "Choose an option",
-                    });
-                } else {
-                    $('#target-select').select2({
-                        minimumResultsForSearch: -1,
-                        multiple: true,
-                        placeholder: "Choose an option",
-                    });
-                }
-
-                setTimeout(function () {
-                    // $('#drag-select').select2({
-                    //     minimumResultsForSearch: -1,
-                    //     multiple: true,
-                    //     placeholder: "Choose an option",
-                    // });
-
-                    // $('#drag-select').select2({
-                    //     minimumResultsForSearch: -1,
-                    //     multiple: false,
-                    //     placeholder: "Choose an option",
-                    // });
-
-                }, 100);
+                // if (self.isOneToOne) {
+                //     $('#target-select').select2({
+                //         minimumResultsForSearch: -1,
+                //         multiple: false,
+                //         placeholder: "Choose an option",
+                //     });
+                // } else {
+                //     $('#target-select').select2({
+                //         minimumResultsForSearch: -1,
+                //         multiple: true,
+                //         placeholder: "Choose an option",
+                //     });
+                // }
+    
+                self.changeSelectType('target-select', !self.isOneToOne);
                 $('#drag-select').hide();
             }
 
@@ -844,17 +831,19 @@ class DragTarget {
         self.updateTarget();
     }
 
-    updateTarget(){
+    updateTarget() {
         const element = $('.snip.draggable.selected:not(.is_dragged)');
 
-        if(element.length==0){
-            $('#target-select').prop('disabled',true);
+        if (element.length == 0) {
+
+            $('#target-select').prop('disabled', true);
             $('#target-select').trigger('change');
+            updateChosen();
             return;
         }
 
         const selected = element.id;
-        const blankOptions = '<option value="" disabled selected>Choose an option</option>';
+        const blankOptions = this.isOneToOne ? '<option value="">None</option>' : '';
 
         const targetQuery = `.snip.target[dragged='${selected}']`;
 
@@ -877,8 +866,10 @@ class DragTarget {
             $('#target-select').html(targetOption);
 
         }
-        $('#target-select').prop('disabled',false);
+        $('#target-select').prop('disabled', false);
+        updateChosen();
         $('#target-select').trigger('change');
+
     }
     handleOverlapping(moving = false) {
         const self = this;
@@ -1127,8 +1118,12 @@ class DragTarget {
         if (!this.isSelecting) return;
         this.isSelecting = false;
         if (this.currentSnip) {
-            if (this.currentSnip.offsetWidth < 10 || this.currentSnip.offsetHeight < 10) {
+            const isOverlapping = this.isOverlapping(this.currentSnip);
+            if (this.currentSnip.offsetWidth < 10 || this.currentSnip.offsetHeight < 10 ||  isOverlapping) {
                 this.deleteSnip(this.currentSnip);
+                if(isOverlapping){
+                    alertWarning('Selection is not valid it is overlapping');
+                }
             } else {
                 if (this.snipType === "draggable") {
                     this.updateBackgroundImage();
@@ -1142,6 +1137,7 @@ class DragTarget {
                 this.handleHeightWidth(this.currentSnip);
             }
         }
+       
         this.resetSnipCreation();
 
         this.refreshSelect();
@@ -1154,7 +1150,6 @@ class DragTarget {
             if (isSingle) {
                 $('#areaHeight').val(parseFloat(currentSnip.style.height) || 0);
             } else {
-                console.log($('#areaHeight').val());
                 $(currentSnip).height($('#areaHeight').val())
             }
         }
@@ -1231,7 +1226,7 @@ class DragTarget {
         const snipId = event.dataTransfer.getData("text");
         this.handleDrop(snipId, targetWrapper);
     }
-    handleDrop(snipId, targetWrapper) {
+    handleDrop(snipId, targetWrapper, validate = false) {
         if (targetWrapper && snipId != "") {
             const draggedSnip = document.getElementById(snipId);
             if (!targetWrapper.className.includes('is_dragged')) {
@@ -1241,20 +1236,29 @@ class DragTarget {
                 }
                 let beforeHtml = targetWrapper.innerHTML;
                 const old = targetWrapper.querySelector('.value');
-                if (old) { // Checks if 'old' exists
+                if (old) {
+                    try {
+                        this.restoreDraggable(targetWrapper.getAttribute('dragged'));
+                    } catch (error) {
+
+                    }
                     old.remove();
                 }
 
 
                 if (draggedSnip) {
                     const clonedSnip = draggedSnip.cloneNode(true);
+                    clonedSnip.querySelector('.resize-handle').remove();
                     clonedSnip.classList.remove('snip', 'draggable');
                     clonedSnip.classList.add('value');
                     clonedSnip.style.left = `auto`;
                     clonedSnip.style.top = `auto`;
                     clonedSnip.style.border = 'none';
                     clonedSnip.style.opacity = "0.5";
+                    clonedSnip.setAttribute('data-id', clonedSnip.id);
                     clonedSnip.id = 'dragged-' + clonedSnip.id;
+
+
                     try {
                         clonedSnip.querySelector('.delete-btn').remove();
                     } catch (error) {
@@ -1303,5 +1307,22 @@ class DragTarget {
             dragble.attr('draggable', 'true');
         }
     }
+
+    changeSelectType(elmId, multiple) {
+        var obj = $("#" + elmId);
+        var objChzn = byid(elmId + '_chzn');
+        if (objChzn) {
+            objChzn.remove();
+        }
+        obj.chosen("destroy");
+        if (multiple) {
+            obj.attr("multiple", "multiple");
+        } else {
+            obj.removeAttr("multiple");
+        }
+        obj.removeClass('chzn-done');
+        obj.chosen();
+    }
+
 
 }
