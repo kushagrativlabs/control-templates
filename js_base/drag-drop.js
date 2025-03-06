@@ -692,10 +692,15 @@ class DragTarget {
 
 
             $(document).on('click', '#validateBtn', function () {
-                let hasError = $('.snip.target').toArray().some(element =>
-                    !(element.id in self.map) || self.map[element.id] === ""
-                );
-                hasError ? alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
+                const emptyElements = $('.snip.target')
+                        .toArray()
+                        .filter(element => {
+                            let drag = $(element).attr('dragged') ?? '';
+                            console.log(drag); // To log and verify the dragged value
+                            return drag === ''; // Filter elements where 'dragged' is empty
+                        });
+                        console.log(emptyElements);
+                emptyElements.length!=0 ? alertWarning('Matching is not valid. Please map the area by drag drog') : alertMessage('Matching is valid');
             });
 
             $(self.singleMatchInput).on('change', function (e) {
