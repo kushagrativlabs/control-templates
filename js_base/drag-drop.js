@@ -396,7 +396,7 @@ class DragTarget {
         let isResizing = false;
         let deleteItem = null;
         jQuery(document).ready(function ($) {
-            $(document).on('click', '.snip:not(.is_dragged):not(.resizing)', function () {
+            $(document).on('click', '.snip:not(.resizing)', function () { //toggle selected
                 const isSelected = $(this).hasClass('selected');
                 const points = $(this).attr('data-points') || 0;
                 $('#pointsInput').val(points);
@@ -416,7 +416,7 @@ class DragTarget {
                 $('#pointsInput').prop('disabled', isSelected);
                 $('#snipX').prop('disabled', isSelected);
                 $('#snipY').prop('disabled', isSelected);
-
+                console.log('click');
                 self.updateAttrs();
                 self.updateTarget();
             });
@@ -436,7 +436,7 @@ class DragTarget {
                 }
             });
             function moveElement() {
-                let $el = $('.snip.selected');
+                let $el = $('.snip.selected:not(.is_dragged)');
                 if (!$el.length || isResizing) return;
                 let $parent = $el.parent();
                 let pos = $el.position();
@@ -489,12 +489,15 @@ class DragTarget {
                 let newWidth = Math.min(parentWidth - $el.position().left, e.pageX - $el.offset().left);
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
                 if (self.fixedWidth) {
-                    $('.snip').width(Math.max(20, newWidth));
+                    $('.snip').width(Math.max(30, newWidth));
                 }
                 if (self.fixedHeight) {
                     $('.snip').height(Math.max(20, newHeight));
                 }
+                $('#areaHeight').val(Math.max(20, newHeight));
+                $('#areaWidth').val(Math.max(30, newWidth))
                 self.handleOverlapping();
+                self.updateAttrs();
                 setTimeout(() => {
                     $el.removeClass('resizing');
                 }, 100);
@@ -648,25 +651,37 @@ class DragTarget {
                 self.updateAttrs();
             });
 
-            $(document).on('input', '#areaHeight,#areaWidth', function (e) {
+            $(document).on('input', '#areaHeight, #areaWidth', function () {
                 const snips = $('.snip');
                 const input = $(this);
-                const val = input.val();
-
-                // Store the previous value
+                let val = parseInt(input.val(), 10); // Convert input to a number
+            
+                // Store the previous value if not already set
                 if (!input.data('prevValue')) {
                     input.data('prevValue', val);
                 }
-
-                if (this.id == "areaHeight") {
+            
+                // Enforce minimum constraints
+                if ((this.id === "areaHeight" && val < 20) || (this.id === "areaWidth" && val < 30)) {
+                    input.val(input.data('prevValue')); // Revert to previous valid value
+                    return;
+                }
+            
+                // Apply new dimensions
+                if (this.id === "areaHeight") {
                     self.fixedHeight ? snips.height(val) : $('.snip.selected').height(val);
                 } else {
                     self.fixedWidth ? snips.width(val) : $('.snip.selected').width(val);
                 }
-
-                self.handleOverlapping() ? input.val(input.data('prevValue')) : input.data('prevValue', val);
-
+            
+                // Check for overlapping; if true, revert to previous value
+                if (self.handleOverlapping()) {
+                    input.val(input.data('prevValue'));
+                } else {
+                    input.data('prevValue', val);
+                }
             });
+            
 
 
             $(document).on('input', '#snipX,#snipY', function (e) {
@@ -812,7 +827,7 @@ class DragTarget {
                 //         placeholder: "Choose an option",
                 //     });
                 // }
-    
+
                 self.changeSelectType('target-select', !self.isOneToOne);
                 $('#drag-select').hide();
             }
@@ -832,20 +847,22 @@ class DragTarget {
     }
 
     updateTarget() {
-        const element = $('.snip.draggable.selected:not(.is_dragged)');
+        const element = $('.snip.draggable.selected');
+      
 
         if (element.length == 0) {
-
+            $('#target-select option').prop('selected', false);
             $('#target-select').prop('disabled', true);
             $('#target-select').trigger('change');
             updateChosen();
             return;
         }
 
-        const selected = element.id;
+        const selected = element.attr('id');
         const blankOptions = this.isOneToOne ? '<option value="">None</option>' : '';
 
         const targetQuery = `.snip.target[dragged='${selected}']`;
+  
 
         let targets = $(targetQuery);
 
@@ -866,6 +883,7 @@ class DragTarget {
             $('#target-select').html(targetOption);
 
         }
+
         $('#target-select').prop('disabled', false);
         updateChosen();
         $('#target-select').trigger('change');
@@ -902,6 +920,7 @@ class DragTarget {
         } else {
             this.updateAttrs();
         }
+        this.updateBackgroundImage();
         return isOverlapping;
     }
     updateAttrs(el = "") {
@@ -1111,6 +1130,9 @@ class DragTarget {
             this.currentSnip.style.top = `${event.clientY - wrapperRect.top}px`;
             height = Math.abs(height);
         }
+        width = Math.max(width, 30);
+        height = Math.max(height, 20);
+    
         this.currentSnip.style.width = `${width}px`;
         this.currentSnip.style.height = `${height}px`;
     }
@@ -1119,9 +1141,9 @@ class DragTarget {
         this.isSelecting = false;
         if (this.currentSnip) {
             const isOverlapping = this.isOverlapping(this.currentSnip);
-            if (this.currentSnip.offsetWidth < 10 || this.currentSnip.offsetHeight < 10 ||  isOverlapping) {
+            if (this.currentSnip.offsetWidth < 10 || this.currentSnip.offsetHeight < 10 || isOverlapping) {
                 this.deleteSnip(this.currentSnip);
-                if(isOverlapping){
+                if (isOverlapping) {
                     alertWarning('Selection is not valid it is overlapping');
                 }
             } else {
@@ -1137,7 +1159,7 @@ class DragTarget {
                 this.handleHeightWidth(this.currentSnip);
             }
         }
-       
+
         this.resetSnipCreation();
 
         this.refreshSelect();
@@ -1148,14 +1170,14 @@ class DragTarget {
         const isSingle = length === 1;
         if (this.fixedHeight) {
             if (isSingle) {
-                $('#areaHeight').val(parseFloat(currentSnip.style.height) || 0);
+                $('#areaHeight').val($(currentSnip).height() || 20);
             } else {
                 $(currentSnip).height($('#areaHeight').val())
             }
         }
         if (this.fixedWidth) {
             if (isSingle) {
-                $('#areaWidth').val(parseFloat(currentSnip.style.width) || 0);
+                $('#areaWidth').val($(currentSnip).width() || 30);
             } else {
                 $(currentSnip).width($('#areaWidth').val())
             }
@@ -1248,7 +1270,6 @@ class DragTarget {
 
                 if (draggedSnip) {
                     const clonedSnip = draggedSnip.cloneNode(true);
-                    clonedSnip.querySelector('.resize-handle').remove();
                     clonedSnip.classList.remove('snip', 'draggable');
                     clonedSnip.classList.add('value');
                     clonedSnip.style.left = `auto`;
@@ -1257,6 +1278,11 @@ class DragTarget {
                     clonedSnip.style.opacity = "0.5";
                     clonedSnip.setAttribute('data-id', clonedSnip.id);
                     clonedSnip.id = 'dragged-' + clonedSnip.id;
+                    try {
+                        clonedSnip.querySelector('.resize-handle').remove();
+                    } catch (error) {
+
+                    }
 
 
                     try {
