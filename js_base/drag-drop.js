@@ -1,5 +1,5 @@
 class DragTarget {
-    targetColor = '#ffe000';
+    targetColor = '#fcc82d';
     dragColor = '#158AEB';
     constructor(wrapper, imgUrl, enableEditing = true, height = 0, config = null, add_btn = true) {
         this.isTester = false;
@@ -20,7 +20,7 @@ class DragTarget {
         this.mapItem = false;
         this.map = {};
         this.isOneToOne = true;
-
+        this.currentOverlapping = null;
         this.isPlaceHolder = true; this.width = 0;
         this.height = height;
         this.wrapper = wrapper;
@@ -156,183 +156,17 @@ class DragTarget {
             snip.appendChild(this.getDeleteButton());
         }
     }
-    // shiftToPreventOverlap(element) {
-    //     let rect1 = element.getBoundingClientRect();
-    //     let step = 10; // Pixels to move per step
 
-    //     let maxWidth = window.innerWidth;
-    //     let maxHeight = window.innerHeight;
-
-    //     let tries = 0, maxTries = 50; // Limit attempts to prevent infinite loops
-
-    //     while (this.isOverlapping(element) && tries < maxTries) {
-    //         let currentTop = parseInt(element.style.top || 0);
-    //         let currentLeft = parseInt(element.style.left || 0);
-
-    //         if (rect1.bottom + step < maxHeight) {
-    //             // Move Down
-    //             element.style.top = `${currentTop + step}px`;
-    //         } else if (rect1.right + step < maxWidth) {
-    //             // Move Right
-    //             element.style.left = `${currentLeft + step}px`;
-    //         } else if (rect1.left - step > 0) {
-    //             // Move Left
-    //             element.style.left = `${currentLeft - step}px`;
-    //         } else {
-    //             // If no space is available, break the loop
-    //             break;
-    //         }
-
-    //         rect1 = element.getBoundingClientRect();
-    //         tries++;
-    //     }
-    //     this.updateBackgroundImage();
-    // }
-    // shiftToPreventOverlap(element) {
-    //     let rect1 = element.getBoundingClientRect();
-    //     let step = 10; // Pixels to move per step
-
-    //     let maxWidth = window.innerWidth;
-    //     let maxHeight = window.innerHeight;
-
-    //     let tries = 0, maxTries = 50; // Limit attempts to prevent infinite loops
-
-    //     // Get parent element (ensure parent exists)
-    //     let parent = element.parentElement;
-    //     if (!parent) return;
-
-    //     let parentRect = parent.getBoundingClientRect();
-
-    //     while (this.isOverlapping(element) && tries < maxTries) {
-    //         let currentTop = parseInt(element.style.top || 0);
-    //         let currentLeft = parseInt(element.style.left || 0);
-
-    //         // Check if moving down is within parent bounds
-    //         if (rect1.bottom + step < maxHeight && rect1.bottom + step <= parentRect.bottom) {
-    //             // Move Down
-    //             element.style.top = `${currentTop + step}px`;
-    //         } 
-    //         // Check if moving right is within parent bounds
-    //         else if (rect1.right + step < maxWidth && rect1.right + step <= parentRect.right) {
-    //             // Move Right
-    //             element.style.left = `${currentLeft + step}px`;
-    //         } 
-    //         // Check if moving left is within parent bounds
-    //         else if (rect1.left - step > 0 && rect1.left - step >= parentRect.left) {
-    //             // Move Left
-    //             element.style.left = `${currentLeft - step}px`;
-    //         } 
-    //         // Check if moving up is within parent bounds
-    //         else if (rect1.top - step > 0 && rect1.top - step >= parentRect.top) {
-    //             // Move Up
-    //             element.style.top = `${currentTop - step}px`;
-    //         } else {
-    //             // If no space is available, break the loop
-    //             break;
-    //         }
-
-    //         rect1 = element.getBoundingClientRect();
-    //         tries++;
-    //     }
-    //     this.updateBackgroundImage();
-    // }
-
-    shiftToPreventOverlap(element) {
-        let rect1 = element.getBoundingClientRect();
-        let step = 10; // Pixels to move per step
-        let randomTries = 30;
-        let tries = 0, maxTries = 50; // Limit attempts to prevent infinite loops
-
-        // Get parent element (ensure parent exists)
-        let parent = element.parentElement;
-        if (!parent) return;
-
-        // Get the parent's bounding rect
-        let parentRect = parent.getBoundingClientRect();
-
-        while (this.isOverlapping(element) && tries < maxTries) {
-            let currentTop = parseInt(element.style.top || 0);
-            let currentLeft = parseInt(element.style.left || 0);
-
-            // Move Down (Ensure element doesn't go below parent's bottom edge)
-            if (rect1.bottom + step <= parentRect.bottom) {
-                element.style.top = `${currentTop + step}px`;
-            }
-            // Move Right (Ensure element doesn't go beyond parent's right edge)
-            else if (rect1.right + step <= parentRect.right) {
-                element.style.left = `${currentLeft + step}px`;
-            }
-            // Move Left (Ensure element doesn't go beyond parent's left edge)
-            else if (rect1.left - step >= parentRect.left) {
-                element.style.left = `${currentLeft - step}px`;
-            }
-            // Move Up (Ensure element doesn't go above parent's top edge)
-            else if (rect1.top - step >= parentRect.top) {
-                element.style.top = `${currentTop - step}px`;
-            } else {
-                // If no space is available, break the loop
-                break;
-            }
-
-            // Update the rect after the move
-            rect1 = element.getBoundingClientRect();
-            tries++;
-        }
-
-        if (this.isOverlapping(element)) {
-            tries = 0;
-            while (this.isOverlapping(element) && tries < randomTries) {
-                let randomTop = Math.random() * (parentRect.height - rect1.height);
-                let randomLeft = Math.random() * (parentRect.width - rect1.width);
-
-                element.style.top = `${randomTop}px`;
-                element.style.left = `${randomLeft}px`;
-
-                tries++;
-            }
-        }
-        this.updateBackgroundImage();
-    }
-
-
-
-
-    // isOverlapping(element) {
-    //     let snips = document.querySelectorAll('.snip');
-    //     let rect1 = element.getBoundingClientRect();
-
-    //     for (let snip of snips) {
-    //         if (snip === element) continue; // Skip self
-
-    //         let rect2 = snip.getBoundingClientRect();
-
-    //         // Expand rect2 by 10px margin
-    //         let margin = 2;
-    //         let expandedRect2 = {
-    //             left: rect2.left - margin,
-    //             right: rect2.right + margin,
-    //             top: rect2.top - margin,
-    //             bottom: rect2.bottom + margin
-    //         };
-
-    //         if (
-    //             rect1.left < expandedRect2.right &&
-    //             rect1.right > expandedRect2.left &&
-    //             rect1.top < expandedRect2.bottom &&
-    //             rect1.bottom > expandedRect2.top
-    //         ) {
-    //             return true; // Overlap detected
-    //         }
-    //     }
-    //     return false;
-    // }
     isOverlapping(element) {
         let snips = document.querySelectorAll('.snip');
         let rect1 = element.getBoundingClientRect();
 
         // Get parent element and its bounding rect
         let parent = element.parentElement;
-        if (!parent) return true; // If no parent, assume it's out of bounds
+        if (!parent) {
+            this.currentOverlapping = 'parent' || null;
+            return true;
+        }
 
         let parentRect = parent.getBoundingClientRect();
         let margin = 0.1; // Margin for overlap detection
@@ -366,6 +200,7 @@ class DragTarget {
                 rect1.top < expandedRect2.bottom &&
                 rect1.bottom > expandedRect2.top
             ) {
+                this.currentOverlapping = snip.id || null;
                 return true; // Overlap detected
             }
         }
@@ -416,7 +251,6 @@ class DragTarget {
                 $('#pointsInput').prop('disabled', isSelected);
                 $('#snipX').prop('disabled', isSelected);
                 $('#snipY').prop('disabled', isSelected);
-                console.log('click');
                 self.updateAttrs();
                 self.updateTarget();
             });
@@ -450,6 +284,11 @@ class DragTarget {
                     $el.css('left', Math.min(parentWidth - elWidth, pos.left + movementSpeed) + 'px');
                 if (keys[40] && pos.top + elHeight < parentHeight)
                     $el.css('top', Math.min(parentHeight - elHeight, pos.top + movementSpeed) + 'px');
+
+                const x = parseInt($el.css('left'));
+                const y = parseInt($el.css('top'));
+                $('#snipX').val(x);
+                $('#snipY').val(y);
                 self.handleOverlapping(true);
                 self.updateBackgroundImage();
             }
@@ -488,14 +327,16 @@ class DragTarget {
                 let parentHeight = $parent.height();
                 let newWidth = Math.min(parentWidth - $el.position().left, e.pageX - $el.offset().left);
                 let newHeight = Math.min(parentHeight - $el.position().top, e.pageY - $el.offset().top);
+                const height = Math.max(20, newHeight);
+                const width = Math.max(30, newWidth);
                 if (self.fixedWidth) {
-                    $('.snip').width(Math.max(30, newWidth));
+                    $('.snip:not(.is_dragged)').width(width);
                 }
                 if (self.fixedHeight) {
-                    $('.snip').height(Math.max(20, newHeight));
+                    $('.snip:not(.is_dragged)').height(height);
                 }
-                $('#areaHeight').val(Math.max(20, newHeight));
-                $('#areaWidth').val(Math.max(30, newWidth))
+                $('#areaHeight').val(height);
+                $('#areaWidth').val(width)
                 self.handleOverlapping();
                 self.updateAttrs();
                 setTimeout(() => {
@@ -652,28 +493,28 @@ class DragTarget {
             });
 
             $(document).on('input', '#areaHeight, #areaWidth', function () {
-                const snips = $('.snip');
+                const snips = $('.snip:not(.is_dragged)');
                 const input = $(this);
                 let val = parseInt(input.val(), 10); // Convert input to a number
-            
+
                 // Store the previous value if not already set
                 if (!input.data('prevValue')) {
                     input.data('prevValue', val);
                 }
-            
+
                 // Enforce minimum constraints
                 if ((this.id === "areaHeight" && val < 20) || (this.id === "areaWidth" && val < 30)) {
                     input.val(input.data('prevValue')); // Revert to previous valid value
                     return;
                 }
-            
+
                 // Apply new dimensions
                 if (this.id === "areaHeight") {
                     self.fixedHeight ? snips.height(val) : $('.snip.selected').height(val);
                 } else {
                     self.fixedWidth ? snips.width(val) : $('.snip.selected').width(val);
                 }
-            
+
                 // Check for overlapping; if true, revert to previous value
                 if (self.handleOverlapping()) {
                     input.val(input.data('prevValue'));
@@ -681,7 +522,7 @@ class DragTarget {
                     input.data('prevValue', val);
                 }
             });
-            
+
 
 
             $(document).on('input', '#snipX,#snipY', function (e) {
@@ -717,19 +558,20 @@ class DragTarget {
                 self.isOneToOne = self.singleMatchInput.checked;
                 initSelect();
             });
-            const blankOptions = '<option value="" disabled selected>Choose an option</option>';
+            const blankOptions = '<option value="" disabled selected>NONE</option>';
             $(document).on('update-select', '.select-wrapper', function (e) {
                 let selected = $('#drag-select').val() || '';
                 selected = selected.trim();
 
                 let dragOptions = blankOptions;
-                let targetOption = blankOptions;
+                let targetOption = self.isOneToOne ? blankOptions : '';
                 $('.snip.draggable').each(function (idx, el) {
                     const id = el.id;
                     dragOptions += id == selected ? `<option selected value="${id}">${id}</option>` : `<option value="${id}" >${id}</option>`;
                 });
                 $('.snip.target').each(function (idx, el) {
                     const id = el.id;
+
                     targetOption += id == selected ? `<option selected value="${id}" >${id}</option>` : `<option value="${id}" >${id}</option>`;
                 });
 
@@ -739,41 +581,14 @@ class DragTarget {
 
             });
 
-            $(document).on('change', '#drag-select', function (e) {
-                // let selected = $('#drag-select').val() || '';
-                // selected = selected.trim();
-                // const targetQuery = `.snip.target[dragged='${selected}']`;
-
-                // let targets = $(targetQuery);
-
-                // if (targets.length > 0) {
-
-                //     targets.each(function () {
-                //         const id = $(this).attr('id');
-                //         const optionQuery = `#target-select option[value='${id}']`;
-
-                //         $(optionQuery).prop('selected', true);
-                //     });
-                // } else {
-                //     let targetOption = blankOptions;
-                //     $('.snip.target').each(function (idx, el) {
-                //         const id = el.id;
-                //         targetOption += id == selected ? `<option selected value="${id}" >${id}</option>` : `<option value="${id}" >${id}</option>`;
-                //     });
-                //     $('#target-select').html(targetOption);
-
-                // }
-
-                // $('#target-select').trigger('change');
-
-            });
-
             $(document).on('change', '#target-select', function (e) {
                 let selectedTargets = $(this).val();
-                // Ensure selectedTargets is always an array
+
+
                 if (!Array.isArray(selectedTargets)) {
                     selectedTargets = [selectedTargets];
                 }
+
                 const dragSnip = $('.snip.draggable.selected').attr('id');
 
                 const oldTargets = $(`.snip.target[dragged="${dragSnip}"]`);
@@ -804,7 +619,7 @@ class DragTarget {
                         } catch (error) {
 
                         }
-                        if(target==""){
+                        if (target == "") {
                             self.restoreDraggable(dragSnip);
                         }
                     });
@@ -813,42 +628,21 @@ class DragTarget {
 
 
             function initSelect() {
-                // Check if `self.isOneToOne` and initialize `#target-select` accordingly
-                // if (self.isOneToOne) {
-                //     $('#target-select').select2({
-                //         minimumResultsForSearch: -1,
-                //         multiple: false,
-                //         placeholder: "Choose an option",
-                //     });
-                // } else {
-                //     $('#target-select').select2({
-                //         minimumResultsForSearch: -1,
-                //         multiple: true,
-                //         placeholder: "Choose an option",
-                //     });
-                // }
-
                 self.changeSelectType('target-select', !self.isOneToOne);
+                self.updateTarget();
                 $('#drag-select').hide();
             }
-
-            // Ensure the first option is a placeholder in HTML
             $(document).ready(function () {
                 $("#target-select, #drag-select").prepend('<option value="" disabled selected>Choose an option</option>');
             });
-
-
-
             initSelect();
-
         });
-
         self.updateTarget();
     }
 
     updateTarget() {
         const element = $('.snip.draggable.selected');
-      
+
 
         if (element.length == 0) {
             $('#target-select option').prop('selected', false);
@@ -862,12 +656,13 @@ class DragTarget {
         const blankOptions = this.isOneToOne ? '<option value="">None</option>' : '';
 
         const targetQuery = `.snip.target[dragged='${selected}']`;
-  
+
 
         let targets = $(targetQuery);
 
-        if (targets.length > 0) {
 
+        if (targets.length > 0) {
+            $('#target-select option').prop('selected', false);
             targets.each(function () {
                 const id = $(this).attr('id');
                 const optionQuery = `#target-select option[value='${id}']`;
@@ -884,28 +679,46 @@ class DragTarget {
 
         }
 
+
         $('#target-select').prop('disabled', false);
-        updateChosen();
+
         $('#target-select').trigger('change');
+        updateChosen();
+
+
+
+
 
     }
     handleOverlapping(moving = false) {
         const self = this;
         let isOverlapping = false;
+        const overlaps = [];
+        const vals = [];
         $('.snip').each(function (idx, el) {
-            // if (self.isOverlapping(el) && el != document.querySelector('.snip.selected')) {
-            //     self.shiftToPreventOverlap(el);
-            // }
+            const obj = {};
             if (self.isOverlapping(el)) {
                 isOverlapping = true;
+                obj[el.id] = self.currentOverlapping;
+                overlaps.push(obj);
             } else if (el == document.querySelector('.snip.selected') && moving) {
                 self.updateAttrs(el);
             }
 
         });
         if (isOverlapping) {
+
             if ($('.jGrowl-notification').length <= 1) {
-                alertWarning('Area are overlapping');
+                overlaps.forEach(function (item) {
+                    const key = Object.keys(item)[0];
+                    const value = item[key];
+                    const isParent = value == 'parent';
+                    if (vals.includes(key) || vals.includes(value)) {
+                        return;
+                    }
+                    isParent ? alertWarning(`Area going out of bounds!!`) : alertWarning(`${key} and ${value} is overlapping with each other!`);
+                    vals.push(key, value);
+                });
             }
             $('.snip').each(function (idx, el) {
                 const top = $(el).attr('top');
@@ -1132,7 +945,7 @@ class DragTarget {
         }
         width = Math.max(width, 30);
         height = Math.max(height, 20);
-    
+
         this.currentSnip.style.width = `${width}px`;
         this.currentSnip.style.height = `${height}px`;
     }
@@ -1227,10 +1040,19 @@ class DragTarget {
 
     onDragStart(event, snip) {
         event.dataTransfer.setData("text", snip.id);
-        snip.style.opacity = "0.5";  // Make the snip semi-transparent during dragging
+        snip.style.opacity = "0.5";
+        snip.classList.add('dropping');
     }
     onDragEnd(event, snip) {
-        snip.style.opacity = "1";  // Reset the opacity after dragging
+        try {
+            setTimeout(function () {
+                snip.classList.remove('dropping');
+            }, 1500);
+        } catch (error) {
+
+        }
+        // snip.style.opacity = "1";  
+        // snip.classList.remove('dropping');
     }
     enableTargetSnip(targetWrapper) {
         targetWrapper.addEventListener("dragover", (e) => this.onDragOver(e, targetWrapper));
@@ -1245,13 +1067,16 @@ class DragTarget {
     }
     onDrop(event, targetWrapper) {
         event.preventDefault();
+
         const snipId = event.dataTransfer.getData("text");
         this.handleDrop(snipId, targetWrapper);
+
     }
     handleDrop(snipId, targetWrapper, validate = false) {
+
         if (targetWrapper && snipId != "") {
             const draggedSnip = document.getElementById(snipId);
-            if (!targetWrapper.className.includes('is_dragged')) {
+            if (!targetWrapper.className.includes('draggable')) {
                 if (this.mapItem) {
                     const id = targetWrapper.id;
                     this.map[id] = snipId;
@@ -1270,7 +1095,7 @@ class DragTarget {
 
                 if (draggedSnip) {
                     const clonedSnip = draggedSnip.cloneNode(true);
-                    clonedSnip.classList.remove('snip', 'draggable');
+                    clonedSnip.classList.remove('snip', 'draggable', 'dropping');
                     clonedSnip.classList.add('value');
                     clonedSnip.style.left = `auto`;
                     clonedSnip.style.top = `auto`;
@@ -1304,23 +1129,31 @@ class DragTarget {
                         draggedSnip.classList.add('is_dragged');
                         shouldHide = true;
                         draggedSnip.removeAttribute('draggable');
-                        this.enableTargetSnip(draggedSnip);
+                    } else {
+                        draggedSnip.classList.add('drag_multiple');
                     }
+                    this.enableTargetSnip(draggedSnip);
 
                     this.makeDraggable(clonedSnip);
                     const afterHtml = targetWrapper.innerHTML;
                     this.addUndo({ draggable: draggedSnip.id, target: targetWrapper.id, shouldHide, beforeHtml, afterHtml });
                 }
             } else {
-                const targetID = targetWrapper.id;
-                const dragID = draggedSnip.id.replace('dragged-', '');
-                const parent = document.getElementById(draggedSnip.id).parentNode;
-                if (targetID == dragID) {
-                    targetWrapper.classList.remove('is_dragged');
-                    targetWrapper.setAttribute('draggable', 'true');
-                    parent.setAttribute('dragged', '');
-                    draggedSnip.remove();
-                    this.updateBackgroundImage();
+                try {
+                    const targetID = targetWrapper.id;
+                    const snipElement = document.querySelector('.dropping');
+                    const id = snipElement.id.replace("dragged-", '');
+                    const parent = snipElement.parentNode;
+                    if (targetID == id) {
+                        targetWrapper.classList.remove('is_dragged', 'drag_multiple');
+                        targetWrapper.setAttribute('draggable', 'true');
+                        targetWrapper.style.opacity = 1;
+                        parent.setAttribute('dragged', '');
+                        draggedSnip.remove();
+                        this.updateBackgroundImage();
+                    }
+                } catch (error) {
+
                 }
             }
         }
@@ -1329,7 +1162,7 @@ class DragTarget {
     restoreDraggable(dragID) {
         if (dragID) {
             const dragble = $(`#${dragID}`);
-            dragble.removeClass('is_dragged');
+            dragble.removeClass('is_dragged', 'drag_multiple');
             dragble.attr('draggable', 'true');
         }
     }
@@ -1352,3 +1185,5 @@ class DragTarget {
 
 
 }
+
+let changeEnable = true;
