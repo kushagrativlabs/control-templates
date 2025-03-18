@@ -994,20 +994,21 @@ class DragTarget {
   }
   updateSelection(event) {
     if (!this.isSelecting || !this.currentSnip) return;
+    
     const wrapperRect = this.wrapper.getBoundingClientRect();
-    let width = event.clientX - wrapperRect.left - this.startX;
-    let height = event.clientY - wrapperRect.top - this.startY;
-    if (width < 0) {
-      this.currentSnip.style.left = `${event.clientX - wrapperRect.left}px`;
-      width = Math.abs(width);
-    }
-    if (height < 0) {
-      this.currentSnip.style.top = `${event.clientY - wrapperRect.top}px`;
-      height = Math.abs(height);
-    }
+    const currentX = event.clientX - wrapperRect.left;
+    const currentY = event.clientY - wrapperRect.top;
+  
+    // Ensure width and height are positive by setting min value at startX/startY
+    const width = Math.max(currentX - this.startX, 0);
+    const height = Math.max(currentY - this.startY, 0);
+  
+    this.currentSnip.style.left = `${this.startX}px`;
+    this.currentSnip.style.top = `${this.startY}px`;
     this.currentSnip.style.width = `${width}px`;
     this.currentSnip.style.height = `${height}px`;
   }
+  
   endSelection(event) {
     if (!this.isSelecting) return;
     this.isSelecting = false;
