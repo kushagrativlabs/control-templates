@@ -178,7 +178,6 @@ class DragTarget {
     // Get parent element and its bounding rect
     let parent = element.parentElement;
     if (!parent) {
-      this.currentOverlapping = "parent" || null;
       return true;
     }
 
@@ -192,6 +191,7 @@ class DragTarget {
       rect1.top < parentRect.top ||
       rect1.bottom > parentRect.bottom
     ) {
+      this.currentOverlapping = "parent";
       return true; // Out of bounds
     }
 
@@ -1005,8 +1005,9 @@ class DragTarget {
       this.currentSnip.style.top = `${event.clientY - wrapperRect.top}px`;
       height = Math.abs(height);
     }
-    width = Math.max(width, 30);
-    height = Math.max(height, 20);
+    // width = Math.max(width, 30);
+    // height = Math.max(height, 20);
+    // console.log(width);
 
     this.currentSnip.style.width = `${width}px`;
     this.currentSnip.style.height = `${height}px`;
@@ -1015,6 +1016,12 @@ class DragTarget {
     if (!this.isSelecting) return;
     this.isSelecting = false;
     if (this.currentSnip) {
+     let height =  jQuery(this.currentSnip).height();
+     let width =  jQuery(this.currentSnip).width();
+        width = Math.max(width, 30);
+        height = Math.max(height, 20);
+       jQuery(this.currentSnip).height(height);
+       jQuery(this.currentSnip).width(width);
       const isOverlapping = this.isOverlapping(this.currentSnip);
       if (
         this.currentSnip.offsetWidth < 10 ||
@@ -1037,6 +1044,8 @@ class DragTarget {
         }
         this.handleHeightWidth(this.currentSnip);
       }
+
+
     }
 
     this.resetSnipCreation();
