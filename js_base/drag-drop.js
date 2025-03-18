@@ -585,9 +585,47 @@ class DragTarget {
       });
 
       $(self.singleMatchInput).on("change", function (e) {
+    
         self.isOneToOne = self.singleMatchInput.checked;
-       
-        self.updateTarget();
+        const map={};
+        let exceeded = false;
+        const duplicate = new Set();
+        if(self.isOneToOne){
+          $('.snip.target').each(function(idx,el){
+            const value = $(el).attr('dragged') ?? '';
+            if(value.length!=0){
+              const objKeys = Object.keys(map);
+              if(objKeys.includes(value)){
+                map[value]= map[value]+1;
+                exceeded =true;
+              }else{
+                map[value]= 1;
+              }
+              duplicate.add(value);
+            }
+          });
+    
+          if(exceeded){
+            self.singleMatchInput.checked = false;
+            self.isOneToOne = false;
+            const str = [...duplicate].join(', ');
+            alertWarning(`${str} blocks are matched with multiple targets`);
+            return;
+          }else{
+            duplicate.forEach(function(el){
+              const elmt = $(`#${el}`);
+              elmt.addClass('is_dragged');
+              elmt.removeClass('drag_multiple');
+              elmt.attr('draggable',false);
+            });
+          }
+        }else{
+          $('.snip.draggable').each(function(idx,el){
+            $(el).removeClass('is_dragged');
+            $(el).attr('draggable',true);
+          })
+        }   
+           
       });
       const blankOptions = '<option value="" disabled selected>NONE</option>';
       $(document).on("update-select", ".select-wrapper", function (e) {
@@ -691,7 +729,8 @@ class DragTarget {
     self.updateTarget();
   }
 
-  updateTarget() {
+  updateTarget(change=true) {
+    
     const element = $(".snip.selected");
     const isDraggable = element.hasClass("draggable");
 
@@ -702,7 +741,7 @@ class DragTarget {
     }
 
     const selected = element.attr("id");
-    const blankOptions = this.isOneToOne || isDraggable
+    const blankOptions = this.isOneToOne || isDraggable 
       ? '<option value="">None</option>'
       : "";
     let options = blankOptions;
@@ -734,7 +773,9 @@ class DragTarget {
       $("#target-select").html(options);
     }
 
+  
     $("#target-select").prop("disabled", false).trigger("change");
+
     updateChosen();
   }
 
@@ -1019,7 +1060,11 @@ class DragTarget {
         height = Math.max(height, 20);
        jQuery(this.currentSnip).height(height);
        jQuery(this.currentSnip).width(width);
+
+      const snip = this.currentSnip;
+
       const isOverlapping = this.isOverlapping(this.currentSnip);
+   
       if (
         this.currentSnip.offsetWidth < 10 ||
         this.currentSnip.offsetHeight < 10 ||
@@ -1041,9 +1086,15 @@ class DragTarget {
         }
         this.handleHeightWidth(this.currentSnip);
       }
-
+      
+      if(this.isOverlapping(snip)){
+        this.deleteSnip(snip);
+        alertWarning("Selection is not valid it is overlapping");
+      }
 
     }
+
+   
 
     this.resetSnipCreation();
 
@@ -1150,9 +1201,13 @@ class DragTarget {
     this.handleDrop(snipId, targetWrapper);
   }
   handleDrop(snipId, targetWrapper, validate = false) {
+    if(targetWrapper.id==snipId){
+      return;
+    }
     if (targetWrapper && snipId != "") {
       const draggedSnip = document.getElementById(snipId);
       if (!targetWrapper.className.includes("draggable") && !draggedSnip.className.includes('value') ) {
+        console.log('targetWrapper-handleDrop')
         if (this.mapItem) {
           const id = targetWrapper.id;
           this.map[id] = snipId;
@@ -1213,6 +1268,7 @@ class DragTarget {
           });
         }
       } else {
+    
         try {
           const targetID = targetWrapper.id;
           const snipElement = document.querySelector(".dropping");
