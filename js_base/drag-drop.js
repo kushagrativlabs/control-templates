@@ -759,11 +759,11 @@ class DragTarget {
           const key = Object.keys(item)[0];
           const value = item[key];
           const isParent = value == "parent";
-          if (vals.includes(key) || vals.includes(value)) {
+          if ((vals.includes(key) || vals.includes(value)) && !isParent) {
             return;
           }
           isParent
-            ? alertWarning(`Area going out of bounds!!`)
+            ? alertWarning(`Area ${key} going out of bounds!!`)
             : alertWarning(
                 `${key} and ${value} is overlapping with each other!`
               );
@@ -1152,7 +1152,7 @@ class DragTarget {
   handleDrop(snipId, targetWrapper, validate = false) {
     if (targetWrapper && snipId != "") {
       const draggedSnip = document.getElementById(snipId);
-      if (!targetWrapper.className.includes("draggable")) {
+      if (!targetWrapper.className.includes("draggable") && !draggedSnip.className.includes('value') ) {
         if (this.mapItem) {
           const id = targetWrapper.id;
           this.map[id] = snipId;
@@ -1218,6 +1218,19 @@ class DragTarget {
           const snipElement = document.querySelector(".dropping");
           const id = snipElement.id.replace("dragged-", "");
           const parent = snipElement.parentNode;
+        
+          if(parent.className.includes('target')){  
+            $(parent).html('');
+            $(parent).attr('dragged','');
+            if (id) {
+              const dragble = $(`#${id}`);
+              dragble.removeClass("is_dragged", "drag_multiple");
+              dragble.attr("draggable", "true");
+              dragble.css({'opacity':1})
+            }
+            return;
+          }
+         
           if (targetID == id) {
             targetWrapper.classList.remove("is_dragged", "drag_multiple");
             targetWrapper.setAttribute("draggable", "true");
