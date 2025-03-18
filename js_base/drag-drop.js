@@ -283,7 +283,7 @@ class DragTarget {
         }
       });
       function moveElement() {
-        let $el = $(".snip.selected:not(.is_dragged)");
+        let $el = $(".snip.selected"); //:not(.is_dragged)
         if (!$el.length || isResizing) return;
         let $parent = $el.parent();
         let pos = $el.position();
@@ -362,10 +362,10 @@ class DragTarget {
         const height = Math.max(20, newHeight);
         const width = Math.max(30, newWidth);
         if (self.fixedWidth) {
-          $(".snip:not(.is_dragged)").width(width);
+          $(".snip").width(width); //not(.is_dragged)
         }
         if (self.fixedHeight) {
-          $(".snip:not(.is_dragged)").height(height);
+          $(".snip").height(height); //not(.is_dragged)
         }
         $("#areaHeight").val(height);
         $("#areaWidth").val(width);
@@ -515,7 +515,7 @@ class DragTarget {
       });
 
       $(document).on("input", "#areaHeight, #areaWidth", function () {
-        const snips = $(".snip:not(.is_dragged)");
+        const snips = $(".snip"); //:not(.is_dragged)
         const input = $(this);
         let val = parseInt(input.val(), 10); // Convert input to a number
 
@@ -1005,10 +1005,6 @@ class DragTarget {
       this.currentSnip.style.top = `${event.clientY - wrapperRect.top}px`;
       height = Math.abs(height);
     }
-    // width = Math.max(width, 30);
-    // height = Math.max(height, 20);
-    // console.log(width);
-
     this.currentSnip.style.width = `${width}px`;
     this.currentSnip.style.height = `${height}px`;
   }
