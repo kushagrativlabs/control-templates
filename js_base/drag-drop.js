@@ -70,16 +70,7 @@ class DragTarget {
     this.addUndo(lastItem);
     return lastItem; // Return the removed item
   }
-  static importConfig(wrapper, configs) {
-    return new DragTarget(
-      wrapper,
-      configs.wrapper_config.backgroundImage,
-      true,
-      configs.wrapper_config.height,
-      config,
-      false
-    );
-  }
+ 
   init() {
     this.setMainImage();
     if (this.configs != null) {
@@ -108,6 +99,8 @@ class DragTarget {
 
   handleConfigs(configs) {
     const self = this;
+    const targs= [];
+    const drags = [];
     for (const config of configs.areas) {
       const isTarget = config.type == 1;
       const snip = document.createElement("div");
@@ -131,7 +124,12 @@ class DragTarget {
       if (this.add_btn) {
         snip.appendChild(this.getDeleteButton());
       }
+     const idx = parseInt(config.id.split('-')[1]);    
+      isTarget ? targs.push(idx) : drags.push(idx);
     }
+
+
+  
     self.isOneToOne = configs.options.OneToOneMatching;
     self.singleMatchInput.checked = self.isOneToOne;
     self.singleMatchInput.dispatchEvent(new Event("change"));
@@ -142,7 +140,22 @@ class DragTarget {
     self.fixedWidthCheckbox.checked = self.fixedWidth;
     document.getElementById("areaHeight").value = configs.options.AreaHeight;
     document.getElementById("areaWidth").value = configs.options.AreaWidth;
-    self.refreshSelect();
+
+    const matchings = configs.match;
+    if(matchings){
+      matchings.forEach(function(match){
+        const key  = Object.keys(match)[0];
+        self.handleDrop(match[key],document.getElementById(key));
+      });
+      self.updateBackgroundImage();
+    }
+  
+    try {
+      self.dragCounter = drags.sort().reverse()[0]+1;
+      self.targetCounter = targs.sort().reverse()[0]+1;
+    } catch (error) {
+      
+    }
   }
   addConfigSnap(config, makeDraggable = false) {
     const snip = document.createElement("div");
@@ -386,7 +399,7 @@ class DragTarget {
         }
         $("#deleteModal").modal("hide");
         self.resetSnipCreation();
-        self.refreshSelect();
+     
       });
       $(document).on("change", "#imageInput", function (e) {
         var fileInput = this;
@@ -447,7 +460,6 @@ class DragTarget {
         });
         self.dragCounter = 1;
         self.targetCounter = 1;
-        self.refreshSelect();
       });
       $(document).on("click", "#resetValues", function (e) {
         $(".snip.draggable").each(function (index, element) {
@@ -458,8 +470,6 @@ class DragTarget {
           $(element).find(".value").remove();
           $(element).attr("dragged", "");
         });
-
-        self.refreshSelect();
       });
 
       document.getElementById("importSnip").addEventListener("click", (e) => {
@@ -741,7 +751,7 @@ class DragTarget {
     }
 
     const selected = element.attr("id");
-    const blankOptions = this.isOneToOne || isDraggable 
+    const blankOptions = this.isOneToOne || !isDraggable 
       ? '<option value="">None</option>'
       : "";
     let options = blankOptions;
@@ -763,19 +773,21 @@ class DragTarget {
     } else {
       this.changeSelectType("target-select", false);
       const drag = element.attr("dragged") ?? "";
+      console.log(drag);
       $(".snip.draggable").each(function (_, el) {
         const id = el.id;
         options += `<option value="${id}" ${
           id === drag ? "selected" : ""
         }>${id}</option>`;
       });
-
+      console.log(options);
       $("#target-select").html(options);
     }
 
   
+    if(change){
     $("#target-select").prop("disabled", false).trigger("change");
-
+    }
     updateChosen();
   }
 
@@ -977,9 +989,7 @@ class DragTarget {
     return allConfigs; // Important: Return the array!
   }
 
-  refreshSelect() {
-    // jQuery(".select-wrapper").trigger("update-select")
-  }
+
 
   downloadConfigAsJSON() {
     const configData = this.exportConfigs();
@@ -1098,7 +1108,7 @@ class DragTarget {
 
     this.resetSnipCreation();
 
-    this.refreshSelect();
+    
   }
   handleHeightWidth(currentSnip) {
     if (!this.fixedHeight && !this.fixedWidth) return;
@@ -1120,6 +1130,7 @@ class DragTarget {
     }
   }
   updateBackgroundImage() {
+    const self = this;
     const wrapperRect = this.wrapper.getBoundingClientRect();
     const url = this.mainImage.src;
     $(".snip.draggable").each(function (idx, snip) {
@@ -1128,6 +1139,17 @@ class DragTarget {
       snip.style.backgroundImage = `url(${url})`;
       snip.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
       snip.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
+      const id = snip.id;
+      const els = $(`.snip[dragged='${id}']`);
+     
+      if(els.length!=0){
+        const snp = els.find('.value').get(0);
+        snp.style.backgroundImage = `url(${url})`;
+        snp.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
+        snp.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
+        $(snp).width($(snip).width());
+        $(snp).height($(snip).height());
+      }
     });
   }
   deleteSnip(snip) {
@@ -1207,7 +1229,7 @@ class DragTarget {
     if (targetWrapper && snipId != "") {
       const draggedSnip = document.getElementById(snipId);
       if (!targetWrapper.className.includes("draggable") && !draggedSnip.className.includes('value') ) {
-        console.log('targetWrapper-handleDrop')
+       
         if (this.mapItem) {
           const id = targetWrapper.id;
           this.map[id] = snipId;
@@ -1267,6 +1289,7 @@ class DragTarget {
             afterHtml,
           });
         }
+        this.updateTarget(false);
       } else {
     
         try {
@@ -1276,7 +1299,7 @@ class DragTarget {
           const parent = snipElement.parentNode;
         
           if(parent.className.includes('target')){  
-            $(parent).html('');
+            $(parent).find('.value').remove();
             $(parent).attr('dragged','');
             if (id) {
               const dragble = $(`#${id}`);
@@ -1295,9 +1318,11 @@ class DragTarget {
             draggedSnip.remove();
             this.updateBackgroundImage();
           }
+          this.updateTarget(false);
         } catch (error) {}
       }
     }
+    
   }
 
   restoreDraggable(dragID) {
