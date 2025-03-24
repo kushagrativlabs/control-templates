@@ -258,6 +258,20 @@ class DragTarget {
     let isResizing = false;
     let deleteItem = null;
     jQuery(document).ready(function ($) {
+
+        $(document).on('click','#downloadSnip',function(e){
+
+            $('.snip,.value').addClass('downloading')
+            
+            html2canvas(self.wrapper).then(canvas => {
+                let link = document.createElement('a');
+                link.href = canvas.toDataURL("image/png");
+                link.download = "editor.png";
+                link.click();
+            });
+            $('.snip,.value').removeClass('downloading')
+        
+        })
       $(document).on("click", ".snip:not(.resizing)", function () {
         //toggle selected
         const isSelected = $(this).hasClass("selected");
