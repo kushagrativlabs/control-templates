@@ -9,6 +9,7 @@ class DragTarget {
     config = null,
     add_btn = true
   ) {
+    alertMessage("Version: 20/03 bug fixes");
     this.isTester = false;
     this.dragCounter = 1;
     this.targetCounter = 1;
@@ -393,6 +394,8 @@ class DragTarget {
         deleteItem = $(this).parent();
         $("#deleteModal").modal("show");
       });
+
+    
       $(document).on("click", "#confirmDelete", function (e) {
         if (deleteItem != null) {
           deleteItem.remove();
@@ -455,22 +458,34 @@ class DragTarget {
         self.downloadConfigAsJSON();
       });
       $(document).on("click", "#resetAllConfig", function (e) {
+        $('#resetConfigModal').modal('show');
+      });
+
+      $(document).on('click','#confirmResetConfig',function(e){
         $(".snip").each(function (index, element) {
-          $(element).remove();
-        });
-        self.dragCounter = 1;
-        self.targetCounter = 1;
+            $(element).remove();
+          });
+          self.dragCounter = 1;
+          self.targetCounter = 1;
+
+          $('#resetConfigModal').modal('hide');
       });
       $(document).on("click", "#resetValues", function (e) {
-        $(".snip.draggable").each(function (index, element) {
-          $(element).show();
-          $(element).removeClass("is_dragged");
-        });
-        $(".snip.target").each(function (index, element) {
-          $(element).find(".value").remove();
-          $(element).attr("dragged", "");
-        });
+        $('#resetValueModal').modal('show');
       });
+
+      $(document).on('click','#confirmResetValue',function(e){
+        $(".snip.draggable").each(function (index, element) {
+            $(element).show();
+            $(element).removeClass("is_dragged");
+          });
+          $(".snip.target").each(function (index, element) {
+            $(element).find(".value").remove();
+            $(element).attr("dragged", "");
+          });
+
+          $('#resetValueModal').modal('hide');
+      })
 
       document.getElementById("importSnip").addEventListener("click", (e) => {
         if ($(".snip").length != 0) {
@@ -600,6 +615,7 @@ class DragTarget {
         const map={};
         let exceeded = false;
         const duplicate = new Set();
+        const exded = [];
         if(self.isOneToOne){
           $('.snip.target').each(function(idx,el){
             const value = $(el).attr('dragged') ?? '';
@@ -608,6 +624,7 @@ class DragTarget {
               if(objKeys.includes(value)){
                 map[value]= map[value]+1;
                 exceeded =true;
+                exded.push(value);
               }else{
                 map[value]= 1;
               }
@@ -618,7 +635,7 @@ class DragTarget {
           if(exceeded){
             self.singleMatchInput.checked = false;
             self.isOneToOne = false;
-            const str = [...duplicate].join(', ');
+            const str = exded.join(', ');
             alertWarning(`${str} blocks are matched with multiple targets`);
             return;
           }else{
@@ -632,6 +649,7 @@ class DragTarget {
         }else{
           $('.snip.draggable').each(function(idx,el){
             $(el).removeClass('is_dragged');
+            $(el).addClass('drag_multiple');
             $(el).attr('draggable',true);
           })
         }   
@@ -1141,14 +1159,16 @@ class DragTarget {
       snip.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
       const id = snip.id;
       const els = $(`.snip[dragged='${id}']`);
-     
+      
       if(els.length!=0){
-        const snp = els.find('.value').get(0);
-        snp.style.backgroundImage = `url(${url})`;
-        snp.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
-        snp.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
-        $(snp).width($(snip).width());
-        $(snp).height($(snip).height());
+        els.each(function(idx,el){
+            const snp = $(el).find('.value').get(0);
+            snp.style.backgroundImage = `url(${url})`;
+            snp.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
+            snp.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
+            $(snp).width($(snip).width());
+            $(snp).height($(snip).height());
+        })
       }
     });
   }
@@ -1275,6 +1295,7 @@ class DragTarget {
             shouldHide = true;
             draggedSnip.removeAttribute("draggable");
           } else {
+            
             draggedSnip.classList.add("drag_multiple");
           }
           this.enableTargetSnip(draggedSnip);
