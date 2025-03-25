@@ -9,7 +9,10 @@ class DragTarget {
     config = null,
     add_btn = true
   ) {
-    alertMessage("Version: 20/03 bug fixes");
+    alertMessage("Version: 25/03 ");
+    this.og = true;
+    this.ogHeight=0;
+    this.ogWidth =0;
     this.isTester = false;
     this.dragCounter = 1;
     this.targetCounter = 1;
@@ -100,37 +103,53 @@ class DragTarget {
 
   handleConfigs(configs) {
     const self = this;
-    const targs= [];
+    const targs = [];
     const drags = [];
+    const ogHeight = this.ogHeight;
+    const ogWidth = this.ogWidth;
+    const newHeight = this.wrapper.clientHeight;
+    const newWidth = this.wrapper.clientWidth;
+    const isOg = this.isOg;
+
+    // Scale factors for width and height
+    const scaleX = isOg ? 1 : newWidth / ogWidth;
+    const scaleY = isOg ? 1 : newHeight / ogHeight;
+    if($('.snip').length!=0){
+      $('.snip').remove();
+    }
     for (const config of configs.areas) {
-      const isTarget = config.type == 1;
-      const snip = document.createElement("div");
-      snip.classList.add("snip");
-      snip.classList.add(isTarget ? "target" : "draggable");
-      snip.style.left = config.x;
-      snip.style.top = config.y;
-      snip.id = config.id;
-      snip.style.height = config.height;
-      snip.style.width = config.width;
-      snip.setAttribute("data-points", config.points);
-      this.wrapper.appendChild(snip);
-      if (!isTarget) {
-        snip.style.backgroundImage = `url(${this.mainImage.src})`;
-        snip.style.backgroundSize = config.backgroundSize;
-        snip.style.backgroundPosition = config.backgroundPosition;
-        self.makeDraggable(snip);
-      } else {
-        self.enableTargetSnip(snip);
-      }
-      if (this.add_btn) {
-        snip.appendChild(this.getDeleteButton());
-      }
-     const idx = parseInt(config.id.split('-')[1]);    
-      isTarget ? targs.push(idx) : drags.push(idx);
+        const isTarget = config.type == 1;
+        const snip = document.createElement("div");
+        snip.classList.add("snip");
+        snip.classList.add(isTarget ? "target" : "draggable");
+
+        // Adjust left, top, width, and height based on scaling
+        snip.style.left = `${parseFloat(config.x) * scaleX}px`;
+        snip.style.top = `${parseFloat(config.y) * scaleY}px`;
+        snip.style.width = `${parseFloat(config.width) * scaleX}px`;
+        snip.style.height = `${parseFloat(config.height) * scaleY}px`;
+
+        snip.id = config.id;
+        snip.setAttribute("data-points", config.points);
+        this.wrapper.appendChild(snip);
+
+        if (!isTarget) {
+            snip.style.backgroundImage = `url(${this.mainImage.src})`;
+            snip.style.backgroundSize = config.backgroundSize;
+            snip.style.backgroundPosition = config.backgroundPosition;
+            self.makeDraggable(snip);
+        } else {
+            self.enableTargetSnip(snip);
+        }
+
+        if (this.add_btn) {
+            snip.appendChild(this.getDeleteButton());
+        }
+
+        const idx = parseInt(config.id.split('-')[1]);
+        isTarget ? targs.push(idx) : drags.push(idx);
     }
 
-
-  
     self.isOneToOne = configs.options.OneToOneMatching;
     self.singleMatchInput.checked = self.isOneToOne;
     self.singleMatchInput.dispatchEvent(new Event("change"));
@@ -143,21 +162,26 @@ class DragTarget {
     document.getElementById("areaWidth").value = configs.options.AreaWidth;
 
     const matchings = configs.match;
-    if(matchings){
-      matchings.forEach(function(match){
-        const key  = Object.keys(match)[0];
-        self.handleDrop(match[key],document.getElementById(key));
-      });
-      self.updateBackgroundImage();
+    if (matchings) {
+        matchings.forEach(function(match) {
+            const key = Object.keys(match)[0];
+            self.handleDrop(match[key], document.getElementById(key));
+        });
+        self.updateBackgroundImage();
     }
-  
+
     try {
-      self.dragCounter = drags.sort().reverse()[0]+1;
-      self.targetCounter = targs.sort().reverse()[0]+1;
+        self.dragCounter = drags.sort().reverse()[0] + 1;
+        self.targetCounter = targs.sort().reverse()[0] + 1;
     } catch (error) {
-      
+        console.error(error);
     }
-  }
+
+     this.ogHeight = this.wrapper.clientHeight;
+     this.ogWidth = this.wrapper.clientWidth;
+   
+}
+
   addConfigSnap(config, makeDraggable = false) {
     const snip = document.createElement("div");
     snip.classList.add("snip");
@@ -259,16 +283,39 @@ class DragTarget {
     let deleteItem = null;
     jQuery(document).ready(function ($) {
 
+      function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+    
+    window.addEventListener("resize", debounce(() => {
+      const config = self.exportConfigs();
+      if(Object.keys(config).length!=0){
+        self.setMainImage();
+        self.handleConfigs(config);
+      }
+    }, 300)); 
+
+
         $(document).on('click','#downloadSnip',function(e){
 
             $('.snip,.value').addClass('downloading')
             
-            html2canvas(self.wrapper).then(canvas => {
-                let link = document.createElement('a');
-                link.href = canvas.toDataURL("image/png");
-                link.download = "editor.png";
-                link.click();
-            });
+            html2canvas(self.wrapper, {
+              scale: 10, // Increase scale for higher resolution
+              useCORS: true, // Helps with cross-origin images
+              logging: false, // Disable logging for better performance
+              backgroundColor: null // Keeps transparent background if needed
+          }).then(canvas => {
+              let link = document.createElement('a');
+              link.href = canvas.toDataURL("image/png", 1.0); // Set highest quality
+              link.download = "editor.png";
+              link.click();
+          });
+          
             $('.snip,.value').removeClass('downloading')
         
         })
@@ -922,6 +969,9 @@ class DragTarget {
           );
           img.width = parseInt(jsonData.wrapper_config.width.replace("px", ""));
           self.mainImage = img;
+          self.ogHeight =  parseInt(jsonData.wrapper_config.height.replace("px", ""));
+          self.ogWidth = parseInt(jsonData.wrapper_config.width.replace("px", ""));
+          self.og = false;
           self.setMainImage();
           self.isPlaceHolder = false;
           self.handleConfigs(jsonData);
