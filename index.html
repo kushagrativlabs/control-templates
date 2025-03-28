@@ -138,10 +138,6 @@
 				background: #ffffff91;
 			}
 
-			.snip.draggable.is_dragged .delete-btn, .snip.draggable.drag_multiple .delete-btn {
-				display: none !important;
-			}
-
 
 
 
@@ -172,6 +168,7 @@
 			}
 
 			.delete-btn {
+				display: none;
 				position: absolute;
 				top: 0px;
 				right: 0px;
@@ -184,6 +181,11 @@
 				height: 15px;
 				z-index: 9;
 			}
+			.snip .delete-btn{
+				display: block !important;
+			}
+
+
 
 			.delete-btn:hover {
 				background-color: darkred;
@@ -203,6 +205,11 @@
 				opacity: 1 !important;
 				margin: 0px !important;
 			}
+			.snip.downloading .delete-btn, .snip.downloading .resize-handle{
+				display: none !important;
+			}
+
+			
 			.snip.downloading::after,.value.downloading::after{
 				display: none;
 			}
