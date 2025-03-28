@@ -9,7 +9,7 @@ class DragTarget {
     config = null,
     add_btn = true
   ) {
-    const version = "Version: 26/03";
+    const version = "Version: 28/03";
     console.log(version);
     alertMessage(version);
     this.og = true;
@@ -135,10 +135,15 @@ class DragTarget {
         snip.classList.add(isTarget ? "target" : "draggable");
 
         // Adjust left, top, width, and height based on scaling
-        snip.style.left = `${parseFloat(config.x) * scaleX}px`;
-        snip.style.top = `${parseFloat(config.y) * scaleY}px`;
-        snip.style.width = `${parseFloat(config.width) * scaleX}px`;
-        snip.style.height = `${parseFloat(config.height) * scaleY}px`;
+        // snip.style.left = `${parseFloat(config.x) * scaleX}px`;
+        // snip.style.top = `${parseFloat(config.y) * scaleY}px`;
+        // snip.style.width = `${parseFloat(config.width) * scaleX}px`;
+        // snip.style.height = `${parseFloat(config.height) * scaleY}px`;
+        snip.style.left = `${Math.round(parseFloat(config.x) * scaleX)}px`;
+        snip.style.top = `${Math.round(parseFloat(config.y) * scaleY)}px`;
+        snip.style.width = `${Math.round(parseFloat(config.width) * scaleX)}px`;
+        snip.style.height = `${Math.round(parseFloat(config.height) * scaleY)}px`;
+
 
         snip.id = config.id;
         snip.setAttribute("data-points", config.points);
@@ -483,6 +488,11 @@ class DragTarget {
             while($(`#dragged-${id}`).length!=0){
               $(`#dragged-${id}`).parents('.target').attr('dragged','');
               $(`#dragged-${id}`).remove();
+            }
+          }else{
+            const dragged = deleteItem.attr('dragged') ?? null;
+            if(dragged){
+              self.isOneToOne && $(`#${dragged}`).removeClass('is_dragged');
             }
           }
           deleteItem.remove();
@@ -1070,9 +1080,6 @@ class DragTarget {
         this.configs != null
           ? this.configs.wrapper_config.backgroundImage
           : this.getBase64Image(this.mainImage), // Convert image to Base64
-      backgroundSize: this.wrapper.style.backgroundSize,
-      backgroundRepeat: this.wrapper.style.backgroundRepeat,
-      position: this.wrapper.style.position,
       width: this.wrapper.style.width,
       height: this.wrapper.style.height,
     };
