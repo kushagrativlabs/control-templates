@@ -1,5 +1,5 @@
 
-class DragTarget {
+class DDEditor {
   targetColor = "#fcc82d";
   dragColor = "#158AEB";
   constructor(

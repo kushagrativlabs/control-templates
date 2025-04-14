@@ -12,7 +12,6 @@ class DDEditor {
   ) {
 
     const version = "Version: 14/04/2025";
-    console.log(version);
     alertMessage(version);
     this.applyOpacity = true;
     this.og = true;
@@ -243,7 +242,7 @@ class DDEditor {
       self.dragCounter = drags.sort().reverse()[0] + 1;
       self.targetCounter = targs.sort().reverse()[0] + 1;
     } catch (error) {
-      console.error(error);
+     
     }
 
     this.ogHeight = this.wrapper.clientHeight;
@@ -1558,7 +1557,6 @@ class DDEditor {
   restoreDraggable(dragID) {
 
     if (dragID.length != 0) {
-      console.log('heheh')
       const dragble = $(`#${dragID}`);
       dragble.removeClass("is_dragged", "drag_multiple");
       dragble.attr("draggable", "true");
