@@ -101,9 +101,10 @@
 		</header>
 
 		<style>
-			.target .value{
+			.target .value {
 				opacity: .5;
 			}
+
 			.content {
 				padding-top: 0px;
 				padding-bottom: 0px;
@@ -486,8 +487,13 @@
 		</div>
 		<div id="EditorFullScreen" style="display: none;">&nbsp;</div>
 		<script>
+			// instance.downloadSnip(); // pass true as parameter  to download;
+			// instance.import(); //pass config file to import the config without the filepicket
+			// const config = await instance.export(); // pass true as parameter  to download;
+			// instance.isValid();
+
 			const wrapper = document.getElementById('drag-target-wrapper');
-			const dragTargetInstance = new DragTarget(wrapper, '/drag-drop-v2/img/placeholder-image.jpg', true);
+			const dragTargetInstance = new DDEditor(wrapper, '/drag-drop-v2/img/placeholder-image.jpg', true);
 			window.onload = function () {
 				const validateBtn = document.getElementById('validateBtn');
 				const downloadImageBtn = document.getElementById('downloadSnip');
@@ -500,16 +506,13 @@
 
 				downloadImageBtn.addEventListener('click', async function () {
 					const data = await dragTargetInstance.downloadSnip(); // pass true as parameter  to download;
-			
+
 				});
 
 				importSnip.addEventListener('click', function () {
 					dragTargetInstance.import(); //pass config file to import the config without the filepicket
 				});
 
-				exportSnip.addEventListener('click', async function() {
-					const config = await dragTargetInstance.export(); // pass true as parameter  to download;
-				});
 			}
 		</script>
 	</div>
