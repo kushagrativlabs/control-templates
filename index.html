@@ -54,7 +54,7 @@
 
 
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	
+
 </head>
 
 <body class="">
@@ -163,7 +163,8 @@
 				box-shadow: #ccc 10px 5px 13px;
 			}
 
-			.snip.selected,.snip.selected.is_dragged  {
+			.snip.selected,
+			.snip.selected.is_dragged {
 				border: 2px solid black !important;
 			}
 
@@ -181,7 +182,8 @@
 				height: 15px;
 				z-index: 9;
 			}
-			.snip .delete-btn{
+
+			.snip .delete-btn {
 				display: block !important;
 			}
 
@@ -205,22 +207,30 @@
 				opacity: 1 !important;
 				margin: 0px !important;
 			}
-			.snip.downloading .delete-btn{
+
+			.snip.downloading .delete-btn {
 				display: none !important;
 			}
-			.snip.downloading::after,.value.downloading::after{
+
+			.snip.downloading::after,
+			.value.downloading::after {
 				display: none;
 			}
-			.snip::after, .value::after{
+
+			.snip::after,
+			.value::after {
 				position: absolute;
 				content: attr(id);
 				font-size: 10px;
 			}
-			.value::after{
+
+			.value::after {
 				content: attr(data-id);
 				color: #158AEB;
 			}
-			.snip.draggable::after,.value.draggable::after {
+
+			.snip.draggable::after,
+			.value.draggable::after {
 				top: 0;
 				left: 0;
 				color: #158AEB;
@@ -231,11 +241,13 @@
 				left: 0;
 				color: #fcc82d;
 			}
+
 			.check-box-wrapper {
 				display: flex;
 				gap: 10px;
 				align-items: center;
 			}
+
 			/* .selected.is_dragged .resize-handle{
 				display: none !important;
 			} */
@@ -261,7 +273,8 @@
 				gap: 10px;
 				flex-wrap: wrap;
 			}
-			.select-wrapper{
+
+			.select-wrapper {
 				width: 400px;
 				margin-top: 10px;
 				margin-bottom: 20px;
@@ -270,7 +283,8 @@
 				gap: 10px;
 				width: 200px;
 			}
-			.select-wrapper select{
+
+			.select-wrapper select {
 				width: 400px;
 			}
 		</style>
@@ -354,16 +368,14 @@
 										Configs</button>
 									<button type="button" id="importSnip" class="btn btn-secondary">Import
 										Configs</button>
-										<button type="button" id="downloadSnip" class="btn btn-secondary">Download</button>
+									<button type="button" id="downloadSnip" class="btn btn-secondary">Download</button>
 									<button type="button" id="resetValues" class="btn btn-secondary">Reset
 										Value</button>
 									<button type="button" id="resetAllConfig" class="btn btn-secondary">Reset All
 										Configs</button>
 
-									<button type="button" id="undoBtn" class="btn btn-secondary"
-									disabled>Undo</button>
-									<button type="button" id="redoBtn" class="btn btn-secondary"
-									disabled>Redo</button>
+									<button type="button" id="undoBtn" class="btn btn-secondary" disabled>Undo</button>
+									<button type="button" id="redoBtn" class="btn btn-secondary" disabled>Redo</button>
 								</div>
 								<br><br><br>
 								<div class="check-box-wrapper">
@@ -379,26 +391,28 @@
 								</div>
 								<p>Map Areas</p>
 								<div class="select-wrapper">
-									<select name="drag-select" id="drag-select" class="form-select" style="display: none !important;">
+									<select name="drag-select" id="drag-select" class="form-select"
+										style="display: none !important;">
 										<option value="" disabled selected>Choose an option</option>
 									</select>
 
-									<select id="target-select" class="target-select form-select chzn-select" style="display: block;">
+									<select id="target-select" class="target-select form-select chzn-select"
+										style="display: block;">
 										<option value="">None</option>
 									</select>
 
 								</div>
 								<div class="inputs-wrapper">
-									<label class="points-label"><input type="number"
-											id="pointsInput" name="pointsInput" class="points" disabled>Points</label>
+									<label class="points-label"><input type="number" id="pointsInput" name="pointsInput"
+											class="points" disabled>Points</label>
 									<label class="area-height"><input type="number" id="areaHeight" name="areaHeight"
 											class="points" min="20">Area Height</label>
 									<label class="area-width"><input type="number" id="areaWidth" name="areaWidth"
 											class="points" min="30">Area Width</label>
 									<label class="area-height"><input type="number" id="snipX" name="areaHeight"
-										class="points" disabled>X</label>
-								<label class="area-width"><input type="number" id="snipY" name="areaWidth"
-										class="points" disabled>Y</label>
+											class="points" disabled>X</label>
+									<label class="area-width"><input type="number" id="snipY" name="areaWidth"
+											class="points" disabled>Y</label>
 								</div>
 							</div>
 						</div>
@@ -435,7 +449,8 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Cancel</button>
-										<button type="button" class="btn btn-danger" id="confirmResetValue">Reset Values</button>
+										<button type="button" class="btn btn-danger" id="confirmResetValue">Reset
+											Values</button>
 									</div>
 								</div>
 							</div>
@@ -454,7 +469,8 @@
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">Cancel</button>
-										<button type="button" class="btn btn-danger" id="confirmResetConfig">Reset Configs</button>
+										<button type="button" class="btn btn-danger" id="confirmResetConfig">Reset
+											Configs</button>
 									</div>
 								</div>
 							</div>
@@ -469,6 +485,29 @@
 		<script>
 			const wrapper = document.getElementById('drag-target-wrapper');
 			const dragTargetInstance = new DragTarget(wrapper, '/drag-drop-v2/img/placeholder-image.jpg', true);
+			window.onload = function () {
+				const validateBtn = document.getElementById('validateBtn');
+				const downloadImageBtn = document.getElementById('downloadSnip');
+				const importSnip = document.getElementById('importSnip');
+				const exportSnip = document.getElementById('exportSnip');
+
+				validateBtn.addEventListener('click', function () {
+					dragTargetInstance.isValid();
+				});
+
+				downloadImageBtn.addEventListener('click', async function () {
+					const data = await dragTargetInstance.downloadSnip(); // pass true as parameter  to download;
+			
+				});
+
+				importSnip.addEventListener('click', function () {
+					dragTargetInstance.import(); //pass config file to import the config without the filepicket
+				});
+
+				exportSnip.addEventListener('click', async function() {
+					const config = await dragTargetInstance.export(); // pass true as parameter  to download;
+				});
+			}
 		</script>
 	</div>
 
@@ -526,7 +565,7 @@
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 </body>
 
