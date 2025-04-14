@@ -11,7 +11,7 @@ class DragTarget {
     add_btn = true
   ) {
 
-    const version = "Version: 09/04/2025";
+    const version = "Version: 14/04/2025";
     console.log(version);
     alertMessage(version);
     this.applyOpacity = true;
@@ -312,9 +312,6 @@ class DragTarget {
 
       this.setMainImage();
       this.handleConfigs(jsonData);
-    } else {
-      // Trigger file input only if no valid data was provided
-      $("#jsonFileInput").click();
     }
   }
 
@@ -1092,48 +1089,6 @@ class DragTarget {
   }
   initCommonEvents() {
     const self = this;
-    let importInput = document.createElement("input");
-    importInput.type = "file";
-    importInput.id = "jsonFileInput";
-    importInput.accept = ".json";
-    importInput.style.display = "none";
-    this.wrapper.appendChild(importInput);
-    importInput.addEventListener("change", function (event) {
-      let file = event.target.files[0];
-      if (!file) return; // If no file is selected
-      if (file.type !== "application/json" && !file.name.endsWith(".json")) {
-        alert("Please upload a valid JSON file.");
-        return;
-      }
-      let reader = new FileReader();
-      reader.onload = function (e) {
-        try {
-          let jsonData = JSON.parse(e.target.result); // Parse JSON
-          self.configs = jsonData;
-          self.enableEditing = true;
-          const img = new Image();
-          img.src = jsonData.wrapper_config.backgroundImage;
-          img.height = parseInt(
-            jsonData.wrapper_config.height.replace("px", "")
-          );
-          img.width = parseInt(jsonData.wrapper_config.width.replace("px", ""));
-          self.mainImage = img;
-          self.ogHeight = parseInt(jsonData.wrapper_config.height.replace("px", ""));
-          self.ogWidth = parseInt(jsonData.wrapper_config.width.replace("px", ""));
-          self.og = false;
-          self.setMainImage();
-          self.isPlaceHolder = false;
-          self.handleConfigs(jsonData);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      reader.readAsText(file);
-    });
-    importInput.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent click event from bubbling up
-    });
-
     self.fixedHeightCheckbox.addEventListener("change", function (e) {
       self.fixedHeight = self.fixedHeightCheckbox.checked;
     });
@@ -1141,80 +1096,6 @@ class DragTarget {
       self.fixedWidth = self.fixedWidthCheckbox.checked;
     });
   }
-  // exportConfigs() {
-  //   const draggables = document.querySelectorAll(".snip");
-  //   const drag_configs = [];
-  //   const target_configs = [];
-  //   const pointsObj = {};
-  //   const areas = [];
-  //   const mainImage = self.mainImage
-  //   for (const draggable of draggables) {
-  //     const dragConfig = {};
-  //     const area = {};
-  //     const point = draggable.getAttribute("data-points") ?? 0;
-  //     area.id = draggable.id;
-  //     area.type = draggable.className.includes("target") ? 1 : 2;
-  //     area.height = draggable.style.height;
-  //     area.width = draggable.style.width;
-  //     area.x = draggable.style.left;
-  //     area.y = draggable.style.top;
-  //     area.points = point;
-  //     pointsObj[area.id] = point;
-  //     dragConfig.classList = draggable.className;
-  //     dragConfig.style_position = draggable.style.position;
-  //     dragConfig.style_left = draggable.style.left;
-  //     dragConfig.style_top = draggable.style.top;
-  //     dragConfig.style_height = draggable.style.height;
-  //     dragConfig.style_width = draggable.style.width;
-  //     dragConfig.id = draggable.id;
-  //     if (dragConfig.classList.includes("target")) {
-  //       target_configs.push(dragConfig);
-  //     } else {
-  //       const left = parseFloat(draggable.style.left);
-  //       const top = parseFloat(draggable.style.top);
-  //       dragConfig.backgroundPosition = `-${left}px -${top}px`;
-  //       drag_configs.push(dragConfig);
-  //     }
-  //     areas.push(area);
-  //     pointsObj[area.id] = point;
-  //   }
-  //   const wrapper_config = {
-  //     backgroundImage:
-  //       this.configs != null
-  //         ? this.configs.wrapper_config.backgroundImage
-  //         : this.getBase64Image(this.mainImage), // Convert image to Base64
-  //     width: this.wrapper.style.width,
-  //     height: this.wrapper.style.height,
-  //   };
-  //   const options = {
-  //     OneToOneMatching: this.isOneToOne,
-  //     FixedHeight: this.fixedHeight,
-  //     FixedWidth: this.fixedWidth,
-  //     AreaHeight: $("#areaHeight").val(),
-  //     AreaWidth: $("#areaWidth").val(),
-  //   };
-  //   const match = [];
-
-  //   $(".snip.target").each(function (idx, el) {
-  //     const ID = el.id;
-  //     const drag = $(this).attr("dragged") ?? "";
-  //     const obj = {};
-  //     obj[ID] = drag;
-  //     match.push(obj);
-  //   });
-
-  //   const points = [];
-  //   const pointsKey = Object.keys(pointsObj);
-  //   pointsKey.forEach((key) => {
-  //     const obj = {};
-  //     obj[key] = pointsObj[key];
-  //     points.push(obj);
-  //   });
-  //   const allConfigs = { wrapper_config, areas, options, match, points };
-  //   return allConfigs; // Important: Return the array!
-  // }
-
-
   exportConfigs(scale= true) {
     const draggables = document.querySelectorAll(".snip");
     const drag_configs = [];
@@ -1520,7 +1401,7 @@ class DragTarget {
 
   onDragStart(event, snip) {
     event.dataTransfer.setData("text", snip.id);
-    snip.style.opacity = "0.5";
+    // snip.style.opacity = "0.5";
     snip.classList.add("dropping");
   }
   onDragEnd(event, snip) {
@@ -1530,9 +1411,7 @@ class DragTarget {
         snip.classList.remove("dropping");
       }, 1500);
     } catch (error) { }
-    if(this.applyOpacity){
-      snip.style.opacity = "1";
-    }
+   
     // snip.classList.remove('dropping');
   }
   enableTargetSnip(targetWrapper) {
@@ -1589,7 +1468,7 @@ class DragTarget {
           clonedSnip.style.left = `auto`;
           clonedSnip.style.top = `auto`;
           clonedSnip.style.border = "none";
-          clonedSnip.style.opacity = "0.5";
+          // clonedSnip.style.opacity = "0.5";
           clonedSnip.setAttribute("data-id", clonedSnip.id);
           clonedSnip.id = "dragged-" + clonedSnip.id;
           try {
@@ -1638,15 +1517,13 @@ class DragTarget {
           const snipElement = document.querySelector(".dropping");
           const id = snipElement.id.replace("dragged-", "");
           const parent = snipElement.parentNode;
-
-          console.log(targetID == parent.id);
-
-          if (targetID == parent.id) {
-            this.applyOpacity =false;
+ 
+         if (targetID == parent.id) {
+            // this.applyOpacity =false;
             return
           }
     
-          this.applyOpacity = true;
+          // this.applyOpacity = true;
 
           if (parent.className.includes('target')) {
             $(parent).find('.value').remove();
@@ -1666,7 +1543,7 @@ class DragTarget {
           if (targetID == id) {
             targetWrapper.classList.remove("is_dragged", "drag_multiple");
             targetWrapper.setAttribute("draggable", "true");
-            targetWrapper.style.opacity = 1;
+            // targetWrapper.style.opacity = 1;
             parent.setAttribute("dragged", "");
             draggedSnip.remove();
             this.updateBackgroundImage();
@@ -1685,7 +1562,7 @@ class DragTarget {
       const dragble = $(`#${dragID}`);
       dragble.removeClass("is_dragged", "drag_multiple");
       dragble.attr("draggable", "true");
-      dragble.css({ 'opacity': 1 });
+      // dragble.css({ 'opacity': 1 });
       updateChosen();
     }
   }
