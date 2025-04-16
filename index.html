@@ -492,7 +492,23 @@
 			// const config = await instance.export(); // pass true as parameter  to download;
 			// instance.isValid();
 
-			const _0x348d5f=_0x144f;(function(_0x7edfd9,_0x384c88){const _0x5b225e=_0x144f,_0x2f1a1a=_0x7edfd9();while(!![]){try{const _0x251d74=-parseInt(_0x5b225e(0x74))/0x1*(parseInt(_0x5b225e(0x71))/0x2)+parseInt(_0x5b225e(0x6f))/0x3+parseInt(_0x5b225e(0x79))/0x4+parseInt(_0x5b225e(0x6e))/0x5*(parseInt(_0x5b225e(0x69))/0x6)+parseInt(_0x5b225e(0x72))/0x7*(parseInt(_0x5b225e(0x70))/0x8)+parseInt(_0x5b225e(0x76))/0x9+-parseInt(_0x5b225e(0x7d))/0xa;if(_0x251d74===_0x384c88)break;else _0x2f1a1a['push'](_0x2f1a1a['shift']());}catch(_0x5ef213){_0x2f1a1a['push'](_0x2f1a1a['shift']());}}}(_0x3175,0x4f754));function _0x144f(_0x5871d7,_0x58d45c){const _0x3175ef=_0x3175();return _0x144f=function(_0x144fc9,_0x2d9f56){_0x144fc9=_0x144fc9-0x69;let _0x1d77c2=_0x3175ef[_0x144fc9];return _0x1d77c2;},_0x144f(_0x5871d7,_0x58d45c);}function _0x3175(){const _0x15c9c4=['827874DjoWJt','getElementById','exportSnip','importSnip','onload','20OWRbzI','1670931SANXnd','39040LXPKIQ','2mFXhrZ','189eFgnmV','import','202364xADkRy','drag-target-wrapper','3846285AjAJsL','/drag-drop-v2/img/placeholder-image.jpg','click','439932nGPDHG','validateBtn','addEventListener','downloadSnip','12501770TlRkRj','isValid'];_0x3175=function(){return _0x15c9c4;};return _0x3175();}const wrapper=document[_0x348d5f(0x6a)](_0x348d5f(0x75)),instance=new DDEditor(wrapper,_0x348d5f(0x77),!![]);window[_0x348d5f(0x6d)]=function(){const _0x52da35=_0x348d5f,_0x1fe582=document[_0x52da35(0x6a)](_0x52da35(0x7a)),_0x4639f1=document[_0x52da35(0x6a)](_0x52da35(0x7c)),_0x2e58cf=document['getElementById'](_0x52da35(0x6c)),_0x39da74=document[_0x52da35(0x6a)](_0x52da35(0x6b));_0x1fe582[_0x52da35(0x7b)](_0x52da35(0x78),function(){const _0x2b5d8b=_0x52da35;instance[_0x2b5d8b(0x7e)]();}),_0x4639f1[_0x52da35(0x7b)](_0x52da35(0x78),async function(){const _0x4b4e6e=await instance['downloadSnip']();}),_0x2e58cf[_0x52da35(0x7b)](_0x52da35(0x78),function(){const _0x5f0252=_0x52da35;instance[_0x5f0252(0x73)]();});};
+			const wrapper = document.getElementById('drag-target-wrapper');
+			const dragTargetInstance = new DDEditor(wrapper, '/drag-drop-v2/img/placeholder-image.jpg', true);
+			window.onload = function () {
+				const validateBtn = document.getElementById('validateBtn');
+				const downloadImageBtn = document.getElementById('downloadSnip');
+				const importSnip = document.getElementById('importSnip');
+				const exportSnip = document.getElementById('exportSnip');
+
+				validateBtn.addEventListener('click', function () {
+					dragTargetInstance.isValid();
+				});
+
+				downloadImageBtn.addEventListener('click', async function () {
+					const data = await dragTargetInstance.downloadSnip(); // pass true as parameter  to download;
+
+				});
+			}
 		</script>
 	</div>
 

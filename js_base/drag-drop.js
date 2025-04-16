@@ -1,1 +1,1586 @@
-const _0x19c576=_0x5162;function _0x5162(_0x52b6c2,_0x110c7b){const _0x29b070=_0x29b0();return _0x5162=function(_0x516216,_0x499c7a){_0x516216=_0x516216-0xf2;let _0x7690d9=_0x29b070[_0x516216];return _0x7690d9;},_0x5162(_0x52b6c2,_0x110c7b);}(function(_0x160cce,_0x3c49e0){const _0x5354bd=_0x5162,_0x1fc305=_0x160cce();while(!![]){try{const _0x53cd27=-parseInt(_0x5354bd(0x1af))/0x1*(parseInt(_0x5354bd(0x139))/0x2)+-parseInt(_0x5354bd(0x14e))/0x3*(-parseInt(_0x5354bd(0x1cd))/0x4)+parseInt(_0x5354bd(0x13f))/0x5+parseInt(_0x5354bd(0x184))/0x6+parseInt(_0x5354bd(0x228))/0x7*(parseInt(_0x5354bd(0x16a))/0x8)+-parseInt(_0x5354bd(0x230))/0x9+parseInt(_0x5354bd(0x218))/0xa*(-parseInt(_0x5354bd(0x1d4))/0xb);if(_0x53cd27===_0x3c49e0)break;else _0x1fc305['push'](_0x1fc305['shift']());}catch(_0x39c364){_0x1fc305['push'](_0x1fc305['shift']());}}}(_0x29b0,0x46139));class DDEditor{[_0x19c576(0x15e)]=_0x19c576(0x1b2);[_0x19c576(0x1fc)]=_0x19c576(0x102);constructor(_0xee2d4d,_0x4a19c8,_0x1b9489=!![],_0x3361e=0x0,_0x3a2e73=null,_0x5bac67=!![]){const _0x4ac4eb=_0x19c576,_0x395b77=_0x4ac4eb(0x21a);alertMessage(_0x395b77),this['applyOpacity']=!![],this['og']=!![],this[_0x4ac4eb(0x1df)]=_0xee2d4d['offsetHeight'],this[_0x4ac4eb(0x160)]=_0xee2d4d[_0x4ac4eb(0x1ad)],this[_0x4ac4eb(0x22a)]=![],this[_0x4ac4eb(0xfc)]=0x1,this[_0x4ac4eb(0x108)]=0x1,this[_0x4ac4eb(0x181)]=document[_0x4ac4eb(0x1b0)](_0x4ac4eb(0x233)),this[_0x4ac4eb(0x13e)]=!![],this[_0x4ac4eb(0x19c)]=!![],this[_0x4ac4eb(0x22c)]=document[_0x4ac4eb(0x1b0)](_0x4ac4eb(0x13e)),this[_0x4ac4eb(0x122)]=document[_0x4ac4eb(0x1b0)](_0x4ac4eb(0x19c)),this['areaHeight']=0x0,this[_0x4ac4eb(0x156)]=0x0,this[_0x4ac4eb(0x136)]=document[_0x4ac4eb(0x1b0)](_0x4ac4eb(0x136)),this[_0x4ac4eb(0xf9)]=document[_0x4ac4eb(0x1b0)](_0x4ac4eb(0xf9)),this[_0x4ac4eb(0x105)]='',this[_0x4ac4eb(0x1aa)]=[],this[_0x4ac4eb(0x18f)]=[],this[_0x4ac4eb(0x1e5)]=![],this[_0x4ac4eb(0xf2)]={},this[_0x4ac4eb(0x222)]=!![],this[_0x4ac4eb(0xf4)]=null,this[_0x4ac4eb(0x1c2)]=!![],this[_0x4ac4eb(0x187)]=0x0,this[_0x4ac4eb(0x1e4)]=_0x3361e,this[_0x4ac4eb(0x1ac)]=_0xee2d4d,this[_0x4ac4eb(0x148)]=new Image(),this['mainImage'][_0x4ac4eb(0x231)]=_0x4a19c8,_0x1b9489&&(this[_0x4ac4eb(0x142)]=![],this[_0x4ac4eb(0x18b)]=null,this['isSnipEnabled']=![],this[_0x4ac4eb(0x18a)]=null,this[_0x4ac4eb(0x157)]='',this[_0x4ac4eb(0x237)]=![],this[_0x4ac4eb(0x180)](),this['isButtonClicked']=![]),this['add_btn']=_0x5bac67,this['configs']=_0x3a2e73,this[_0x4ac4eb(0x1e7)]=!![],this[_0x4ac4eb(0x148)][_0x4ac4eb(0x107)]=()=>this['init']();}[_0x19c576(0x209)](_0x4e9a92){const _0x4bf55b=_0x19c576;this[_0x4bf55b(0x1aa)][_0x4bf55b(0x235)](_0x4e9a92),this[_0x4bf55b(0x136)]['disabled']=this[_0x4bf55b(0x1aa)][_0x4bf55b(0x119)]==0x0;}[_0x19c576(0x1d6)](){const _0x3c1048=_0x19c576;if(this[_0x3c1048(0x1aa)]['length']===0x0)return null;const _0x68814f=this[_0x3c1048(0x1aa)][_0x3c1048(0x1cc)]();return this[_0x3c1048(0x136)]['disabled']=this[_0x3c1048(0x1aa)][_0x3c1048(0x119)]==0x0,this[_0x3c1048(0x10e)](_0x68814f),_0x68814f;}[_0x19c576(0x10e)](_0xa9befe){const _0xf19dfe=_0x19c576;this['redo'][_0xf19dfe(0x235)](_0xa9befe),this[_0xf19dfe(0xf9)][_0xf19dfe(0x197)]=this[_0xf19dfe(0x18f)][_0xf19dfe(0x119)]==0x0;}['removeRedo'](){const _0x2047c8=_0x19c576;if(this['redo'][_0x2047c8(0x119)]===0x0)return null;const _0xf9865d=this['redo'][_0x2047c8(0x1cc)]();return this['redoBtn'][_0x2047c8(0x197)]=this[_0x2047c8(0x18f)][_0x2047c8(0x119)]==0x0,this[_0x2047c8(0x209)](_0xf9865d),_0xf9865d;}[_0x19c576(0x13d)](){const _0x420b06=_0x19c576;function _0x2c56ae(_0x56e16c){return alertWarning(_0x56e16c),![];}if(self[_0x420b06(0x1e7)])return _0x2c56ae(_0x420b06(0x1cb));if($(_0x420b06(0x11a))[_0x420b06(0x119)]===0x0)return _0x2c56ae(_0x420b06(0x1b3));const _0x28996c=$(_0x420b06(0x1dc))[_0x420b06(0x126)]()['filter'](_0x2e8c07=>{const _0x36a726=_0x420b06,_0x3ea35c=$(_0x2e8c07)[_0x36a726(0x16e)]('dragged')??'';return _0x3ea35c==='';});if(_0x28996c[_0x420b06(0x119)]!==0x0)return _0x2c56ae(_0x420b06(0xfa));const _0x4feded=[],_0x1f264b=[];$('.snip')[_0x420b06(0x132)](function(_0x5a55f7,_0x5aa30e){const _0x16ce7d=_0x420b06;_0x4feded[_0x16ce7d(0x235)]($(_0x5aa30e)[_0x16ce7d(0x11f)]()),_0x1f264b['push']($(_0x5aa30e)[_0x16ce7d(0x185)]());});const _0x5556f2=_0x4feded[_0x420b06(0x147)](_0x55e62f=>_0x55e62f===_0x4feded[0x0]),_0x4ee8df=_0x1f264b[_0x420b06(0x147)](_0x4b35be=>_0x4b35be===_0x1f264b[0x0]);if(self[_0x420b06(0x13e)]&&self['fixedWidth']){if(!_0x5556f2||!_0x4ee8df)return _0x2c56ae(_0x420b06(0x1a0));}else{if(self[_0x420b06(0x13e)]){if(!_0x5556f2)return _0x2c56ae(_0x420b06(0x188));}else{if(self[_0x420b06(0x19c)]){if(!_0x4ee8df)return _0x2c56ae(_0x420b06(0x1c8));}}}return alertMessage(_0x420b06(0x17a)),!![];}[_0x19c576(0x1f8)](){const _0xd30222=_0x19c576;this['setMainImage']();this[_0xd30222(0x17e)]!=null&&this[_0xd30222(0x1c1)](this[_0xd30222(0x17e)]);const _0x54fc9f=document['createElement']('input');_0x54fc9f[_0xd30222(0x190)]=_0xd30222(0x17c),_0x54fc9f['id']=_0xd30222(0x1fe),_0x54fc9f['accept']=_0xd30222(0x178),_0x54fc9f[_0xd30222(0x1da)][_0xd30222(0x1be)]=_0xd30222(0x20e),this[_0xd30222(0x1ac)]['appendChild'](_0x54fc9f),this['ogImage']=!![];}[_0x19c576(0x23d)](_0x4f2603=![]){const _0x71e6e7=_0x19c576,_0x5bb40a=this['wrapper'][_0x71e6e7(0x109)][_0x71e6e7(0x198)],_0x1d5d65=this[_0x71e6e7(0x148)]['width'],_0x25bf07=this[_0x71e6e7(0x148)][_0x71e6e7(0x1e4)];_0x4f2603&&(this[_0x71e6e7(0x1df)]=this['wrapper']['clientHeight'],this[_0x71e6e7(0x160)]=this[_0x71e6e7(0x1ac)][_0x71e6e7(0x198)]),this[_0x71e6e7(0x187)]=_0x5bb40a,this[_0x71e6e7(0x1e4)]=_0x25bf07/_0x1d5d65*this['width'],this[_0x71e6e7(0x1ac)]['style'][_0x71e6e7(0x18c)]=_0x71e6e7(0x103)+this[_0x71e6e7(0x148)][_0x71e6e7(0x231)]+')',this[_0x71e6e7(0x1ac)][_0x71e6e7(0x1da)][_0x71e6e7(0x1c7)]='cover',this[_0x71e6e7(0x1ac)][_0x71e6e7(0x1da)][_0x71e6e7(0x208)]=_0x71e6e7(0x154),this[_0x71e6e7(0x1ac)][_0x71e6e7(0x1da)][_0x71e6e7(0x232)]=_0x71e6e7(0x169),this['wrapper'][_0x71e6e7(0x1da)]['width']=this[_0x71e6e7(0x187)]+'px',this[_0x71e6e7(0x1ac)][_0x71e6e7(0x1da)]['height']=this[_0x71e6e7(0x1e4)]+'px',_0x4f2603&&(this[_0x71e6e7(0x1df)]=this[_0x71e6e7(0x1ac)][_0x71e6e7(0x1a8)],this['ogWidth']=this['wrapper']['clientWidth']),this[_0x71e6e7(0x1e7)]=![];}[_0x19c576(0x1c1)](_0x4bf0e4){const _0x142816=_0x19c576,_0x1c0a0b=this,_0x450e66=[],_0x33431e=[],_0x2dc7b2=this[_0x142816(0x1df)],_0x21da02=this[_0x142816(0x160)],_0x3c706e=this['wrapper'][_0x142816(0x1a8)],_0x306cfa=this['wrapper'][_0x142816(0x198)],_0x1a22c1=this[_0x142816(0x112)],_0x30ebe9=_0x1a22c1?0x1:_0x306cfa/_0x21da02,_0x55bf77=_0x1a22c1?0x1:_0x3c706e/_0x2dc7b2;$(_0x142816(0x11a))[_0x142816(0x119)]!=0x0&&$(_0x142816(0x11a))[_0x142816(0x11b)]();for(const _0x2be6dc of _0x4bf0e4[_0x142816(0xf6)]){const _0x399ce8=_0x2be6dc[_0x142816(0x190)]==0x1,_0x406199=document[_0x142816(0x141)](_0x142816(0x1f7));_0x406199[_0x142816(0x21f)][_0x142816(0x16f)](_0x142816(0x16b)),_0x406199['classList'][_0x142816(0x16f)](_0x399ce8?_0x142816(0x1b8):_0x142816(0x153)),_0x406199[_0x142816(0x1da)][_0x142816(0x191)]=Math[_0x142816(0x220)](parseFloat(_0x2be6dc['x'])*_0x30ebe9)+'px',_0x406199[_0x142816(0x1da)][_0x142816(0x14a)]=Math[_0x142816(0x220)](parseFloat(_0x2be6dc['y'])*_0x55bf77)+'px',_0x406199[_0x142816(0x1da)]['width']=Math['round'](parseFloat(_0x2be6dc[_0x142816(0x187)])*_0x30ebe9)+'px',_0x406199['style']['height']=Math[_0x142816(0x220)](parseFloat(_0x2be6dc[_0x142816(0x1e4)])*_0x55bf77)+'px',_0x406199['id']=_0x2be6dc['id'],_0x406199[_0x142816(0x14b)]('data-points',_0x2be6dc[_0x142816(0x115)]),this[_0x142816(0x1ac)][_0x142816(0x1b7)](_0x406199);!_0x399ce8?(_0x406199[_0x142816(0x1da)][_0x142816(0x18c)]=_0x142816(0x103)+this[_0x142816(0x148)][_0x142816(0x231)]+')',_0x406199[_0x142816(0x1da)]['backgroundSize']=_0x306cfa+_0x142816(0x171)+_0x3c706e+'px',_0x1c0a0b[_0x142816(0x236)](_0x406199)):_0x1c0a0b['enableTargetSnip'](_0x406199);this[_0x142816(0x1ed)]&&_0x406199['appendChild'](this[_0x142816(0x194)]());const _0x32ee73=parseInt(_0x2be6dc['id'][_0x142816(0x150)]('-')[0x1]);_0x399ce8?_0x450e66['push'](_0x32ee73):_0x33431e[_0x142816(0x235)](_0x32ee73);}_0x1c0a0b[_0x142816(0x222)]=_0x4bf0e4[_0x142816(0x14c)]['OneToOneMatching'],_0x1c0a0b[_0x142816(0x181)][_0x142816(0x1d2)]=_0x1c0a0b[_0x142816(0x222)],_0x1c0a0b['singleMatchInput'][_0x142816(0x1a2)](new Event(_0x142816(0x19a))),_0x1c0a0b['fixedHeight']=_0x4bf0e4[_0x142816(0x14c)][_0x142816(0x159)],_0x1c0a0b['fixedHeightCheckbox'][_0x142816(0x1d2)]=_0x1c0a0b['fixedHeight'],_0x1c0a0b['fixedWidth']=_0x4bf0e4[_0x142816(0x14c)][_0x142816(0x1dd)],_0x1c0a0b[_0x142816(0x122)][_0x142816(0x1d2)]=_0x1c0a0b[_0x142816(0x19c)],document[_0x142816(0x1b0)](_0x142816(0x1de))[_0x142816(0x1db)]=_0x4bf0e4[_0x142816(0x14c)]['AreaHeight'],document[_0x142816(0x1b0)]('areaWidth')[_0x142816(0x1db)]=_0x4bf0e4[_0x142816(0x14c)][_0x142816(0x1d1)];const _0x2314bd=_0x4bf0e4[_0x142816(0x110)];_0x2314bd&&(_0x2314bd[_0x142816(0x21e)](function(_0x573b11){const _0x4ac469=_0x142816,_0x2c30c4=Object[_0x4ac469(0x226)](_0x573b11)[0x0];_0x1c0a0b[_0x4ac469(0x1f4)](_0x573b11[_0x2c30c4],document[_0x4ac469(0x1b0)](_0x2c30c4));}),_0x1c0a0b[_0x142816(0x134)]());try{_0x1c0a0b[_0x142816(0xfc)]=_0x33431e['sort']()[_0x142816(0xff)]()[0x0]+0x1,_0x1c0a0b[_0x142816(0x108)]=_0x450e66[_0x142816(0x12d)]()[_0x142816(0xff)]()[0x0]+0x1;}catch(_0x382e41){}this[_0x142816(0x1df)]=this[_0x142816(0x1ac)][_0x142816(0x1a8)],this['ogWidth']=this[_0x142816(0x1ac)][_0x142816(0x198)],_0x1c0a0b[_0x142816(0x134)]();}['addConfigSnap'](_0x181b4a,_0x24ff6a=![]){const _0x3903e1=_0x19c576,_0x4193e8=document[_0x3903e1(0x141)](_0x3903e1(0x1f7));_0x4193e8[_0x3903e1(0x21f)]['add'](_0x3903e1(0x16b)),_0x4193e8[_0x3903e1(0x21f)][_0x3903e1(0x16f)](_0x181b4a[_0x3903e1(0x21f)][_0x3903e1(0x186)](_0x3903e1(0x16b),'')[_0x3903e1(0x186)](_0x3903e1(0x1b6),'')[_0x3903e1(0x1ae)]()),_0x4193e8['style']['position']=_0x181b4a[_0x3903e1(0x1cf)],_0x4193e8[_0x3903e1(0x1da)][_0x3903e1(0x191)]=_0x181b4a[_0x3903e1(0x166)],_0x4193e8[_0x3903e1(0x1da)][_0x3903e1(0x14a)]=_0x181b4a[_0x3903e1(0x211)],_0x4193e8[_0x3903e1(0x1da)][_0x3903e1(0x138)]=_0x181b4a[_0x3903e1(0x210)],_0x4193e8['id']=_0x181b4a['id'],_0x4193e8['style'][_0x3903e1(0x1e4)]=_0x181b4a[_0x3903e1(0x1fd)],_0x4193e8['style'][_0x3903e1(0x187)]=_0x181b4a[_0x3903e1(0x1a4)],this['wrapper'][_0x3903e1(0x1b7)](_0x4193e8),_0x24ff6a?(_0x4193e8[_0x3903e1(0x1da)]['backgroundImage']='url('+this[_0x3903e1(0x148)][_0x3903e1(0x231)]+')',_0x4193e8['style'][_0x3903e1(0x1c7)]=_0x181b4a[_0x3903e1(0x1c7)],_0x4193e8[_0x3903e1(0x1da)][_0x3903e1(0x193)]=_0x181b4a[_0x3903e1(0x193)],this[_0x3903e1(0x236)](_0x4193e8)):this[_0x3903e1(0x121)](_0x4193e8),this['add_btn']&&_0x4193e8[_0x3903e1(0x1b7)](this[_0x3903e1(0x194)]());}['import'](_0x13d35b=''){const _0x527188=_0x19c576;if($(_0x527188(0x11a))[_0x527188(0x119)]>0x0){alertWarning(_0x527188(0x118));return;}const _0x741422=_0x13d35b&&typeof _0x13d35b==='object';if(_0x741422){this[_0x527188(0x17e)]=_0x13d35b,this['enableEditing']=!![];const _0x479b91=_0x13d35b[_0x527188(0x130)],_0x3661da=parseInt(_0x479b91[_0x527188(0x1e4)][_0x527188(0x186)]('px','')),_0x9e7bda=parseInt(_0x479b91['width'][_0x527188(0x186)]('px','')),_0x98eeac=new Image();_0x98eeac[_0x527188(0x231)]=_0x479b91[_0x527188(0x18c)],_0x98eeac[_0x527188(0x1e4)]=_0x3661da,_0x98eeac[_0x527188(0x187)]=_0x9e7bda,this[_0x527188(0x148)]=_0x98eeac,this[_0x527188(0x1df)]=_0x3661da,this['ogWidth']=_0x9e7bda,this['og']=![],this[_0x527188(0x1c2)]=![],this[_0x527188(0x23d)](),this[_0x527188(0x1c1)](_0x13d35b);}}[_0x19c576(0x133)](_0x2000e6=![]){const _0x1fccd4=_0x19c576;if(this[_0x1fccd4(0x1c2)]){alertWarning(_0x1fccd4(0x1cb));return;}else{if($('.snip.target')['length']<0x1||$(_0x1fccd4(0x1a7))['length']<0x2){alertWarning('At\x20least\x201\x20target\x20and\x202\x20draggable\x20areas\x20required.');return;}}return _0x2000e6?this[_0x1fccd4(0x1c0)]():this[_0x1fccd4(0x1fa)]();}['downloadSnip'](_0xeb6717=![]){const _0x42ee24=_0x19c576,_0x2bea09=$('.snip.selected');return $(_0x42ee24(0x206))[_0x42ee24(0x173)](_0x42ee24(0x17b)),_0x2bea09[_0x42ee24(0x1bc)](_0x42ee24(0x1b6)),$('.resize-handle')[_0x42ee24(0x1bf)](_0x42ee24(0x162),'0'),new Promise(_0x186236=>{const _0x497c9b=_0x42ee24;html2canvas(this[_0x497c9b(0x1ac)],{'scale':0xa,'useCORS':!![],'logging':![],'backgroundColor':null})[_0x497c9b(0x1ef)](_0x2d71d1=>{const _0x19c260=_0x497c9b,_0x4c8235=_0x2d71d1[_0x19c260(0x1a6)](_0x19c260(0x229),0x1);if(_0xeb6717){const _0x1fde34=document[_0x19c260(0x141)]('a');_0x1fde34[_0x19c260(0x1c4)]=_0x4c8235,_0x1fde34[_0x19c260(0x223)]='editor.png',_0x1fde34[_0x19c260(0x22d)]();}$('.snip,.value')[_0x19c260(0x1bc)](_0x19c260(0x17b)),_0x2bea09['addClass'](_0x19c260(0x1b6)),$(_0x19c260(0x17f))[_0x19c260(0x1bf)](_0x19c260(0x162),'1'),_0x186236(_0xeb6717?!![]:_0x4c8235);});});}[_0x19c576(0xf5)](_0x13f745){const _0x176118=_0x19c576;let _0x30b1c7=document[_0x176118(0x23c)](_0x176118(0x11a)),_0xd618e7=_0x13f745[_0x176118(0x15c)](),_0x7264de=_0x13f745[_0x176118(0x109)];if(!_0x7264de)return!![];let _0x46c19b=_0x7264de['getBoundingClientRect'](),_0x30bb2c=0.1;if(_0xd618e7[_0x176118(0x191)]<_0x46c19b['left']||_0xd618e7[_0x176118(0x163)]>_0x46c19b[_0x176118(0x163)]||_0xd618e7[_0x176118(0x14a)]<_0x46c19b['top']||_0xd618e7[_0x176118(0x167)]>_0x46c19b[_0x176118(0x167)])return this[_0x176118(0xf4)]=_0x176118(0x19f),!![];for(let _0x363e7c of _0x30b1c7){if(_0x363e7c===_0x13f745)continue;let _0x834e29=_0x363e7c[_0x176118(0x15c)](),_0x224f04={'left':_0x834e29[_0x176118(0x191)]-_0x30bb2c,'right':_0x834e29[_0x176118(0x163)]+_0x30bb2c,'top':_0x834e29[_0x176118(0x14a)]-_0x30bb2c,'bottom':_0x834e29[_0x176118(0x167)]+_0x30bb2c};if(_0xd618e7[_0x176118(0x191)]<_0x224f04[_0x176118(0x163)]&&_0xd618e7[_0x176118(0x163)]>_0x224f04['left']&&_0xd618e7[_0x176118(0x14a)]<_0x224f04[_0x176118(0x167)]&&_0xd618e7[_0x176118(0x167)]>_0x224f04[_0x176118(0x14a)])return this[_0x176118(0xf4)]=_0x363e7c['id']||null,!![];}return![];}['getDeleteButton'](){const _0x4c6665=_0x19c576,_0x4e25bb=Object[_0x4c6665(0x207)](document[_0x4c6665(0x141)](_0x4c6665(0x201)),{'innerText':'×','className':_0x4c6665(0x221)});return _0x4e25bb;}[_0x19c576(0x180)](){const _0x2c4208=_0x19c576;this[_0x2c4208(0x1ac)]['addEventListener'](_0x2c4208(0x161),_0x51ab96=>this[_0x2c4208(0x137)](_0x51ab96)),this[_0x2c4208(0x1ac)][_0x2c4208(0x101)](_0x2c4208(0x168),_0xe026f=>this[_0x2c4208(0x203)](_0xe026f)),document[_0x2c4208(0x101)](_0x2c4208(0x1d0),_0x5c4ebd=>this[_0x2c4208(0x23a)](_0x5c4ebd)),this[_0x2c4208(0x1bb)](),this[_0x2c4208(0x227)]();}[_0x19c576(0x227)](){const _0x3980bd=_0x19c576,_0x4047f9=this;let _0x25c74b=0x2,_0x2d0eee,_0x3ff8d5={},_0xc02fb=![],_0x25c359=null;jQuery(document)[_0x3980bd(0x1f0)](function(_0x3d6cf9){const _0x58bc2c=_0x3980bd;function _0xbf9c62(_0x1c158e,_0x57ff60){let _0xf3dd12;return function(..._0x1e7407){const _0x1ed1cc=_0x5162;clearTimeout(_0xf3dd12),_0xf3dd12=setTimeout(()=>_0x1c158e[_0x1ed1cc(0x106)](this,_0x1e7407),_0x57ff60);};}window[_0x58bc2c(0x101)](_0x58bc2c(0x131),_0xbf9c62(()=>{const _0x50160f=_0x58bc2c,_0x4f5ee3=_0x4047f9['exportConfigs'](![]);Object[_0x50160f(0x226)](_0x4f5ee3)['length']!=0x0&&(_0x4047f9[_0x50160f(0x23d)](),_0x4047f9['handleConfigs'](_0x4f5ee3));},0x12c)),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),'.snip:not(.resizing)',function(){const _0x1cf557=_0x58bc2c,_0x5cc7ba=_0x3d6cf9(this)[_0x1cf557(0x1f2)](_0x1cf557(0x1b6)),_0x7416a2=_0x3d6cf9(this)[_0x1cf557(0x16e)]('data-points')||0x0;_0x3d6cf9('#pointsInput')[_0x1cf557(0x1ca)](_0x7416a2),_0x3d6cf9(_0x1cf557(0x11a))[_0x1cf557(0x1bc)](_0x1cf557(0x1b6)),_0x3d6cf9('.resize-handle')[_0x1cf557(0x11b)](),!_0x5cc7ba&&(_0x3d6cf9(this)[_0x1cf557(0x173)]('selected'),_0x21628b(_0x3d6cf9(this)),_0x3d6cf9(_0x1cf557(0x177))['val'](_0x3d6cf9(this)[_0x1cf557(0x1e4)]()),_0x3d6cf9(_0x1cf557(0xfb))[_0x1cf557(0x1ca)](_0x3d6cf9(this)[_0x1cf557(0x187)]()),_0x3d6cf9(_0x1cf557(0x145))[_0x1cf557(0x1ca)](parseInt(_0x3d6cf9(this)[_0x1cf557(0x1bf)](_0x1cf557(0x191)))),_0x3d6cf9(_0x1cf557(0x1a9))[_0x1cf557(0x1ca)](parseInt(_0x3d6cf9(this)[_0x1cf557(0x1bf)](_0x1cf557(0x14a))))),_0x3d6cf9(_0x1cf557(0x12e))[_0x1cf557(0x15a)]('disabled',_0x5cc7ba),_0x3d6cf9(_0x1cf557(0x145))[_0x1cf557(0x15a)](_0x1cf557(0x197),_0x5cc7ba),_0x3d6cf9(_0x1cf557(0x1a9))[_0x1cf557(0x15a)](_0x1cf557(0x197),_0x5cc7ba),_0x4047f9['updateAttrs'](),_0x4047f9[_0x1cf557(0x10c)]();}),_0x3d6cf9(document)['keydown'](function(_0x4df0fd){const _0xc047e4=_0x58bc2c;if([0x25,0x26,0x27,0x28][_0xc047e4(0x140)](_0x4df0fd[_0xc047e4(0x18e)]))_0x4df0fd[_0xc047e4(0x1ab)]();if(!_0x3ff8d5[_0x4df0fd[_0xc047e4(0x18e)]]){_0x3ff8d5[_0x4df0fd[_0xc047e4(0x18e)]]=!![];if(!_0x2d0eee)_0x2d0eee=setInterval(_0x17d24b,0x32);}}),_0x3d6cf9(document)[_0x58bc2c(0x1d9)](function(_0x5206f5){const _0x1da29f=_0x58bc2c;delete _0x3ff8d5[_0x5206f5[_0x1da29f(0x18e)]],_0x3d6cf9[_0x1da29f(0x12a)](_0x3ff8d5)&&(clearInterval(_0x2d0eee),_0x2d0eee=null);});function _0x17d24b(){const _0x362426=_0x58bc2c;let _0x150365=_0x3d6cf9(_0x362426(0x20f));if(!_0x150365[_0x362426(0x119)]||_0xc02fb)return;let _0xd1856c=_0x150365[_0x362426(0x19f)](),_0x32afb8=_0x150365[_0x362426(0x232)](),_0x4d3621=_0xd1856c[_0x362426(0x187)](),_0x2b6e56=_0xd1856c[_0x362426(0x1e4)](),_0x447148=_0x150365['outerWidth'](),_0x102f2c=_0x150365[_0x362426(0x11f)]();if(_0x3ff8d5[0x25]&&_0x32afb8[_0x362426(0x191)]>0x0)_0x150365[_0x362426(0x1bf)](_0x362426(0x191),Math[_0x362426(0x144)](0x0,_0x32afb8['left']-_0x25c74b)+'px');if(_0x3ff8d5[0x26]&&_0x32afb8[_0x362426(0x14a)]>0x0)_0x150365[_0x362426(0x1bf)](_0x362426(0x14a),Math[_0x362426(0x144)](0x0,_0x32afb8[_0x362426(0x14a)]-_0x25c74b)+'px');if(_0x3ff8d5[0x27]&&_0x32afb8[_0x362426(0x191)]+_0x447148<_0x4d3621)_0x150365['css'](_0x362426(0x191),Math['min'](_0x4d3621-_0x447148,_0x32afb8[_0x362426(0x191)]+_0x25c74b)+'px');if(_0x3ff8d5[0x28]&&_0x32afb8[_0x362426(0x14a)]+_0x102f2c<_0x2b6e56)_0x150365[_0x362426(0x1bf)](_0x362426(0x14a),Math[_0x362426(0x18d)](_0x2b6e56-_0x102f2c,_0x32afb8[_0x362426(0x14a)]+_0x25c74b)+'px');const _0x8d4fb7=parseInt(_0x150365[_0x362426(0x1bf)](_0x362426(0x191))),_0x695bfe=parseInt(_0x150365['css'](_0x362426(0x14a)));_0x3d6cf9('#snipX')['val'](_0x8d4fb7),_0x3d6cf9('#snipY')[_0x362426(0x1ca)](_0x695bfe),_0x4047f9[_0x362426(0xf8)](!![]),_0x4047f9[_0x362426(0x134)]();}function _0x21628b(_0x14bb98){const _0x2402c9=_0x58bc2c,_0x56fa2=_0x3d6cf9('<div\x20class=\x22resize-handle\x22></div>');_0x14bb98[_0x2402c9(0x1d5)](_0x56fa2),_0x56fa2['on'](_0x2402c9(0x161),function(_0x20d000){const _0xa1eacf=_0x2402c9;_0x20d000[_0xa1eacf(0x1ab)](),_0x20d000['stopPropagation'](),_0xc02fb=!![],_0x3d6cf9(document)['on'](_0xa1eacf(0x168),_0x250c9b),_0x3d6cf9(document)['on'](_0xa1eacf(0x1d0),_0x3fb802);});}function _0x250c9b(_0x2358ee){const _0x51e1de=_0x58bc2c;if(!_0xc02fb)return;let _0x2d6c94=_0x3d6cf9(_0x51e1de(0x20f));_0x2d6c94['addClass'](_0x51e1de(0x13c));let _0x279588=_0x2d6c94[_0x51e1de(0x19f)](),_0x5654c9=_0x279588[_0x51e1de(0x187)](),_0x5446a3=_0x279588[_0x51e1de(0x1e4)](),_0x371e9d=Math[_0x51e1de(0x18d)](_0x5654c9-_0x2d6c94[_0x51e1de(0x232)]()['left'],_0x2358ee['pageX']-_0x2d6c94['offset']()[_0x51e1de(0x191)]),_0x1017fd=Math[_0x51e1de(0x18d)](_0x5446a3-_0x2d6c94[_0x51e1de(0x232)]()['top'],_0x2358ee[_0x51e1de(0x1ba)]-_0x2d6c94[_0x51e1de(0x189)]()[_0x51e1de(0x14a)]);_0x2d6c94['width'](Math['max'](0x14,_0x371e9d)),_0x2d6c94[_0x51e1de(0x1e4)](Math[_0x51e1de(0x144)](0x14,_0x1017fd));}function _0x3fb802(_0x3838f5){const _0x23cc04=_0x58bc2c;_0xc02fb=![],_0x3d6cf9(document)[_0x23cc04(0x117)](_0x23cc04(0x168),_0x250c9b),_0x3d6cf9(document)[_0x23cc04(0x117)](_0x23cc04(0x1d0),_0x3fb802);let _0x3d1f09=_0x3d6cf9('.snip.selected'),_0xde5d73=_0x3d1f09[_0x23cc04(0x19f)](),_0xca5dcc=_0xde5d73[_0x23cc04(0x187)](),_0x3f3abd=_0xde5d73[_0x23cc04(0x1e4)](),_0xa7533f=Math['min'](_0xca5dcc-_0x3d1f09[_0x23cc04(0x232)]()[_0x23cc04(0x191)],_0x3838f5['pageX']-_0x3d1f09['offset']()[_0x23cc04(0x191)]),_0x355d8f=Math[_0x23cc04(0x18d)](_0x3f3abd-_0x3d1f09['position']()[_0x23cc04(0x14a)],_0x3838f5[_0x23cc04(0x1ba)]-_0x3d1f09['offset']()[_0x23cc04(0x14a)]);const _0x3c36d7=Math[_0x23cc04(0x144)](0x14,_0x355d8f),_0x5c3863=Math[_0x23cc04(0x144)](0x1e,_0xa7533f);_0x4047f9[_0x23cc04(0x19c)]&&_0x3d6cf9(_0x23cc04(0x11a))['width'](_0x5c3863),_0x4047f9[_0x23cc04(0x13e)]&&_0x3d6cf9(_0x23cc04(0x11a))[_0x23cc04(0x1e4)](_0x3c36d7),_0x3d6cf9(_0x23cc04(0x177))['val'](_0x3c36d7),_0x3d6cf9(_0x23cc04(0xfb))[_0x23cc04(0x1ca)](_0x5c3863),_0x4047f9[_0x23cc04(0xf8)](),_0x4047f9[_0x23cc04(0x239)](),setTimeout(()=>{const _0x41b3f9=_0x23cc04;_0x3d1f09['removeClass'](_0x41b3f9(0x13c));},0x64);}_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x175),function(_0x80e140){const _0x39f665=_0x58bc2c;_0x80e140[_0x39f665(0x1ab)](),_0x25c359=_0x3d6cf9(this)[_0x39f665(0x19f)](),_0x3d6cf9(_0x39f665(0x1e8))['modal'](_0x39f665(0x14f));}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x114),function(_0xd1b73a){const _0x1651d1=_0x58bc2c;if(_0x25c359!=null){const _0x1a19d8=_0x25c359['attr']('id');if(_0x25c359['hasClass'](_0x1651d1(0x153)))while(_0x3d6cf9(_0x1651d1(0x104)+_0x1a19d8)[_0x1651d1(0x119)]!=0x0){_0x3d6cf9(_0x1651d1(0x104)+_0x1a19d8)[_0x1651d1(0x1f5)]('.target')['attr'](_0x1651d1(0x225),''),_0x3d6cf9(_0x1651d1(0x104)+_0x1a19d8)[_0x1651d1(0x11b)]();}else{const _0x23d383=_0x25c359[_0x1651d1(0x16e)](_0x1651d1(0x225))??null;_0x23d383&&(_0x4047f9['isOneToOne']&&_0x3d6cf9('#'+_0x23d383)[_0x1651d1(0x1bc)](_0x1651d1(0x1ff)));}_0x25c359[_0x1651d1(0x11b)](),_0x4047f9[_0x1651d1(0x10c)]();}_0x3d6cf9('#deleteModal')[_0x1651d1(0x1eb)](_0x1651d1(0x1ce)),_0x4047f9[_0x1651d1(0x16c)]();}),_0x3d6cf9(document)['on'](_0x58bc2c(0x19a),_0x58bc2c(0x152),function(_0x11e6dd){const _0x6a4d8b=_0x58bc2c;var _0x38a4cc=this;if(_0x38a4cc[_0x6a4d8b(0x20b)]&&_0x38a4cc[_0x6a4d8b(0x20b)][0x0]){var _0x31cd0d=new FileReader();_0x31cd0d[_0x6a4d8b(0x107)]=function(_0xc14325){const _0x28d4a2=_0x6a4d8b;var _0x4f5378=new Image();_0x4f5378['src']=_0xc14325[_0x28d4a2(0x1b8)][_0x28d4a2(0x10d)],_0x4047f9['mainImage']=_0x4f5378,_0x4f5378[_0x28d4a2(0x107)]=function(){const _0x1d0f1f=_0x28d4a2;_0x4047f9[_0x1d0f1f(0x23d)](!![]);},_0x4047f9[_0x28d4a2(0x1c2)]=![],_0x4047f9[_0x28d4a2(0x17e)]=null;},_0x31cd0d['readAsDataURL'](_0x38a4cc[_0x6a4d8b(0x20b)][0x0]);}}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x216),function(_0xa74f4b){const _0x47dbf4=_0x58bc2c;if(_0x3d6cf9('.snip')[_0x47dbf4(0x119)]!=0x0){alertWarning(_0x47dbf4(0x1e6));return;}_0x3d6cf9(_0x47dbf4(0x152))[_0x47dbf4(0x22d)]();}),_0x3d6cf9(document)['on']('click',_0x58bc2c(0x1e0),function(_0x1a81f){const _0x31cee4=_0x58bc2c;if(_0x4047f9[_0x31cee4(0x1c2)]){alertWarning('Please\x20select\x20base\x20image.');return;}_0x4047f9[_0x31cee4(0x176)](_0x31cee4(0x153));}),_0x3d6cf9(document)['on']('click',_0x58bc2c(0x219),function(_0x32f5a4){const _0x4c8e66=_0x58bc2c;if(_0x4047f9[_0x4c8e66(0x1c2)]){alertWarning('Please\x20select\x20base\x20image.');return;}_0x4047f9[_0x4c8e66(0x176)](_0x4c8e66(0x1b8));}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x205),function(_0x59a591){const _0x4d0149=_0x58bc2c;_0x3d6cf9('#resetConfigModal')['modal'](_0x4d0149(0x14f));}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),'#confirmResetConfig',function(_0x3c5608){const _0x4b98ff=_0x58bc2c;_0x3d6cf9(_0x4b98ff(0x11a))[_0x4b98ff(0x132)](function(_0x247727,_0x216e15){const _0x125262=_0x4b98ff;_0x3d6cf9(_0x216e15)[_0x125262(0x11b)]();}),_0x4047f9[_0x4b98ff(0xfc)]=0x1,_0x4047f9[_0x4b98ff(0x108)]=0x1,_0x3d6cf9(_0x4b98ff(0x13b))['modal']('hide');}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x19d),function(_0x5ce41d){const _0x1005cf=_0x58bc2c;_0x3d6cf9(_0x1005cf(0x149))['modal']('show');}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x20a),function(_0x5d0c51){const _0x577be7=_0x58bc2c;_0x3d6cf9(_0x577be7(0x1a7))['each'](function(_0xc935a2,_0x106378){const _0x393b96=_0x577be7;_0x3d6cf9(_0x106378)[_0x393b96(0x14f)](),_0x3d6cf9(_0x106378)[_0x393b96(0x1bc)](_0x393b96(0x1ff));}),_0x3d6cf9(_0x577be7(0x1dc))[_0x577be7(0x132)](function(_0x23db56,_0x2e9657){const _0x201b41=_0x577be7;_0x3d6cf9(_0x2e9657)[_0x201b41(0x1d8)]('.value')[_0x201b41(0x11b)](),_0x3d6cf9(_0x2e9657)['attr'](_0x201b41(0x225),'');}),_0x3d6cf9(_0x577be7(0x149))['modal']('hide');}),_0x3d6cf9(_0x4047f9['undoBtn'])['on'](_0x58bc2c(0x22d),function(_0x9a5106){const _0x518ba0=_0x58bc2c,_0x2773ef=_0x4047f9[_0x518ba0(0x1d6)](),_0x14baad=_0x3d6cf9('#'+_0x2773ef[_0x518ba0(0x1b8)]),_0x4cac0c=_0x3d6cf9('#'+_0x2773ef[_0x518ba0(0x153)]),_0x1763e6=_0x2773ef[_0x518ba0(0x165)];_0x14baad[_0x518ba0(0x1bd)](_0x1763e6),_0x4cac0c[_0x518ba0(0x14f)]();}),_0x3d6cf9(_0x4047f9[_0x58bc2c(0xf9)])['on'](_0x58bc2c(0x22d),function(_0x51d8d0){const _0x152f94=_0x58bc2c,_0x4ac20a=_0x4047f9[_0x152f94(0x158)](),_0x54e373=_0x3d6cf9('#'+_0x4ac20a[_0x152f94(0x1b8)]),_0x32dceb=_0x3d6cf9('#'+_0x4ac20a[_0x152f94(0x153)]),_0x46a23d=_0x4ac20a[_0x152f94(0x1f1)];_0x54e373[_0x152f94(0x1bd)](_0x46a23d),_0x4ac20a[_0x152f94(0x195)]?_0x32dceb[_0x152f94(0x1ce)]():_0x32dceb[_0x152f94(0x14f)]();}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x1a7),function(_0x8907ca){const _0x4d6fa2=_0x58bc2c;_0x8907ca[_0x4d6fa2(0x127)](),_0x4047f9[_0x4d6fa2(0x105)]=this['id'];}),_0x3d6cf9(document)['on'](_0x58bc2c(0x22d),_0x58bc2c(0x1dc),function(_0x102691){const _0x45b645=_0x58bc2c;_0x102691[_0x45b645(0x127)]();const _0x7812fb=document[_0x45b645(0x1b0)](this['id']);_0x4047f9[_0x45b645(0x105)]!=''&&_0x4047f9['isTester']&&(_0x3d6cf9(this)['removeClass']('selected'),_0x3d6cf9(this)[_0x45b645(0x1d8)](_0x45b645(0x17f))[_0x45b645(0x11b)](),_0x4047f9[_0x45b645(0x1f4)](_0x4047f9[_0x45b645(0x105)],_0x7812fb));}),_0x3d6cf9(document)['on']('click','html',function(_0x30843f){const _0x1f1ee6=_0x58bc2c;_0x4047f9[_0x1f1ee6(0x105)]='';}),_0x3d6cf9(document)['on'](_0x58bc2c(0x1c5),_0x58bc2c(0x12e),function(_0x9cf591){const _0x2ec494=_0x58bc2c;_0x9cf591['preventDefault']();let _0xf4e849=_0x3d6cf9(this)[_0x2ec494(0x1ca)](),_0x565fe7=_0x3d6cf9(_0x2ec494(0x20f));_0x565fe7[_0x2ec494(0x119)]==0x0&&alertWarning(_0x2ec494(0x23b)),_0x565fe7[_0x2ec494(0x16e)](_0x2ec494(0x215),_0xf4e849);}),_0x3d6cf9(document)['on'](_0x58bc2c(0x21b),'#areaHeight,#areaWidth',function(_0x2d4f91){const _0x48fb14=_0x58bc2c;_0x4047f9[_0x48fb14(0x239)]();}),_0x3d6cf9(document)['on']('input',_0x58bc2c(0x15b),function(){const _0x4c1ab3=_0x58bc2c,_0xf82301=_0x3d6cf9(_0x4c1ab3(0x11a)),_0x31729f=_0x3d6cf9(this);let _0x25499a=parseInt(_0x31729f['val'](),0xa);!_0x31729f['data'](_0x4c1ab3(0x128))&&_0x31729f['data'](_0x4c1ab3(0x128),_0x25499a);if(this['id']==='areaHeight'&&_0x25499a<0x14||this['id']==='areaWidth'&&_0x25499a<0x1e){_0x31729f[_0x4c1ab3(0x1ca)](_0x31729f[_0x4c1ab3(0x17d)](_0x4c1ab3(0x128)));return;}this['id']===_0x4c1ab3(0x1de)?_0x4047f9[_0x4c1ab3(0x13e)]?_0xf82301[_0x4c1ab3(0x1e4)](_0x25499a):_0x3d6cf9(_0x4c1ab3(0x20f))[_0x4c1ab3(0x1e4)](_0x25499a):_0x4047f9[_0x4c1ab3(0x19c)]?_0xf82301[_0x4c1ab3(0x187)](_0x25499a):_0x3d6cf9(_0x4c1ab3(0x20f))[_0x4c1ab3(0x187)](_0x25499a),_0x4047f9[_0x4c1ab3(0xf8)]()?_0x31729f[_0x4c1ab3(0x1ca)](_0x31729f['data'](_0x4c1ab3(0x128))):_0x31729f[_0x4c1ab3(0x17d)]('prevValue',_0x25499a);}),_0x3d6cf9(document)['on'](_0x58bc2c(0x1c5),_0x58bc2c(0x15d),function(_0x3ee0db){const _0x21d64b=_0x58bc2c,_0x4c4a91=_0x3d6cf9(_0x21d64b(0x11a)),_0x4290c6=_0x3d6cf9(this),_0x3a4af6=_0x4290c6['val']();!_0x4290c6[_0x21d64b(0x17d)]('prevValue')&&_0x4290c6['data'](_0x21d64b(0x128),_0x3a4af6),this['id']==_0x21d64b(0x170)?_0x3d6cf9(_0x21d64b(0x20f))[_0x21d64b(0x1bf)](_0x21d64b(0x191),_0x3a4af6+'px'):_0x3d6cf9(_0x21d64b(0x20f))[_0x21d64b(0x1bf)](_0x21d64b(0x14a),_0x3a4af6+'px'),_0x4047f9[_0x21d64b(0xf8)]()?_0x4290c6[_0x21d64b(0x1ca)](_0x4290c6[_0x21d64b(0x17d)](_0x21d64b(0x128))):_0x4290c6['data'](_0x21d64b(0x128),_0x3a4af6);}),_0x3d6cf9(_0x4047f9[_0x58bc2c(0x181)])['on'](_0x58bc2c(0x19a),function(_0x5871e0){const _0x394b82=_0x58bc2c;_0x4047f9[_0x394b82(0x222)]=_0x4047f9['singleMatchInput']['checked'];const _0x1cf9e5={};let _0x20056b=![];const _0x2a6307=new Set(),_0x11588d=[];if(_0x4047f9['isOneToOne']){_0x3d6cf9('.snip.target')[_0x394b82(0x132)](function(_0x4bf60a,_0x7d2d78){const _0xb0111=_0x394b82,_0x188209=_0x3d6cf9(_0x7d2d78)[_0xb0111(0x16e)](_0xb0111(0x225))??'';if(_0x188209[_0xb0111(0x119)]!=0x0){const _0x279e7d=Object[_0xb0111(0x226)](_0x1cf9e5);_0x279e7d[_0xb0111(0x140)](_0x188209)?(_0x1cf9e5[_0x188209]=_0x1cf9e5[_0x188209]+0x1,_0x20056b=!![],_0x11588d[_0xb0111(0x235)](_0x188209)):_0x1cf9e5[_0x188209]=0x1,_0x2a6307['add'](_0x188209);}});if(_0x20056b){_0x4047f9[_0x394b82(0x181)][_0x394b82(0x1d2)]=![],_0x4047f9['isOneToOne']=![];const _0x257394=_0x11588d['join'](',\x20');alertWarning(_0x257394+_0x394b82(0x1ee));return;}else _0x2a6307[_0x394b82(0x21e)](function(_0x1c6582){const _0x3e8da3=_0x394b82,_0x4a8be4=_0x3d6cf9('#'+_0x1c6582);_0x4a8be4[_0x3e8da3(0x1f2)](_0x3e8da3(0xfd))&&(_0x4a8be4['addClass']('is_dragged'),_0x4a8be4[_0x3e8da3(0x1bc)](_0x3e8da3(0xfd)),_0x4a8be4[_0x3e8da3(0x16e)]('draggable',![]));});}else _0x3d6cf9(_0x394b82(0x1a7))[_0x394b82(0x132)](function(_0x4c042a,_0x5b882b){const _0x254575=_0x394b82;_0x3d6cf9(_0x5b882b)['hasClass'](_0x254575(0x1ff))&&(_0x3d6cf9(_0x5b882b)[_0x254575(0x1bc)]('is_dragged'),_0x3d6cf9(_0x5b882b)[_0x254575(0x173)]('drag_multiple'),_0x3d6cf9(_0x5b882b)[_0x254575(0x16e)](_0x254575(0x153),!![]));});const _0x569403=_0x3d6cf9('.snip.selected');_0x569403['trigger'](_0x394b82(0x22d)),_0x569403[_0x394b82(0x1c9)](_0x394b82(0x22d));});const _0x166702='<option\x20value=\x22\x22\x20disabled\x20selected>NONE</option>';_0x3d6cf9(document)['on']('update-select',_0x58bc2c(0x113),function(_0x5be67f){const _0x18b463=_0x58bc2c;let _0x3df915=_0x3d6cf9(_0x18b463(0x21d))[_0x18b463(0x1ca)]()||'';_0x3df915=_0x3df915['trim']();let _0x3ff60e=_0x166702,_0x39e597=_0x4047f9[_0x18b463(0x222)]?_0x166702:'';_0x3d6cf9(_0x18b463(0x1a7))[_0x18b463(0x132)](function(_0x3935c7,_0x2b1a3d){const _0x58dbdb=_0x18b463,_0x347ade=_0x2b1a3d['id'];_0x3ff60e+=_0x347ade==_0x3df915?_0x58dbdb(0x22e)+_0x347ade+'\x22>'+_0x347ade+'</option>':_0x58dbdb(0x217)+_0x347ade+_0x58dbdb(0x10a)+_0x347ade+_0x58dbdb(0x11d);}),_0x3d6cf9('.snip.target')['each'](function(_0x49e41a,_0x201e0f){const _0x189a77=_0x18b463,_0x167930=_0x201e0f['id'];_0x39e597+=_0x167930==_0x3df915?_0x189a77(0x22e)+_0x167930+'\x22\x20>'+_0x167930+_0x189a77(0x11d):_0x189a77(0x217)+_0x167930+_0x189a77(0x10a)+_0x167930+_0x189a77(0x11d);}),_0x3d6cf9(_0x18b463(0x21d))[_0x18b463(0x1bd)](_0x3ff60e),_0x3d6cf9('#target-select')[_0x18b463(0x1bd)](_0x39e597),_0x3d6cf9('#target-select')[_0x18b463(0x1c9)](_0x18b463(0x19a));}),_0x3d6cf9(document)['on'](_0x58bc2c(0x19a),_0x58bc2c(0x22b),function(_0x1a89d9){const _0x2a712a=_0x58bc2c;let _0x1b41a6=_0x3d6cf9(this)[_0x2a712a(0x1ca)]();!Array[_0x2a712a(0x200)](_0x1b41a6)&&(_0x1b41a6=[_0x1b41a6]);const _0x5ac44b=_0x3d6cf9('.snip.selected'),_0x4acb55=_0x5ac44b[_0x2a712a(0x1f2)](_0x2a712a(0x153)),_0x3f9340=_0x5ac44b[_0x2a712a(0x16e)]('id');if(_0x4acb55){const _0x46ca9e=_0x3d6cf9(_0x2a712a(0x1d7)+_0x3f9340+'\x22]');_0x46ca9e[_0x2a712a(0x119)]!=0x0&&(_0x46ca9e[_0x2a712a(0x16e)](_0x2a712a(0x225),''),_0x46ca9e[_0x2a712a(0x1d8)](_0x2a712a(0x196))['remove']()),_0x1b41a6['length']>0x0&&_0x1b41a6[_0x2a712a(0x21e)](function(_0xc63532){const _0x585836=_0x2a712a;try{const _0x56e8d6=_0x3d6cf9('#'+_0xc63532)['attr']('dragged'),_0x3326b6=!_0x56e8d6||_0x56e8d6[_0x585836(0x119)]===0x0;_0x3326b6?_0x4047f9[_0x585836(0x222)]?_0x4047f9[_0x585836(0x1f4)](_0x3f9340,document[_0x585836(0x1b0)](_0xc63532)):_0x4047f9['handleDrop'](_0x3f9340,document['getElementById'](_0xc63532)):(_0x56e8d6[_0x585836(0x119)]!=0x0&&_0x4047f9['restoreDraggable'](_0x56e8d6),_0x3f9340[_0x585836(0x119)]!=0x0&&document[_0x585836(0x1b0)](_0xc63532)[_0x585836(0x119)]!=0x0&&_0x4047f9[_0x585836(0x1f4)](_0x3f9340,document['getElementById'](_0xc63532)));}catch(_0x5b1f44){}_0xc63532==''&&_0x4047f9[_0x585836(0x1b9)](_0x3f9340);});}else{const _0x727327=_0x1b41a6[0x0]??'',_0x2d6742=_0x5ac44b[_0x2a712a(0x16e)]('dragged')??'';if(_0x727327['length']!=0x0){const _0x597968=_0x3d6cf9(_0x2a712a(0x14d)+_0x727327+'\x22]');_0x4047f9['isOneToOne']&&(_0x597968[_0x2a712a(0x16e)](_0x2a712a(0x225),''),_0x597968[_0x2a712a(0x1d8)]('.value')[_0x2a712a(0x11b)]()),_0x2d6742['length']!=0x0&&_0x4047f9[_0x2a712a(0x1b9)](_0x2d6742),_0x4047f9['handleDrop'](_0x727327,document[_0x2a712a(0x1b0)](_0x3f9340));}else _0x2d6742[_0x2a712a(0x119)]!=0x0&&(_0x4047f9[_0x2a712a(0x1b9)](_0x2d6742),_0x5ac44b[_0x2a712a(0x16e)](_0x2a712a(0x225),''),_0x5ac44b[_0x2a712a(0x1d8)](_0x2a712a(0x196))[_0x2a712a(0x11b)]());}}),_0x3d6cf9(document)[_0x58bc2c(0x1f0)](function(){_0x3d6cf9('#target-select,\x20#drag-select')['prepend']('<option\x20value=\x22\x22\x20disabled\x20selected>Choose\x20an\x20option</option>');});}),_0x4047f9[_0x3980bd(0x10c)]();}[_0x19c576(0x10c)](_0x5c0c05=!![]){const _0x1ce4f5=_0x19c576,_0x5a85d1=$('.snip.selected'),_0xef2f87=_0x5a85d1[_0x1ce4f5(0x1f2)]('draggable');if(_0x5a85d1['length']===0x0){$(_0x1ce4f5(0x22b))[_0x1ce4f5(0x15a)](_0x1ce4f5(0x197),!![])[_0x1ce4f5(0x1ca)]('')[_0x1ce4f5(0x1c9)]('change'),updateChosen();return;}const _0x259588=_0x5a85d1[_0x1ce4f5(0x16e)]('id'),_0x213aa8=this[_0x1ce4f5(0x222)]||!_0xef2f87?_0x1ce4f5(0x20d):'';let _0x524947=_0x213aa8;if(_0xef2f87)this['changeSelectType']('target-select',!this['isOneToOne']),$(_0x1ce4f5(0x1dc))['each'](function(_0xfc17ce,_0x2a0be8){const _0x111f5a=_0x1ce4f5,_0xb185b=_0x2a0be8['id'];_0x524947+=_0x111f5a(0x217)+_0xb185b+'\x22>'+_0xb185b+_0x111f5a(0x11d);}),$(_0x1ce4f5(0x22b))[_0x1ce4f5(0x1bd)](_0x524947),$(_0x1ce4f5(0x1dc))[_0x1ce4f5(0x1b1)]('[dragged=\x27'+_0x259588+'\x27]')[_0x1ce4f5(0x132)](function(_0x228bc8,_0x55d466){const _0x1561d6=_0x1ce4f5;$(_0x1561d6(0x146)+_0x55d466['id']+'\x27]')['prop'](_0x1561d6(0x1b6),!![]);});else{this['changeSelectType']('target-select',![]);const _0x298d26=_0x5a85d1[_0x1ce4f5(0x16e)](_0x1ce4f5(0x225))??'';$(_0x1ce4f5(0x1a7))[_0x1ce4f5(0x132)](function(_0x5b653e,_0x4e9005){const _0x1b3525=_0x1ce4f5,_0x11a184=_0x4e9005['id'];_0x524947+=_0x1b3525(0x217)+_0x11a184+'\x22\x20'+(_0x11a184===_0x298d26?'selected':'')+'>'+_0x11a184+_0x1b3525(0x11d);}),$('#target-select')[_0x1ce4f5(0x1bd)](_0x524947);}_0x5c0c05&&$(_0x1ce4f5(0x22b))[_0x1ce4f5(0x15a)](_0x1ce4f5(0x197),![])[_0x1ce4f5(0x1c9)](_0x1ce4f5(0x19a)),updateChosen();}[_0x19c576(0xf8)](_0x18b873=![]){const _0x151859=_0x19c576,_0x210d0a=this;let _0x3bbb98=![];const _0x420cb1=[],_0x5ec7dc=[];return $(_0x151859(0x11a))[_0x151859(0x132)](function(_0x57b516,_0x3de072){const _0x3ff331=_0x151859,_0x56c69e={};if(_0x210d0a[_0x3ff331(0xf5)](_0x3de072))_0x3bbb98=!![],_0x56c69e[_0x3de072['id']]=_0x210d0a[_0x3ff331(0xf4)],_0x420cb1[_0x3ff331(0x235)](_0x56c69e);else _0x3de072==document[_0x3ff331(0x192)](_0x3ff331(0x20f))&&_0x18b873&&_0x210d0a[_0x3ff331(0x239)](_0x3de072);}),_0x3bbb98?($('.jGrowl-notification')['length']<=0x1&&_0x420cb1[_0x151859(0x21e)](function(_0x2bd9ad){const _0x4b6cd6=_0x151859,_0x4c068c=Object[_0x4b6cd6(0x226)](_0x2bd9ad)[0x0],_0xb8addf=_0x2bd9ad[_0x4c068c],_0x55f998=_0xb8addf=='parent';if((_0x5ec7dc[_0x4b6cd6(0x140)](_0x4c068c)||_0x5ec7dc[_0x4b6cd6(0x140)](_0xb8addf))&&!_0x55f998)return;_0x55f998?alertWarning(_0x4b6cd6(0x155)+_0x4c068c+_0x4b6cd6(0x123)):alertWarning(_0x4c068c+_0x4b6cd6(0x183)+_0xb8addf+'\x20is\x20overlapping\x20with\x20each\x20other!'),_0x5ec7dc['push'](_0x4c068c,_0xb8addf);}),$(_0x151859(0x11a))['each'](function(_0x4e45e3,_0x203fd9){const _0x241179=_0x151859,_0x15e346=$(_0x203fd9)[_0x241179(0x16e)]('top'),_0x5a5e56=$(_0x203fd9)[_0x241179(0x16e)](_0x241179(0x191)),_0x2c3c6e=$(_0x203fd9)[_0x241179(0x16e)]('height'),_0x3699c2=$(_0x203fd9)['attr'](_0x241179(0x187));$(_0x203fd9)[_0x241179(0x1bf)]('top',_0x15e346),$(_0x203fd9)[_0x241179(0x1bf)](_0x241179(0x191),_0x5a5e56),$(_0x203fd9)[_0x241179(0x1bf)](_0x241179(0x187),_0x3699c2),$(_0x203fd9)[_0x241179(0x1bf)]('height',_0x2c3c6e);})):this[_0x151859(0x239)](),this[_0x151859(0x134)](),_0x3bbb98;}[_0x19c576(0x239)](_0x2c6908=''){const _0x8883b0=_0x19c576;if($(_0x2c6908)[_0x8883b0(0x119)]!=0x0){const _0xa4b784=$(_0x2c6908)[_0x8883b0(0x1bf)](_0x8883b0(0x14a)),_0x5d2695=$(_0x2c6908)[_0x8883b0(0x1bf)]('left'),_0x1f88b9=$(_0x2c6908)['css']('height'),_0x2426b7=$(_0x2c6908)[_0x8883b0(0x1bf)](_0x8883b0(0x187));$(_0x2c6908)[_0x8883b0(0x16e)](_0x8883b0(0x14a),_0xa4b784),$(_0x2c6908)[_0x8883b0(0x16e)](_0x8883b0(0x191),_0x5d2695),$(_0x2c6908)[_0x8883b0(0x16e)](_0x8883b0(0x1e4),_0x1f88b9),$(_0x2c6908)[_0x8883b0(0x16e)](_0x8883b0(0x187),_0x2426b7);}else $('.snip')[_0x8883b0(0x132)](function(_0xc26e55,_0x53a68e){const _0x53a94f=_0x8883b0,_0x50f1c1=$(_0x53a68e)[_0x53a94f(0x1bf)](_0x53a94f(0x14a)),_0x3f5911=$(_0x53a68e)['css'](_0x53a94f(0x191)),_0x5ae2a9=$(_0x53a68e)[_0x53a94f(0x1bf)]('height'),_0x4d4c0d=$(_0x53a68e)[_0x53a94f(0x1bf)](_0x53a94f(0x187));$(_0x53a68e)[_0x53a94f(0x16e)](_0x53a94f(0x14a),_0x50f1c1),$(_0x53a68e)[_0x53a94f(0x16e)](_0x53a94f(0x191),_0x3f5911),$(_0x53a68e)['attr'](_0x53a94f(0x1e4),_0x5ae2a9),$(_0x53a68e)[_0x53a94f(0x16e)]('width',_0x4d4c0d);});}[_0x19c576(0x1bb)](){const _0x4e53c1=_0x19c576,_0x2c9705=this;_0x2c9705['fixedHeightCheckbox']['addEventListener'](_0x4e53c1(0x19a),function(_0x46a6aa){const _0x162386=_0x4e53c1;_0x2c9705[_0x162386(0x13e)]=_0x2c9705[_0x162386(0x22c)][_0x162386(0x1d2)];}),_0x2c9705['fixedWidthCheckbox']['addEventListener'](_0x4e53c1(0x19a),function(_0xa34d90){const _0x49b7e5=_0x4e53c1;_0x2c9705[_0x49b7e5(0x19c)]=_0x2c9705[_0x49b7e5(0x122)][_0x49b7e5(0x1d2)];});}[_0x19c576(0x1fa)](_0x1109e4=!![]){const _0x155ea2=_0x19c576,_0x319926=document['querySelectorAll'](_0x155ea2(0x11a)),_0x21918a=[],_0x347f0e=[],_0x79178e={},_0x53da59=[],_0x197747=this[_0x155ea2(0x148)],_0xeee588=_0x197747[_0x155ea2(0x234)]||_0x197747[_0x155ea2(0x187)],_0x40ff97=_0x197747['naturalHeight']||_0x197747[_0x155ea2(0x1e4)],_0x4cbfdd=parseFloat(this[_0x155ea2(0x1ac)][_0x155ea2(0x1da)][_0x155ea2(0x187)]),_0x3ba3c4=parseFloat(this[_0x155ea2(0x1ac)][_0x155ea2(0x1da)][_0x155ea2(0x1e4)]),_0x6a8ef1=_0x1109e4?_0xeee588/_0x4cbfdd:0x1,_0x924a2a=_0x1109e4?_0x40ff97/_0x3ba3c4:0x1;let _0x5abede=0x0,_0x1b8361=0x0;for(const _0x1eb97e of _0x319926){const _0xca21e0={},_0x1e43bc={},_0x354960=parseInt(_0x1eb97e[_0x155ea2(0x1a5)]('data-points')??0x0),_0x165f2c=parseFloat(_0x1eb97e[_0x155ea2(0x1da)][_0x155ea2(0x191)]),_0x294f9c=parseFloat(_0x1eb97e[_0x155ea2(0x1da)][_0x155ea2(0x14a)]),_0x4e62ff=parseFloat(_0x1eb97e['style']['width']),_0x27a8ae=parseFloat(_0x1eb97e['style'][_0x155ea2(0x1e4)]);_0x1e43bc['id']=_0x1eb97e['id'],_0x1e43bc[_0x155ea2(0x190)]=_0x1eb97e[_0x155ea2(0x10b)][_0x155ea2(0x140)](_0x155ea2(0x1b8))?0x1:0x2,_0x1e43bc['x']=Math[_0x155ea2(0x220)](_0x165f2c*_0x6a8ef1),_0x1e43bc['y']=Math[_0x155ea2(0x220)](_0x294f9c*_0x924a2a),_0x1e43bc[_0x155ea2(0x187)]=Math[_0x155ea2(0x220)](_0x4e62ff*_0x6a8ef1),_0x1e43bc[_0x155ea2(0x1e4)]=Math[_0x155ea2(0x220)](_0x27a8ae*_0x924a2a),_0x1e43bc[_0x155ea2(0x115)]=_0x354960,_0x5abede=_0x1e43bc[_0x155ea2(0x1e4)],_0x1b8361=_0x1e43bc[_0x155ea2(0x187)],_0x79178e[_0x1e43bc['id']]=_0x354960,_0xca21e0[_0x155ea2(0x21f)]=_0x1eb97e[_0x155ea2(0x10b)],_0xca21e0[_0x155ea2(0x1cf)]=_0x1eb97e[_0x155ea2(0x1da)][_0x155ea2(0x232)],_0xca21e0['style_left']=_0x1eb97e[_0x155ea2(0x1da)][_0x155ea2(0x191)],_0xca21e0[_0x155ea2(0x211)]=_0x1eb97e['style'][_0x155ea2(0x14a)],_0xca21e0[_0x155ea2(0x1fd)]=_0x1eb97e['style'][_0x155ea2(0x1e4)],_0xca21e0[_0x155ea2(0x1a4)]=_0x1eb97e['style'][_0x155ea2(0x187)],_0xca21e0['id']=_0x1eb97e['id'],_0xca21e0['classList'][_0x155ea2(0x140)](_0x155ea2(0x1b8))?_0x347f0e['push'](_0xca21e0):(_0xca21e0[_0x155ea2(0x193)]='-'+Math[_0x155ea2(0x220)](_0x165f2c)+_0x155ea2(0x204)+Math[_0x155ea2(0x220)](_0x294f9c)+'px',_0x21918a[_0x155ea2(0x235)](_0xca21e0)),_0x53da59[_0x155ea2(0x235)](_0x1e43bc);}const _0x111818={'backgroundImage':this['configs']!=null?this[_0x155ea2(0x17e)]['wrapper_config'][_0x155ea2(0x18c)]:this[_0x155ea2(0x12f)](_0x197747),'width':_0xeee588+'px','height':_0x40ff97+'px'},_0x2bf24a={'OneToOneMatching':this['isOneToOne'],'FixedHeight':this[_0x155ea2(0x13e)],'FixedWidth':this[_0x155ea2(0x19c)],'AreaHeight':this[_0x155ea2(0x13e)]?_0x5abede:parseInt($(_0x155ea2(0x177))[_0x155ea2(0x1ca)]()),'AreaWidth':this[_0x155ea2(0x19c)]?_0x1b8361:parseInt($(_0x155ea2(0xfb))[_0x155ea2(0x1ca)]())},_0x55b456=[];$(_0x155ea2(0x1dc))['each'](function(_0x1b26a9,_0x175eec){const _0x3464e4=_0x155ea2,_0x271813=_0x175eec['id'],_0x4eeac4=$(this)[_0x3464e4(0x16e)](_0x3464e4(0x225))??'',_0x149030={};_0x149030[_0x271813]=_0x4eeac4,_0x55b456['push'](_0x149030);});const _0x1490b5=[],_0x145c4a=Object['keys'](_0x79178e);_0x145c4a[_0x155ea2(0x21e)](_0x1d1f34=>{const _0x62fcbb=_0x155ea2,_0x15dad6={};_0x15dad6[_0x1d1f34]=_0x79178e[_0x1d1f34],_0x1490b5[_0x62fcbb(0x235)](_0x15dad6);});const _0x27da00={'wrapper_config':_0x111818,'areas':_0x53da59,'options':_0x2bf24a,'match':_0x55b456,'points':_0x1490b5};return _0x27da00;}['downloadConfigAsJSON'](){const _0x3a4d06=_0x19c576,_0x228011=this['exportConfigs'](),_0xc65c46=JSON[_0x3a4d06(0x1fb)](_0x228011,null,0x2),_0xca5655=new Blob([_0xc65c46],{'type':_0x3a4d06(0x1a3)}),_0x3131ea=document['createElement']('a');_0x3131ea['href']=URL[_0x3a4d06(0x12c)](_0xca5655),_0x3131ea[_0x3a4d06(0x223)]=_0x3a4d06(0x19e),document['body'][_0x3a4d06(0x1b7)](_0x3131ea),_0x3131ea[_0x3a4d06(0x22d)](),document[_0x3a4d06(0x111)][_0x3a4d06(0x213)](_0x3131ea);}[_0x19c576(0x12f)](_0x45858e){const _0x350f1d=_0x19c576,_0x5832dc=_0x45858e[_0x350f1d(0x231)];if(_0x5832dc[_0x350f1d(0x179)](_0x350f1d(0x1e3)))return _0x5832dc;const _0x5aac27=document[_0x350f1d(0x141)](_0x350f1d(0x124));_0x5aac27[_0x350f1d(0x187)]=_0x45858e[_0x350f1d(0x187)],_0x5aac27[_0x350f1d(0x1e4)]=_0x45858e[_0x350f1d(0x1e4)];const _0x55e0d7=_0x5aac27[_0x350f1d(0x125)]('2d');return _0x55e0d7[_0x350f1d(0xf7)](_0x45858e,0x0,0x0),_0x5aac27[_0x350f1d(0x1a6)](_0x350f1d(0x229));}[_0x19c576(0x137)](_0x6437d){const _0x2991b6=_0x19c576;if(this[_0x2991b6(0x237)]||!this[_0x2991b6(0x1d3)]||this[_0x2991b6(0x18b)]||!this[_0x2991b6(0x20c)])return;this[_0x2991b6(0x142)]=!![],this[_0x2991b6(0x237)]=!![];const _0x5d8f07=this['wrapper'][_0x2991b6(0x15c)]();this['startX']=_0x6437d[_0x2991b6(0x1f3)]-_0x5d8f07[_0x2991b6(0x191)],this[_0x2991b6(0x1f6)]=_0x6437d[_0x2991b6(0x1e9)]-_0x5d8f07['top'],this[_0x2991b6(0x18b)]=document[_0x2991b6(0x141)](_0x2991b6(0x1f7)),this['currentSnip'][_0x2991b6(0x21f)][_0x2991b6(0x16f)](_0x2991b6(0x16b)),this[_0x2991b6(0x18b)][_0x2991b6(0x21f)][_0x2991b6(0x16f)](this[_0x2991b6(0x18a)]),this['currentSnip'][_0x2991b6(0x1da)][_0x2991b6(0x232)]='absolute',this[_0x2991b6(0x18b)]['style']['left']=this[_0x2991b6(0x22f)]+'px',this[_0x2991b6(0x18b)][_0x2991b6(0x1da)][_0x2991b6(0x14a)]=this[_0x2991b6(0x1f6)]+'px',this[_0x2991b6(0x18b)][_0x2991b6(0x1da)]['border']=this['snipType']==_0x2991b6(0x1b8)?_0x2991b6(0x164)+this[_0x2991b6(0x15e)]:_0x2991b6(0x135)+this[_0x2991b6(0x1fc)],this[_0x2991b6(0x18b)]['id']=this[_0x2991b6(0x18a)]=='target'?_0x2991b6(0x1f9)+this['targetCounter']++:'drag-'+this[_0x2991b6(0xfc)]++,this[_0x2991b6(0x1ac)][_0x2991b6(0x1b7)](this['currentSnip']);}[_0x19c576(0x203)](_0x1c7c45){const _0x3cee77=_0x19c576;if(!this[_0x3cee77(0x142)]||!this[_0x3cee77(0x18b)])return;const _0x4318db=this[_0x3cee77(0x1ac)][_0x3cee77(0x15c)](),_0x580e72=_0x1c7c45[_0x3cee77(0x1f3)]-_0x4318db[_0x3cee77(0x191)],_0x13771e=_0x1c7c45[_0x3cee77(0x1e9)]-_0x4318db[_0x3cee77(0x14a)],_0x39c5c6=Math[_0x3cee77(0x144)](_0x580e72-this['startX'],0x0),_0x19407b=Math['max'](_0x13771e-this['startY'],0x0);this['currentSnip']['style'][_0x3cee77(0x191)]=this['startX']+'px',this['currentSnip'][_0x3cee77(0x1da)]['top']=this['startY']+'px',this['currentSnip'][_0x3cee77(0x1da)][_0x3cee77(0x187)]=_0x39c5c6+'px',this[_0x3cee77(0x18b)][_0x3cee77(0x1da)][_0x3cee77(0x1e4)]=_0x19407b+'px';}['endSelection'](_0x1e9363){const _0x497de6=_0x19c576;if(!this[_0x497de6(0x142)])return;this['isSelecting']=![];if(this['currentSnip']){let _0x537c80=jQuery(this[_0x497de6(0x18b)])[_0x497de6(0x1e4)](),_0x1789c4=jQuery(this[_0x497de6(0x18b)])[_0x497de6(0x187)]();_0x1789c4=Math[_0x497de6(0x144)](_0x1789c4,0x1e),_0x537c80=Math[_0x497de6(0x144)](_0x537c80,0x14),jQuery(this[_0x497de6(0x18b)])[_0x497de6(0x1e4)](_0x537c80),jQuery(this[_0x497de6(0x18b)])['width'](_0x1789c4);const _0x36fb35=this['currentSnip'],_0x41f89d=this[_0x497de6(0xf5)](this[_0x497de6(0x18b)]);this['currentSnip'][_0x497de6(0x1ad)]<0xa||this['currentSnip'][_0x497de6(0x1b4)]<0xa||_0x41f89d?(this[_0x497de6(0x1ec)](this[_0x497de6(0x18b)]),_0x41f89d&&alertWarning(_0x497de6(0x15f))):(this[_0x497de6(0x18a)]===_0x497de6(0x153)?(this[_0x497de6(0x134)](),this['makeDraggable'](this['currentSnip'])):this['enableTargetSnip'](this[_0x497de6(0x18b)]),this[_0x497de6(0x1ed)]&&this[_0x497de6(0x18b)][_0x497de6(0x1b7)](this[_0x497de6(0x194)]()),this[_0x497de6(0x11c)](this[_0x497de6(0x18b)])),this[_0x497de6(0xf5)](_0x36fb35)&&(this['deleteSnip'](_0x36fb35),alertWarning(_0x497de6(0x15f)));}this[_0x497de6(0x16c)]();}[_0x19c576(0x11c)](_0x319643){const _0x2d1d2c=_0x19c576;if(!this[_0x2d1d2c(0x13e)]&&!this[_0x2d1d2c(0x19c)])return;const _0x3e8bb7=document['querySelectorAll'](_0x2d1d2c(0x11a))[_0x2d1d2c(0x119)],_0x309101=_0x3e8bb7===0x1;this[_0x2d1d2c(0x13e)]&&(_0x309101?$(_0x2d1d2c(0x177))['val']($(_0x319643)[_0x2d1d2c(0x1e4)]()||0x14):$(_0x319643)['height']($('#areaHeight')['val']())),this[_0x2d1d2c(0x19c)]&&(_0x309101?$(_0x2d1d2c(0xfb))[_0x2d1d2c(0x1ca)]($(_0x319643)[_0x2d1d2c(0x187)]()||0x1e):$(_0x319643)[_0x2d1d2c(0x187)]($(_0x2d1d2c(0xfb))['val']()));}[_0x19c576(0x134)](){const _0x29b4da=_0x19c576,_0x4abd1d=this,_0x3f1125=this['wrapper']['getBoundingClientRect'](),_0x4cf6b0=this[_0x29b4da(0x148)][_0x29b4da(0x231)];$('.snip.draggable')[_0x29b4da(0x132)](function(_0x30800,_0x2a7e2e){const _0xd2bac1=_0x29b4da,_0x4f3d71=parseFloat(_0x2a7e2e['style']['left']),_0x210151=parseFloat(_0x2a7e2e['style'][_0xd2bac1(0x14a)]);_0x2a7e2e[_0xd2bac1(0x1da)][_0xd2bac1(0x18c)]=_0xd2bac1(0x103)+_0x4cf6b0+')',_0x2a7e2e[_0xd2bac1(0x1da)]['backgroundSize']=_0x3f1125['width']+_0xd2bac1(0x171)+_0x3f1125[_0xd2bac1(0x1e4)]+'px',_0x2a7e2e[_0xd2bac1(0x1da)]['backgroundPosition']='-'+(_0x4f3d71+0x2)+_0xd2bac1(0x204)+(_0x210151+0x2)+'px';const _0x55e8ac=_0x2a7e2e['id'],_0x1624cd=$(_0xd2bac1(0x129)+_0x55e8ac+'\x27]');_0x1624cd[_0xd2bac1(0x119)]!=0x0&&_0x1624cd[_0xd2bac1(0x132)](function(_0x43f428,_0xe25927){const _0x473b90=_0xd2bac1,_0x1606d2=$(_0xe25927)[_0x473b90(0x1d8)](_0x473b90(0x196))['get'](0x0);_0x1606d2[_0x473b90(0x1da)][_0x473b90(0x18c)]=_0x473b90(0x103)+_0x4cf6b0+')',_0x1606d2[_0x473b90(0x1da)][_0x473b90(0x1c7)]=_0x3f1125[_0x473b90(0x187)]+'px\x20'+_0x3f1125[_0x473b90(0x1e4)]+'px',_0x1606d2[_0x473b90(0x1da)][_0x473b90(0x193)]='-'+(_0x4f3d71+0x2)+'px\x20-'+(_0x210151+0x2)+'px',$(_0x1606d2)['width']($(_0x2a7e2e)[_0x473b90(0x187)]()),$(_0x1606d2)[_0x473b90(0x1e4)]($(_0x2a7e2e)['height']());});});}[_0x19c576(0x1ec)](_0x37d169){const _0x24d222=_0x19c576;if(_0x37d169)_0x37d169[_0x24d222(0x11b)]();this[_0x24d222(0x16c)]();}[_0x19c576(0x16c)](){const _0x593480=_0x19c576;this[_0x593480(0x20c)]=![],this[_0x593480(0x237)]=![],this[_0x593480(0x18b)]=null,this['resetCursor']();}[_0x19c576(0x176)](_0x30f12e){const _0x5f113d=_0x19c576;this[_0x5f113d(0x237)]&&this[_0x5f113d(0x16c)](),this[_0x5f113d(0x1d3)]=!![],this[_0x5f113d(0x18a)]=_0x30f12e,this[_0x5f113d(0x20c)]=!![],this['setCursor']();}[_0x19c576(0x1b5)](){const _0x4df536=_0x19c576;this['wrapper']['classList'][_0x4df536(0x16f)](_0x4df536(0x21c));}[_0x19c576(0x120)](){const _0x2df68b=_0x19c576;this['wrapper'][_0x2df68b(0x21f)]['remove'](_0x2df68b(0x21c));}[_0x19c576(0x236)](_0x1e79e0){const _0x509265=_0x19c576;_0x1e79e0[_0x509265(0x14b)](_0x509265(0x153),!![]),_0x1e79e0[_0x509265(0x101)](_0x509265(0x1a1),_0x188f7c=>this['onDragStart'](_0x188f7c,_0x1e79e0)),_0x1e79e0[_0x509265(0x101)]('dragend',_0x2b8c6d=>this[_0x509265(0x12b)](_0x2b8c6d,_0x1e79e0));}['onDragStart'](_0x4dc95c,_0x58faf3){const _0x3f173c=_0x19c576;_0x4dc95c['dataTransfer'][_0x3f173c(0x1c6)](_0x3f173c(0x214),_0x58faf3['id']),_0x58faf3[_0x3f173c(0x21f)][_0x3f173c(0x16f)](_0x3f173c(0x16d));}['onDragEnd'](_0x56d190,_0x2b09d1){try{setTimeout(function(){const _0x462920=_0x5162;_0x2b09d1[_0x462920(0x21f)]['remove'](_0x462920(0x16d));},0x5dc);}catch(_0x4c5731){}}['enableTargetSnip'](_0x3e6f14){const _0x8e7181=_0x19c576;_0x3e6f14[_0x8e7181(0x101)](_0x8e7181(0x202),_0x1fe273=>this[_0x8e7181(0x151)](_0x1fe273,_0x3e6f14)),_0x3e6f14['addEventListener'](_0x8e7181(0x13a),_0x3f2dc5=>this['onDrop'](_0x3f2dc5,_0x3e6f14));}[_0x19c576(0x143)](_0x2ff4ab){const _0xac7e7a=_0x19c576;_0x2ff4ab[_0xac7e7a(0x1ea)](_0xac7e7a(0x202),_0x40f978=>this[_0xac7e7a(0x151)](_0x40f978,_0x2ff4ab)),_0x2ff4ab[_0xac7e7a(0x1ea)]('drop',_0xbab8b3=>this[_0xac7e7a(0x182)](_0xbab8b3,_0x2ff4ab));}[_0x19c576(0x151)](_0x74efa4,_0xcd29c7){_0x74efa4['preventDefault']();}[_0x19c576(0x182)](_0x31fc0a,_0x3c955e){const _0x3ac4de=_0x19c576;_0x31fc0a[_0x3ac4de(0x1ab)]();const _0x269f03=_0x31fc0a[_0x3ac4de(0xf3)]['getData'](_0x3ac4de(0x214));this[_0x3ac4de(0x1f4)](_0x269f03,_0x3c955e);}[_0x19c576(0x1f4)](_0x35d5e1,_0x5caeb3,_0x3df72f=![]){const _0x25f034=_0x19c576;if(_0x5caeb3['id']==_0x35d5e1)return;if(_0x5caeb3&&_0x35d5e1!=''){const _0x33d827=document[_0x25f034(0x1b0)](_0x35d5e1);if(!_0x5caeb3['className'][_0x25f034(0x140)](_0x25f034(0x153))&&!_0x33d827[_0x25f034(0x10b)][_0x25f034(0x140)]('value')){console[_0x25f034(0x212)](_0x25f034(0x1e2));let _0x5d1529=_0x5caeb3[_0x25f034(0x199)];const _0x3a75cc=_0x5caeb3[_0x25f034(0x192)](_0x25f034(0x196));if(_0x3a75cc){try{this['restoreDraggable'](_0x5caeb3[_0x25f034(0x1a5)]('dragged'));}catch(_0x18b585){}_0x3a75cc['remove']();}if(_0x33d827){const _0x22eb21=_0x33d827['cloneNode'](!![]);_0x22eb21[_0x25f034(0x21f)][_0x25f034(0x11b)](_0x25f034(0x16b),'draggable',_0x25f034(0x16d)),_0x22eb21[_0x25f034(0x21f)]['add'](_0x25f034(0x1db)),_0x22eb21[_0x25f034(0x1da)]['left']=_0x25f034(0x224),_0x22eb21[_0x25f034(0x1da)][_0x25f034(0x14a)]='auto',_0x22eb21['style'][_0x25f034(0x138)]=_0x25f034(0x20e),_0x22eb21['setAttribute'](_0x25f034(0x174),_0x22eb21['id']),_0x22eb21['id']=_0x25f034(0x19b)+_0x22eb21['id'];try{_0x22eb21['querySelector'](_0x25f034(0x17f))[_0x25f034(0x11b)]();}catch(_0x4d7b1b){}try{_0x22eb21[_0x25f034(0x192)](_0x25f034(0x175))[_0x25f034(0x11b)]();}catch(_0x61276f){}const _0x5a3fd1=new CustomEvent(_0x25f034(0x172),{'detail':{'parent':_0x5caeb3['id'],'value':_0x35d5e1}});wrapper[_0x25f034(0x1a2)](_0x5a3fd1),_0x5caeb3[_0x25f034(0x1b7)](_0x22eb21),$(_0x5caeb3)[_0x25f034(0x16e)](_0x25f034(0x225),_0x33d827['id']);let _0x54105a=![];this['isOneToOne']?(_0x33d827[_0x25f034(0x21f)][_0x25f034(0x16f)]('is_dragged'),_0x54105a=!![],_0x33d827[_0x25f034(0x1c3)](_0x25f034(0x153))):_0x33d827['classList'][_0x25f034(0x16f)](_0x25f034(0xfd));this[_0x25f034(0x121)](_0x33d827),this[_0x25f034(0x236)](_0x22eb21);const _0x48c1d6=_0x5caeb3[_0x25f034(0x199)];this['addUndo']({'draggable':_0x33d827['id'],'target':_0x5caeb3['id'],'shouldHide':_0x54105a,'beforeHtml':_0x5d1529,'afterHtml':_0x48c1d6});}this[_0x25f034(0x10c)](![]);}else try{const _0x1c1ec9=_0x5caeb3['id'],_0x3945b3=document[_0x25f034(0x192)](_0x25f034(0x238)),_0x1d08dd=_0x3945b3['id'][_0x25f034(0x186)]('dragged-',''),_0x4ae008=_0x3945b3['parentNode'];if(_0x1c1ec9==_0x4ae008['id'])return;if(_0x4ae008[_0x25f034(0x10b)][_0x25f034(0x140)](_0x25f034(0x1b8))){$(_0x4ae008)['find'](_0x25f034(0x196))[_0x25f034(0x11b)](),$(_0x4ae008)[_0x25f034(0x16e)](_0x25f034(0x225),'');if(_0x1d08dd){const _0x292284=$('#'+_0x1d08dd);_0x292284[_0x25f034(0x1bc)]('is_dragged'),_0x292284[_0x25f034(0x1bc)](_0x25f034(0xfd)),_0x292284['attr'](_0x25f034(0x153),'true'),_0x292284['css']({'opacity':0x1});}this[_0x25f034(0x10c)]();return;}_0x1c1ec9==_0x1d08dd&&(_0x5caeb3['classList']['remove'](_0x25f034(0x1ff),'drag_multiple'),_0x5caeb3[_0x25f034(0x14b)](_0x25f034(0x153),_0x25f034(0x100)),_0x4ae008[_0x25f034(0x14b)](_0x25f034(0x225),''),_0x33d827['remove'](),this['updateBackgroundImage']()),this[_0x25f034(0x10c)]();}catch(_0xe24a43){}}}['restoreDraggable'](_0x7dcc53){const _0x1346c5=_0x19c576;if(_0x7dcc53[_0x1346c5(0x119)]!=0x0){const _0x5b850f=$('#'+_0x7dcc53);_0x5b850f[_0x1346c5(0x1bc)](_0x1346c5(0x1ff),_0x1346c5(0xfd)),_0x5b850f[_0x1346c5(0x16e)](_0x1346c5(0x153),'true'),updateChosen();}}['changeSelectType'](_0x202cc4,_0x13c772){const _0x35d09a=_0x19c576;var _0xf4fe28=$('#'+_0x202cc4),_0xe2ba54=byid(_0x202cc4+_0x35d09a(0x1e1));_0xe2ba54&&_0xe2ba54[_0x35d09a(0x11b)](),_0xf4fe28[_0x35d09a(0x116)]('destroy'),_0x13c772?_0xf4fe28['attr'](_0x35d09a(0x10f),_0x35d09a(0x10f)):_0xf4fe28[_0x35d09a(0x11e)](_0x35d09a(0x10f)),_0xf4fe28[_0x35d09a(0x1bc)](_0x35d09a(0xfe)),_0xf4fe28[_0x35d09a(0x116)]();}}function _0x29b0(){const _0x13433f=['toDataURL','.snip.draggable','clientHeight','#snipY','undo','preventDefault','wrapper','offsetWidth','trim','364DobdTT','getElementById','filter','#fcc82d','Please\x20define\x20draggable\x20and\x20target\x20blocks.','offsetHeight','setCursor','selected','appendChild','target','restoreDraggable','pageY','initCommonEvents','removeClass','html','display','css','downloadConfigAsJSON','handleConfigs','isPlaceHolder','removeAttribute','href','input','setData','backgroundSize','Not\x20all\x20blocks\x20are\x20in\x20the\x20same\x20width.\x20Please\x20resize\x20any\x20block\x20to\x20align\x20dimensions.','trigger','val','Please\x20select\x20base\x20image.','pop','239872FvhnlT','hide','style_position','mouseup','AreaWidth','checked','isSnipEnabled','22ZPLuRo','append','removeUndo','.snip.target[dragged=\x22','find','keyup','style','value','.snip.target','FixedWidth','areaHeight','ogHeight','#create-draggable','_chzn','eheheheh','url(\x22data:image','height','mapItem','Please\x20clear\x20all\x20the\x20existing\x20snip\x20before\x20updating\x20this\x20base\x20image','ogImage','#deleteModal','clientY','removeEventListener','modal','deleteSnip','add_btn','\x20blocks\x20are\x20matched\x20with\x20multiple\x20targets','then','ready','afterHtml','hasClass','clientX','handleDrop','parents','startY','div','init','targ-','exportConfigs','stringify','dragColor','style_height','imageInput','is_dragged','isArray','button','dragover','updateSelection','px\x20-','#resetAllConfig','.snip,.value','assign','backgroundRepeat','addUndo','#confirmResetValue','files','isButtonClicked','<option\x20value=\x22\x22>None</option>','none','.snip.selected','style_border','style_top','log','removeChild','text','data-points','#changeBaseImage','<option\x20value=\x22','2968330mQPOOB','#create-target','Version:\x2014/04/2025','focus','snip-creation','#drag-select','forEach','classList','round','delete-btn','isOneToOne','download','auto','dragged','keys','initJquery','1505357fqTPMP','image/png','isTester','#target-select','fixedHeightCheckbox','click','<option\x20selected\x20value=\x22','startX','4925547PLvBBb','src','position','singleDrop','naturalWidth','push','makeDraggable','isCreatingSnip','.dropping','updateAttrs','endSelection','Please\x20Select\x20an\x20area\x20to\x20assign\x20points','querySelectorAll','setMainImage','map','dataTransfer','currentOverlapping','isOverlapping','areas','drawImage','handleOverlapping','redoBtn','Matching\x20is\x20not\x20valid.\x20Please\x20map\x20the\x20area\x20by\x20drag\x20and\x20drop.','#areaWidth','dragCounter','drag_multiple','chzn-done','reverse','true','addEventListener','#158AEB','url(','#dragged-','currentDrag','apply','onload','targetCounter','parentElement','\x22\x20>','className','updateTarget','result','addRedo','multiple','match','body','isOg','.select-wrapper','#confirmDelete','points','chosen','off','Please\x20clear\x20all\x20existing\x20snips\x20before\x20importing','length','.snip','remove','handleHeightWidth','</option>','removeAttr','outerHeight','resetCursor','enableTargetSnip','fixedWidthCheckbox','\x20going\x20out\x20of\x20bounds!!','canvas','getContext','toArray','stopPropagation','prevValue','.snip[dragged=\x27','isEmptyObject','onDragEnd','createObjectURL','sort','#pointsInput','getBase64Image','wrapper_config','resize','each','export','updateBackgroundImage','2px\x20solid\x20','undoBtn','startSelection','border','524HXYfoh','drop','#resetConfigModal','resizing','isValid','fixedHeight','2612015toXpmq','includes','createElement','isSelecting','disableTargetSnip','max','#snipX','#target-select\x20option[value=\x27','every','mainImage','#resetValueModal','top','setAttribute','options','.target[dragged=\x22','9FRXumA','show','split','onDragOver','#imageInput','draggable','no-repeat','Area\x20','areaWidth','snipId','removeRedo','FixedHeight','prop','#areaHeight,\x20#areaWidth','getBoundingClientRect','#snipX,#snipY','targetColor','Selection\x20is\x20not\x20valid\x20it\x20is\x20overlapping','ogWidth','mousedown','opacity','right','2px\x20dashed\x20','beforeHtml','style_left','bottom','mousemove','relative','16oXBWXa','snip','resetSnipCreation','dropping','attr','add','snipX','px\x20','on-dropped','addClass','data-id','.delete-btn','enableSnipCreation','#areaHeight','image/*','startsWith','Matching\x20is\x20valid!','downloading','file','data','configs','.resize-handle','initMouseEvents','singleMatchInput','onDrop','\x20and\x20','2345646sBvvHJ','outerWidth','replace','width','Not\x20all\x20blocks\x20are\x20in\x20the\x20same\x20height.\x20Please\x20resize\x20any\x20block\x20to\x20align\x20dimensions.','offset','snipType','currentSnip','backgroundImage','min','which','redo','type','left','querySelector','backgroundPosition','getDeleteButton','shouldHide','.value','disabled','clientWidth','innerHTML','change','dragged-','fixedWidth','#resetValues','config.json','parent','Not\x20all\x20blocks\x20are\x20in\x20the\x20same\x20size.\x20Please\x20resize\x20any\x20block\x20to\x20align\x20dimensions.','dragstart','dispatchEvent','application/json','style_width','getAttribute'];_0x29b0=function(){return _0x13433f;};return _0x29b0();}
+
+class DDEditor {
+    targetColor = "#fcc82d";
+    dragColor = "#158AEB";
+    constructor(
+      wrapper,
+      imgUrl,
+      enableEditing = true,
+      height = 0,
+      config = null,
+      add_btn = true
+    ) {
+  
+      const version = "Version: 15/04/2025";
+      console.log(version);
+      alertMessage(version);
+      this.applyOpacity = true;
+      this.og = true;
+      this.ogHeight = wrapper.offsetHeight;
+      this.ogWidth = wrapper.offsetWidth;
+      this.isTester = false;
+      this.dragCounter = 1;
+      this.targetCounter = 1;
+      this.singleMatchInput = document.getElementById("singleDrop");
+      this.fixedHeight = true;
+      this.fixedWidth = true;
+      this.fixedHeightCheckbox = document.getElementById("fixedHeight");
+      this.fixedWidthCheckbox = document.getElementById("fixedWidth");
+      this.areaHeight = 0;
+      this.areaWidth = 0;
+      this.undoBtn = document.getElementById("undoBtn");
+      this.redoBtn = document.getElementById("redoBtn");
+      this.currentDrag = "";
+      this.undo = [];
+      this.redo = [];
+      this.mapItem = false;
+      this.map = {};
+      this.isOneToOne = true;
+      this.currentOverlapping = null;
+      this.isPlaceHolder = true;
+      this.width = 0;
+      this.height = height;
+      this.wrapper = wrapper;
+      this.mainImage = new Image();
+      this.mainImage.src = imgUrl;
+      if (enableEditing) {
+        this.isSelecting = false;
+        this.currentSnip = null;
+        this.isSnipEnabled = false;
+        this.snipType = null;
+        this.snipId = "";
+        this.isCreatingSnip = false;
+        this.initMouseEvents();
+        this.isButtonClicked = false;
+      }
+  
+      this.add_btn = add_btn;
+      this.configs = config;
+      this.ogImage = true;
+      this.mainImage.onload = () => this.init();
+    }
+    addUndo(data) {
+      this.undo.push(data);
+      this.undoBtn.disabled = this.undo.length == 0;
+    }
+    removeUndo() {
+      if (this.undo.length === 0) return null; // Return null if no items exist
+      const lastItem = this.undo.pop(); // Remove and get last item
+      this.undoBtn.disabled = this.undo.length == 0;
+      this.addRedo(lastItem);
+      return lastItem; // Return the removed item
+    }
+    addRedo(data) {
+      this.redo.push(data);
+      this.redoBtn.disabled = this.redo.length == 0;
+    }
+    removeRedo() {
+      if (this.redo.length === 0) return null; // Return null if no items exist
+      const lastItem = this.redo.pop(); // Remove and get last item
+      this.redoBtn.disabled = this.redo.length == 0;
+      this.addUndo(lastItem);
+      return lastItem; // Return the removed item
+    }
+  
+    isValid() {
+      function showAlert(message) {
+        alertWarning(message);
+        return false;
+      }
+  
+      if (self.ogImage) {
+        return showAlert("Please select base image.");
+      }
+  
+      if ($(".snip").length === 0) {
+        return showAlert("Please define draggable and target blocks.");
+      }
+  
+      const emptyElements = $(".snip.target").toArray().filter((element) => {
+        const drag = $(element).attr("dragged") ?? "";
+        return drag === "";
+      });
+  
+      if (emptyElements.length !== 0) {
+        return showAlert("Matching is not valid. Please map the area by drag and drop.");
+      }
+  
+      const heights = [];
+      const widths = [];
+  
+      $(".snip").each(function (_, el) {
+        heights.push($(el).outerHeight());
+        widths.push($(el).outerWidth());
+      });
+  
+      const allHeightsEqual = heights.every((h) => h === heights[0]);
+      const allWidthsEqual = widths.every((w) => w === widths[0]);
+  
+      if (self.fixedHeight && self.fixedWidth) {
+        if (!allHeightsEqual || !allWidthsEqual) {
+          return showAlert("Not all blocks are in the same size. Please resize any block to align dimensions.");
+        }
+      } else if (self.fixedHeight) {
+        if (!allHeightsEqual) {
+          return showAlert("Not all blocks are in the same height. Please resize any block to align dimensions.");
+        }
+      } else if (self.fixedWidth) {
+        if (!allWidthsEqual) {
+          return showAlert("Not all blocks are in the same width. Please resize any block to align dimensions.");
+        }
+      }
+  
+      alertMessage("Matching is valid!");
+      return true;
+    }
+  
+    init() {
+      this.setMainImage();
+      if (this.configs != null) {
+        this.handleConfigs(this.configs);
+      }
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.id = "imageInput";
+      fileInput.accept = "image/*";
+      fileInput.style.display = "none";
+      this.wrapper.appendChild(fileInput);
+      this.ogImage = true;
+    }
+    setMainImage(store = false) {
+      const parentWidth = this.wrapper.parentElement.clientWidth;
+      const imgWidth = this.mainImage.width;
+      const imgHeight = this.mainImage.height;
+      if (store) {
+        this.ogHeight = this.wrapper.clientHeight;
+        this.ogWidth = this.wrapper.clientWidth;
+      }
+      this.width = parentWidth;
+      this.height = (imgHeight / imgWidth) * this.width;
+      this.wrapper.style.backgroundImage = `url(${this.mainImage.src})`;
+      this.wrapper.style.backgroundSize = "cover";
+      this.wrapper.style.backgroundRepeat = "no-repeat";
+      this.wrapper.style.position = "relative";
+      this.wrapper.style.width = `${this.width}px`;
+      this.wrapper.style.height = `${this.height}px`;
+      if (store) {
+        this.ogHeight = this.wrapper.clientHeight;
+        this.ogWidth = this.wrapper.clientWidth;
+      }
+      this.ogImage = false;
+    }
+  
+    handleConfigs(configs) {
+      const self = this;
+      const targs = [];
+      const drags = [];
+      const ogHeight = this.ogHeight;
+      const ogWidth = this.ogWidth;
+      const newHeight = this.wrapper.clientHeight;
+      const newWidth = this.wrapper.clientWidth;
+      const isOg = this.isOg;
+  
+      // Scale factors for width and height
+      const scaleX = isOg ? 1 : newWidth / ogWidth;
+      const scaleY = isOg ? 1 : newHeight / ogHeight;
+      if ($('.snip').length != 0) {
+        $('.snip').remove();
+      }
+      for (const config of configs.areas) {
+        const isTarget = config.type == 1;
+        const snip = document.createElement("div");
+        snip.classList.add("snip");
+        snip.classList.add(isTarget ? "target" : "draggable");
+        snip.style.left = `${Math.round(parseFloat(config.x) * scaleX)}px`;
+        snip.style.top = `${Math.round(parseFloat(config.y) * scaleY)}px`;
+        snip.style.width = `${Math.round(parseFloat(config.width) * scaleX)}px`;
+        snip.style.height = `${Math.round(parseFloat(config.height) * scaleY)}px`;
+  
+  
+        snip.id = config.id;
+        snip.setAttribute("data-points", config.points);
+        this.wrapper.appendChild(snip);
+  
+        if (!isTarget) {
+          snip.style.backgroundImage = `url(${this.mainImage.src})`;
+          snip.style.backgroundSize = `${newWidth}px ${newHeight}px`;
+          self.makeDraggable(snip);
+        } else {
+          self.enableTargetSnip(snip);
+        }
+  
+        if (this.add_btn) {
+          snip.appendChild(this.getDeleteButton());
+        }
+  
+        const idx = parseInt(config.id.split('-')[1]);
+        isTarget ? targs.push(idx) : drags.push(idx);
+      }
+  
+      self.isOneToOne = configs.options.OneToOneMatching;
+      self.singleMatchInput.checked = self.isOneToOne;
+      self.singleMatchInput.dispatchEvent(new Event("change"));
+  
+      self.fixedHeight = configs.options.FixedHeight;
+      self.fixedHeightCheckbox.checked = self.fixedHeight;
+      self.fixedWidth = configs.options.FixedWidth;
+      self.fixedWidthCheckbox.checked = self.fixedWidth;
+      document.getElementById("areaHeight").value = configs.options.AreaHeight;
+      document.getElementById("areaWidth").value = configs.options.AreaWidth;
+  
+      const matchings = configs.match;
+      if (matchings) {
+        matchings.forEach(function (match) {
+          const key = Object.keys(match)[0];
+  
+  
+          self.handleDrop(match[key], document.getElementById(key));
+        });
+        self.updateBackgroundImage();
+      }
+  
+      try {
+        self.dragCounter = drags.sort().reverse()[0] + 1;
+        self.targetCounter = targs.sort().reverse()[0] + 1;
+      } catch (error) {
+        console.error(error);
+      }
+  
+      this.ogHeight = this.wrapper.clientHeight;
+      this.ogWidth = this.wrapper.clientWidth;
+      self.updateBackgroundImage();
+    }
+  
+    addConfigSnap(config, makeDraggable = false) {
+      const snip = document.createElement("div");
+      snip.classList.add("snip");
+      snip.classList.add(
+        config.classList.replace("snip", "").replace("selected", "").trim()
+      );
+      snip.style.position = config.style_position;
+      snip.style.left = config.style_left;
+      snip.style.top = config.style_top;
+      snip.style.border = config.style_border;
+      snip.id = config.id;
+      snip.style.height = config.style_height;
+      snip.style.width = config.style_width;
+      this.wrapper.appendChild(snip);
+      if (makeDraggable) {
+        snip.style.backgroundImage = `url(${this.mainImage.src})`;
+        snip.style.backgroundSize = config.backgroundSize;
+        snip.style.backgroundPosition = config.backgroundPosition;
+        this.makeDraggable(snip);
+      } else {
+        this.enableTargetSnip(snip);
+      }
+      if (this.add_btn) {
+        snip.appendChild(this.getDeleteButton());
+      }
+    }
+  
+    import(jsonData = "") {
+      // Check for existing snips before proceeding
+      if ($(".snip").length > 0) {
+        alertWarning("Please clear all existing snips before importing");
+        return;
+      }
+  
+      // Determine if valid JSON data was provided
+      const hasValidData = jsonData && typeof jsonData === 'object';
+  
+      if (hasValidData) {
+        this.configs = jsonData;
+        this.enableEditing = true;
+  
+        // Extract dimensions once
+        const config = jsonData.wrapper_config;
+        const height = parseInt(config.height.replace("px", ""));
+        const width = parseInt(config.width.replace("px", ""));
+  
+        // Create image with extracted dimensions
+        const img = new Image();
+        img.src = config.backgroundImage;
+        img.height = height;
+        img.width = width;
+  
+        // Set properties
+        this.mainImage = img;
+        this.ogHeight = height;
+        this.ogWidth = width;
+        this.og = false;
+        this.isPlaceHolder = false;
+  
+        this.setMainImage();
+        this.handleConfigs(jsonData);
+      }
+    }
+  
+    export(download = false) {
+      if (this.isPlaceHolder) {
+        alertWarning("Please select base image.");
+        return;
+      } else if (
+        $(".snip.target").length < 1 ||
+        $(".snip.draggable").length < 2
+      ) {
+        alertWarning("At least 1 target and 2 draggable areas required.");
+        return;
+      }
+      return download ? this.downloadConfigAsJSON() : this.exportConfigs();
+  
+    }
+  
+    downloadSnip(download = false) {
+      // Store selected elements state
+      const selected = $('.snip.selected');
+  
+      // Apply temporary styles for capturing
+      $('.snip,.value').addClass('downloading');
+      selected.removeClass('selected');
+      $('.resize-handle').css('opacity', '0');
+  
+      return new Promise((resolve) => {
+        html2canvas(this.wrapper, {
+          scale: 10, // Higher resolution
+          useCORS: true,
+          logging: false,
+          backgroundColor: null
+        }).then(canvas => {
+          const base64Data = canvas.toDataURL("image/png", 1.0);
+  
+          // Download if requested
+          if (download) {
+            const link = document.createElement('a');
+            link.href = base64Data;
+            link.download = "editor.png";
+            link.click();
+          }
+  
+          // Restore original styles
+          $('.snip,.value').removeClass('downloading');
+          selected.addClass('selected');
+          $('.resize-handle').css('opacity', '1');
+  
+          // Return base64 data if download is false
+          resolve(download ? true : base64Data);
+        });
+      });
+    }
+  
+    isOverlapping(element) {
+      let snips = document.querySelectorAll(".snip");
+      let rect1 = element.getBoundingClientRect();
+  
+      // Get parent element and its bounding rect
+      let parent = element.parentElement;
+      if (!parent) {
+        return true;
+      }
+  
+      let parentRect = parent.getBoundingClientRect();
+      let margin = 0.1; // Margin for overlap detection
+  
+      // Check if element is going outside of parent boundaries
+      if (
+        rect1.left < parentRect.left ||
+        rect1.right > parentRect.right ||
+        rect1.top < parentRect.top ||
+        rect1.bottom > parentRect.bottom
+      ) {
+        this.currentOverlapping = "parent";
+        return true; // Out of bounds
+      }
+  
+      // Check for overlap with other `.snip` elements
+      for (let snip of snips) {
+        if (snip === element) continue; // Skip self
+  
+        let rect2 = snip.getBoundingClientRect();
+  
+        let expandedRect2 = {
+          left: rect2.left - margin,
+          right: rect2.right + margin,
+          top: rect2.top - margin,
+          bottom: rect2.bottom + margin,
+        };
+  
+        if (
+          rect1.left < expandedRect2.right &&
+          rect1.right > expandedRect2.left &&
+          rect1.top < expandedRect2.bottom &&
+          rect1.bottom > expandedRect2.top
+        ) {
+          this.currentOverlapping = snip.id || null;
+          return true; // Overlap detected
+        }
+      }
+  
+      return false; // No overlap and inside parent
+    }
+  
+    getDeleteButton() {
+      const deleteBtn = Object.assign(document.createElement("button"), {
+        innerText: "×",
+        className: "delete-btn",
+      });
+      return deleteBtn;
+    }
+    initMouseEvents() {
+      this.wrapper.addEventListener("mousedown", (e) => this.startSelection(e));
+      this.wrapper.addEventListener("mousemove", (e) => this.updateSelection(e));
+      document.addEventListener("mouseup", (e) => this.endSelection(e)); // Ensure mouseup is global
+      this.initCommonEvents();
+      this.initJquery();
+    }
+    initJquery() {
+      const self = this;
+      let movementSpeed = 2;
+      let interval;
+      let keys = {};
+      let isResizing = false;
+      let deleteItem = null;
+  
+      jQuery(document).ready(function ($) {
+  
+        function debounce(func, delay) {
+          let timer;
+          return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, args), delay);
+          };
+        }
+  
+        window.addEventListener("resize", debounce(() => {
+          const config = self.exportConfigs(false);
+  
+          if (Object.keys(config).length != 0) {
+            self.setMainImage();
+            self.handleConfigs(config);
+          }
+        }, 300));
+        $(document).on("click", ".snip:not(.resizing)", function () {
+          //toggle selected
+          const isSelected = $(this).hasClass("selected");
+          const points = $(this).attr("data-points") || 0;
+          $("#pointsInput").val(points);
+  
+          $(".snip").removeClass("selected");
+          $(".resize-handle").remove(); // Remove old handles
+          if (!isSelected) {
+            $(this).addClass("selected");
+            addResizeHandle($(this)); // Add resize handle
+            $("#areaHeight").val($(this).height());
+            $("#areaWidth").val($(this).width());
+            $("#snipX").val(parseInt($(this).css("left")));
+            $("#snipY").val(parseInt($(this).css("top")));
+          }
+  
+          $("#pointsInput").prop("disabled", isSelected);
+          $("#snipX").prop("disabled", isSelected);
+          $("#snipY").prop("disabled", isSelected);
+          self.updateAttrs();
+          self.updateTarget();
+        });
+        $(document).keydown(function (e) {
+          if ([37, 38, 39, 40].includes(e.which)) e.preventDefault();
+  
+          if (!keys[e.which]) {
+            keys[e.which] = true;
+            if (!interval) interval = setInterval(moveElement, 50);
+          }
+        });
+        $(document).keyup(function (e) {
+          delete keys[e.which];
+          if ($.isEmptyObject(keys)) {
+            clearInterval(interval);
+            interval = null;
+          }
+        });
+        function moveElement() {
+          let $el = $(".snip.selected"); //:not(.is_dragged)
+          if (!$el.length || isResizing) return;
+          let $parent = $el.parent();
+          let pos = $el.position();
+          let parentWidth = $parent.width();
+          let parentHeight = $parent.height();
+          let elWidth = $el.outerWidth();
+          let elHeight = $el.outerHeight();
+          if (keys[37] && pos.left > 0)
+            $el.css("left", Math.max(0, pos.left - movementSpeed) + "px");
+          if (keys[38] && pos.top > 0)
+            $el.css("top", Math.max(0, pos.top - movementSpeed) + "px");
+          if (keys[39] && pos.left + elWidth < parentWidth)
+            $el.css(
+              "left",
+              Math.min(parentWidth - elWidth, pos.left + movementSpeed) + "px"
+            );
+          if (keys[40] && pos.top + elHeight < parentHeight)
+            $el.css(
+              "top",
+              Math.min(parentHeight - elHeight, pos.top + movementSpeed) + "px"
+            );
+  
+          const x = parseInt($el.css("left"));
+          const y = parseInt($el.css("top"));
+          $("#snipX").val(x);
+          $("#snipY").val(y);
+          self.handleOverlapping(true);
+          self.updateBackgroundImage();
+        }
+  
+        function addResizeHandle($el) {
+          const handle = $('<div class="resize-handle"></div>');
+          $el.append(handle);
+          handle.on("mousedown", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            isResizing = true;
+            $(document).on("mousemove", resizeElement);
+            $(document).on("mouseup", stopResizing);
+          });
+        }
+        function resizeElement(e) {
+          if (!isResizing) return;
+          let $el = $(".snip.selected");
+          $el.addClass("resizing");
+          let $parent = $el.parent();
+          let parentWidth = $parent.width();
+          let parentHeight = $parent.height();
+          let newWidth = Math.min(
+            parentWidth - $el.position().left,
+            e.pageX - $el.offset().left
+          );
+          let newHeight = Math.min(
+            parentHeight - $el.position().top,
+            e.pageY - $el.offset().top
+          );
+          $el.width(Math.max(20, newWidth));
+          $el.height(Math.max(20, newHeight));
+        }
+        function stopResizing(e) {
+          isResizing = false;
+          $(document).off("mousemove", resizeElement);
+          $(document).off("mouseup", stopResizing);
+          let $el = $(".snip.selected");
+          let $parent = $el.parent();
+          let parentWidth = $parent.width();
+          let parentHeight = $parent.height();
+          let newWidth = Math.min(
+            parentWidth - $el.position().left,
+            e.pageX - $el.offset().left
+          );
+          let newHeight = Math.min(
+            parentHeight - $el.position().top,
+            e.pageY - $el.offset().top
+          );
+          const height = Math.max(20, newHeight);
+          const width = Math.max(30, newWidth);
+          if (self.fixedWidth) {
+            $(".snip").width(width); //not(.is_dragged)
+          }
+          if (self.fixedHeight) {
+            $(".snip").height(height); //not(.is_dragged)
+          }
+          $("#areaHeight").val(height);
+          $("#areaWidth").val(width);
+          self.handleOverlapping();
+          self.updateAttrs();
+          setTimeout(() => {
+            $el.removeClass("resizing");
+          }, 100);
+        }
+        $(document).on("click", ".delete-btn", function (e) {
+          e.preventDefault();
+          deleteItem = $(this).parent();
+          $("#deleteModal").modal("show");
+        });
+  
+  
+        $(document).on("click", "#confirmDelete", function (e) {
+          if (deleteItem != null) {
+            const id = deleteItem.attr('id');
+            if (deleteItem.hasClass('draggable')) {
+              while ($(`#dragged-${id}`).length != 0) {
+                $(`#dragged-${id}`).parents('.target').attr('dragged', '');
+                $(`#dragged-${id}`).remove();
+              }
+            } else {
+              const dragged = deleteItem.attr('dragged') ?? null;
+              if (dragged) {
+                self.isOneToOne && $(`#${dragged}`).removeClass('is_dragged');
+              }
+            }
+            deleteItem.remove();
+            self.updateTarget();
+          }
+          $("#deleteModal").modal("hide");
+          self.resetSnipCreation();
+  
+        });
+        $(document).on("change", "#imageInput", function (e) {
+          var fileInput = this;
+          if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var img = new Image();
+              img.src = e.target.result;
+              self.mainImage = img;
+              img.onload = function () {
+                self.setMainImage(true);
+              };
+              self.isPlaceHolder = false;
+              self.configs = null;
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+          }
+        });
+        $(document).on("click", "#changeBaseImage", function (e) {
+          if ($(".snip").length != 0) {
+            alertWarning(
+              "Please clear all the existing snip before updating this base image"
+            );
+            return;
+          }
+          $("#imageInput").click();
+        });
+        $(document).on("click", "#create-draggable", function (e) {
+          if (self.isPlaceHolder) {
+            alertWarning("Please select base image.");
+            return;
+          }
+          self.enableSnipCreation("draggable");
+        });
+        $(document).on("click", "#create-target", function (e) {
+          if (self.isPlaceHolder) {
+            alertWarning("Please select base image.");
+            return;
+          }
+          self.enableSnipCreation("target");
+        });
+        $(document).on("click", "#resetAllConfig", function (e) {
+          $('#resetConfigModal').modal('show');
+        });
+  
+        $(document).on('click', '#confirmResetConfig', function (e) {
+          $(".snip").each(function (index, element) {
+            $(element).remove();
+          });
+          self.dragCounter = 1;
+          self.targetCounter = 1;
+  
+          $('#resetConfigModal').modal('hide');
+        });
+        $(document).on("click", "#resetValues", function (e) {
+          $('#resetValueModal').modal('show');
+        });
+  
+        $(document).on('click', '#confirmResetValue', function (e) {
+          $(".snip.draggable").each(function (index, element) {
+            $(element).show();
+            $(element).removeClass("is_dragged");
+          });
+          $(".snip.target").each(function (index, element) {
+            $(element).find(".value").remove();
+            $(element).attr("dragged", "");
+          });
+  
+          $('#resetValueModal').modal('hide');
+        })
+  
+  
+        $(self.undoBtn).on("click", function (e) {
+          const lastChild = self.removeUndo();
+          const target = $(`#${lastChild.target}`);
+          const draggable = $(`#${lastChild.draggable}`);
+          const beforeHtml = lastChild.beforeHtml;
+          target.html(beforeHtml);
+          draggable.show();
+        });
+        $(self.redoBtn).on("click", function (e) {
+          const lastChild = self.removeRedo();
+          const target = $(`#${lastChild.target}`);
+          const draggable = $(`#${lastChild.draggable}`);
+          const afterHtml = lastChild.afterHtml;
+          target.html(afterHtml);
+          lastChild.shouldHide ? draggable.hide() : draggable.show();
+        });
+        $(document).on("click", ".snip.draggable", function (e) {
+          e.stopPropagation();
+          self.currentDrag = this.id;
+        });
+        $(document).on("click", ".snip.target", function (e) {
+          e.stopPropagation();
+          const target = document.getElementById(this.id);
+          if (self.currentDrag != "" && self.isTester) {
+            $(this).removeClass("selected");
+            $(this).find(".resize-handle").remove();
+  
+  
+            self.handleDrop(self.currentDrag, target);
+          }
+        });
+        $(document).on("click", "html", function (e) {
+          self.currentDrag = "";
+        });
+        $(document).on("input", "#pointsInput", function (e) {
+          e.preventDefault();
+          let value = $(this).val();
+          let $el = $(".snip.selected");
+          if ($el.length == 0) {
+            alertWarning("Please Select an area to assign points");
+          }
+          $el.attr("data-points", value);
+        });
+        $(document).on("focus", "#areaHeight,#areaWidth", function (e) {
+          self.updateAttrs();
+        });
+  
+        $(document).on("input", "#areaHeight, #areaWidth", function () {
+          const snips = $(".snip"); //:not(.is_dragged)
+          const input = $(this);
+          let val = parseInt(input.val(), 10); // Convert input to a number
+  
+          // Store the previous value if not already set
+          if (!input.data("prevValue")) {
+            input.data("prevValue", val);
+          }
+  
+          // Enforce minimum constraints
+          if (
+            (this.id === "areaHeight" && val < 20) ||
+            (this.id === "areaWidth" && val < 30)
+          ) {
+            input.val(input.data("prevValue")); // Revert to previous valid value
+            return;
+          }
+  
+          // Apply new dimensions
+          if (this.id === "areaHeight") {
+            self.fixedHeight
+              ? snips.height(val)
+              : $(".snip.selected").height(val);
+          } else {
+            self.fixedWidth ? snips.width(val) : $(".snip.selected").width(val);
+          }
+  
+          // Check for overlapping; if true, revert to previous value
+          if (self.handleOverlapping()) {
+            input.val(input.data("prevValue"));
+          } else {
+            input.data("prevValue", val);
+          }
+        });
+  
+        $(document).on("input", "#snipX,#snipY", function (e) {
+          const snips = $(".snip");
+          const input = $(this);
+          const val = input.val();
+  
+          if (!input.data("prevValue")) {
+            input.data("prevValue", val);
+          }
+  
+          if (this.id == "snipX") {
+            $(".snip.selected").css("left", val + "px");
+          } else {
+            $(".snip.selected").css("top", val + "px");
+          }
+  
+          self.handleOverlapping()
+            ? input.val(input.data("prevValue"))
+            : input.data("prevValue", val);
+        });
+  
+        $(self.singleMatchInput).on("change", function (e) {
+  
+          self.isOneToOne = self.singleMatchInput.checked;
+          const map = {};
+          let exceeded = false;
+          const duplicate = new Set();
+          const exded = [];
+          if (self.isOneToOne) {
+            $('.snip.target').each(function (idx, el) {
+              const value = $(el).attr('dragged') ?? '';
+              if (value.length != 0) {
+                const objKeys = Object.keys(map);
+                if (objKeys.includes(value)) {
+                  map[value] = map[value] + 1;
+                  exceeded = true;
+                  exded.push(value);
+                } else {
+                  map[value] = 1;
+                }
+                duplicate.add(value);
+              }
+            });
+  
+            if (exceeded) {
+              self.singleMatchInput.checked = false;
+              self.isOneToOne = false;
+              const str = exded.join(', ');
+              alertWarning(`${str} blocks are matched with multiple targets`);
+              return;
+            } else {
+              duplicate.forEach(function (el) {
+  
+                const elmt = $(`#${el}`);
+                if (elmt.hasClass('drag_multiple')) {
+                  elmt.addClass('is_dragged');
+                  elmt.removeClass('drag_multiple');
+                  elmt.attr('draggable', false);
+                }
+  
+              });
+            }
+          } else {
+            $('.snip.draggable').each(function (idx, el) {
+              if ($(el).hasClass('is_dragged')) {
+                $(el).removeClass('is_dragged');
+                $(el).addClass('drag_multiple');
+                $(el).attr('draggable', true);
+              }
+            });
+          }
+          const sltd = $('.snip.selected');
+          sltd.trigger('click');
+          sltd.trigger('click');
+  
+  
+        });
+        const blankOptions = '<option value="" disabled selected>NONE</option>';
+        $(document).on("update-select", ".select-wrapper", function (e) {
+          let selected = $("#drag-select").val() || "";
+          selected = selected.trim();
+  
+          let dragOptions = blankOptions;
+          let targetOption = self.isOneToOne ? blankOptions : "";
+          $(".snip.draggable").each(function (idx, el) {
+            const id = el.id;
+            dragOptions +=
+              id == selected
+                ? `<option selected value="${id}">${id}</option>`
+                : `<option value="${id}" >${id}</option>`;
+          });
+          $(".snip.target").each(function (idx, el) {
+            const id = el.id;
+  
+            targetOption +=
+              id == selected
+                ? `<option selected value="${id}" >${id}</option>`
+                : `<option value="${id}" >${id}</option>`;
+          });
+  
+          $("#drag-select").html(dragOptions);
+          $("#target-select").html(targetOption);
+          $("#target-select").trigger("change");
+        });
+  
+        $(document).on("change", "#target-select", function (e) {
+          let selectedTargets = $(this).val();
+  
+          if (!Array.isArray(selectedTargets)) {
+            selectedTargets = [selectedTargets];
+          }
+  
+          const element = $(".snip.selected");
+          const isDraggable = element.hasClass("draggable");
+          const dragSnip = element.attr("id");
+          if (isDraggable) {
+            const oldTargets = $(`.snip.target[dragged="${dragSnip}"]`);
+  
+            if (oldTargets.length != 0) {
+              oldTargets.attr("dragged", "");
+              oldTargets.find(".value").remove();
+            }
+  
+            if (selectedTargets.length > 0) {
+              // Loop through each selected target and handle the drag-and-drop behavior
+              selectedTargets.forEach(function (target) {
+                try {
+                  const draggedAttr = $(`#${target}`).attr("dragged");
+                  const isEmpty = !draggedAttr || draggedAttr.length === 0;
+                  if (isEmpty) {
+                    if (self.isOneToOne) {
+  
+  
+                      self.handleDrop(dragSnip, document.getElementById(target));
+                    } else {
+  
+  
+                      self.handleDrop(dragSnip, document.getElementById(target));
+                    }
+                  } else {
+                    if (draggedAttr.length != 0) {
+                      self.restoreDraggable(draggedAttr);
+                    }
+                    if (dragSnip.length != 0 && document.getElementById(target).length != 0) {
+  
+  
+  
+                      self.handleDrop(dragSnip, document.getElementById(target));
+                    }
+  
+                  }
+                } catch (error) { }
+                if (target == "") {
+  
+  
+                  self.restoreDraggable(dragSnip);
+                }
+              });
+            }
+          } else {
+            const val = selectedTargets[0] ?? '';
+            const dragOld = element.attr("dragged") ?? "";
+            if (val.length != 0) {
+              const oldTargets = $(`.target[dragged="${val}"]`);
+              if (self.isOneToOne) {
+                oldTargets.attr("dragged", "");
+                oldTargets.find(".value").remove();
+              }
+              if (dragOld.length != 0) {
+  
+                self.restoreDraggable(dragOld);
+              }
+  
+  
+              self.handleDrop(val, document.getElementById(dragSnip));
+            } else {
+  
+              if (dragOld.length != 0) {
+                self.restoreDraggable(dragOld);
+                element.attr('dragged', '');
+                element.find('.value').remove()
+              }
+            }
+          }
+        });
+  
+  
+        $(document).ready(function () {
+          $("#target-select, #drag-select").prepend(
+            '<option value="" disabled selected>Choose an option</option>'
+          );
+        });
+      });
+      self.updateTarget();
+    }
+  
+    updateTarget(change = true) {
+  
+      const element = $(".snip.selected");
+      const isDraggable = element.hasClass("draggable");
+  
+      if (element.length === 0) {
+        $("#target-select").prop("disabled", true).val("").trigger("change");
+        updateChosen();
+        return;
+      }
+  
+      const selected = element.attr("id");
+      const blankOptions = this.isOneToOne || !isDraggable
+        ? '<option value="">None</option>'
+        : "";
+      let options = blankOptions;
+  
+      if (isDraggable) {
+        this.changeSelectType("target-select", !this.isOneToOne);
+        $(".snip.target").each(function (_, el) {
+          const id = el.id;
+          options += `<option value="${id}">${id}</option>`;
+        });
+  
+        $("#target-select").html(options);
+  
+        $(".snip.target")
+          .filter(`[dragged='${selected}']`)
+          .each(function (_, el) {
+            $(`#target-select option[value='${el.id}']`).prop("selected", true);
+          });
+      } else {
+        this.changeSelectType("target-select", false);
+        const drag = element.attr("dragged") ?? "";
+        $(".snip.draggable").each(function (_, el) {
+          const id = el.id;
+          options += `<option value="${id}" ${id === drag ? "selected" : ""
+            }>${id}</option>`;
+        });
+  
+        $("#target-select").html(options);
+      }
+  
+  
+      if (change) {
+        $("#target-select").prop("disabled", false).trigger("change");
+      }
+      updateChosen();
+    }
+  
+    handleOverlapping(moving = false) {
+      const self = this;
+      let isOverlapping = false;
+      const overlaps = [];
+      const vals = [];
+      $(".snip").each(function (idx, el) {
+        const obj = {};
+        if (self.isOverlapping(el)) {
+          isOverlapping = true;
+          obj[el.id] = self.currentOverlapping;
+          overlaps.push(obj);
+        } else if (el == document.querySelector(".snip.selected") && moving) {
+          self.updateAttrs(el);
+        }
+      });
+      if (isOverlapping) {
+        if ($(".jGrowl-notification").length <= 1) {
+          overlaps.forEach(function (item) {
+            const key = Object.keys(item)[0];
+            const value = item[key];
+            const isParent = value == "parent";
+            if ((vals.includes(key) || vals.includes(value)) && !isParent) {
+              return;
+            }
+            isParent
+              ? alertWarning(`Area ${key} going out of bounds!!`)
+              : alertWarning(
+                `${key} and ${value} is overlapping with each other!`
+              );
+            vals.push(key, value);
+          });
+        }
+        $(".snip").each(function (idx, el) {
+          const top = $(el).attr("top");
+          const left = $(el).attr("left");
+          const height = $(el).attr("height");
+          const width = $(el).attr("width");
+          $(el).css("top", top);
+          $(el).css("left", left);
+          $(el).css("width", width);
+          $(el).css("height", height);
+        });
+      } else {
+        this.updateAttrs();
+      }
+      this.updateBackgroundImage();
+      return isOverlapping;
+    }
+    updateAttrs(el = "") {
+      if ($(el).length != 0) {
+        const top = $(el).css("top");
+        const left = $(el).css("left");
+        const height = $(el).css("height");
+        const width = $(el).css("width");
+        $(el).attr("top", top);
+        $(el).attr("left", left);
+        $(el).attr("height", height);
+        $(el).attr("width", width);
+      } else {
+        $(".snip").each(function (idx, el) {
+          const top = $(el).css("top");
+          const left = $(el).css("left");
+          const height = $(el).css("height");
+          const width = $(el).css("width");
+          $(el).attr("top", top);
+          $(el).attr("left", left);
+          $(el).attr("height", height);
+          $(el).attr("width", width);
+        });
+      }
+    }
+    initCommonEvents() {
+      const self = this;
+      self.fixedHeightCheckbox.addEventListener("change", function (e) {
+        self.fixedHeight = self.fixedHeightCheckbox.checked;
+      });
+      self.fixedWidthCheckbox.addEventListener("change", function (e) {
+        self.fixedWidth = self.fixedWidthCheckbox.checked;
+      });
+    }
+    exportConfigs(scale= true) {
+      const draggables = document.querySelectorAll(".snip");
+      const drag_configs = [];
+      const target_configs = [];
+      const pointsObj = {};
+      const areas = [];
+  
+      const mainImage = this.mainImage;
+      const mainImageWidth = mainImage.naturalWidth || mainImage.width;
+      const mainImageHeight = mainImage.naturalHeight || mainImage.height;
+  
+      const wrapperWidth = parseFloat(this.wrapper.style.width);
+      const wrapperHeight = parseFloat(this.wrapper.style.height);
+  
+      const ratioX = scale ? mainImageWidth / wrapperWidth : 1;
+      const ratioY = scale ? mainImageHeight / wrapperHeight: 1;
+  
+      let ah = 0;
+      let aw = 0;
+  
+      for (const draggable of draggables) {
+        const dragConfig = {};
+        const area = {};
+        const point = parseInt(draggable.getAttribute("data-points") ?? 0);
+  
+        const left = parseFloat(draggable.style.left);
+        const top = parseFloat(draggable.style.top);
+        const width = parseFloat(draggable.style.width);
+        const height = parseFloat(draggable.style.height);
+  
+        area.id = draggable.id;
+        area.type = draggable.className.includes("target") ? 1 : 2;
+  
+        // Adjusted by ratio and converted to int
+        area.x = Math.round(left * ratioX);
+        area.y = Math.round(top * ratioY);
+        area.width = Math.round(width * ratioX);
+        area.height = Math.round(height * ratioY);
+        area.points = point;
+        ah = area.height;
+        aw = area.width;
+        pointsObj[area.id] = point;
+  
+        dragConfig.classList = draggable.className;
+        dragConfig.style_position = draggable.style.position;
+        dragConfig.style_left = draggable.style.left;
+        dragConfig.style_top = draggable.style.top;
+        dragConfig.style_height = draggable.style.height;
+        dragConfig.style_width = draggable.style.width;
+        dragConfig.id = draggable.id;
+  
+        if (dragConfig.classList.includes("target")) {
+          target_configs.push(dragConfig);
+        } else {
+          dragConfig.backgroundPosition = `-${Math.round(left)}px -${Math.round(top)}px`;
+          drag_configs.push(dragConfig);
+        }
+  
+        areas.push(area);
+      }
+  
+      const wrapper_config = {
+        backgroundImage:
+          this.configs != null
+            ? this.configs.wrapper_config.backgroundImage
+            : this.getBase64Image(mainImage),
+        width: mainImageWidth + "px",
+        height: mainImageHeight + "px",
+      };
+  
+      const options = {
+        OneToOneMatching: this.isOneToOne,
+        FixedHeight: this.fixedHeight,
+        FixedWidth: this.fixedWidth,
+        AreaHeight: this.fixedHeight ? ah : parseInt($("#areaHeight").val()),
+        AreaWidth: this.fixedWidth ? aw : parseInt($("#areaWidth").val()),
+      };
+  
+      const match = [];
+      $(".snip.target").each(function (idx, el) {
+        const ID = el.id;
+        const drag = $(this).attr("dragged") ?? "";
+        const obj = {};
+        obj[ID] = drag;
+        match.push(obj);
+      });
+  
+      const points = [];
+      const pointsKey = Object.keys(pointsObj);
+      pointsKey.forEach((key) => {
+        const obj = {};
+        obj[key] = pointsObj[key];
+        points.push(obj);
+      });
+  
+      const allConfigs = {
+        wrapper_config,
+        areas,
+        options,
+        match,
+        points
+      };
+  
+      return allConfigs;
+    }
+  
+  
+  
+  
+    downloadConfigAsJSON() {
+      const configData = this.exportConfigs();
+      const jsonString = JSON.stringify(configData, null, 2);
+      const blob = new Blob([jsonString], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "config.json"; // Filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    getBase64Image(img) {
+      const bgImage = img.src;
+      if (bgImage.startsWith('url("data:image')) {
+        return bgImage; // Extract the actual data URL
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      return canvas.toDataURL("image/png"); // Convert to Base64 PNG
+    }
+    startSelection(event) {
+      if (
+        this.isCreatingSnip ||
+        !this.isSnipEnabled ||
+        this.currentSnip ||
+        !this.isButtonClicked
+      )
+        return;
+      this.isSelecting = true;
+      this.isCreatingSnip = true; // Set the flag to true when snip creation starts
+      const wrapperRect = this.wrapper.getBoundingClientRect();
+      this.startX = event.clientX - wrapperRect.left;
+      this.startY = event.clientY - wrapperRect.top;
+      this.currentSnip = document.createElement("div");
+      this.currentSnip.classList.add("snip");
+      this.currentSnip.classList.add(this.snipType);
+      this.currentSnip.style.position = "absolute";
+      this.currentSnip.style.left = `${this.startX}px`;
+      this.currentSnip.style.top = `${this.startY}px`;
+      this.currentSnip.style.border =
+        this.snipType == "target"
+          ? `2px dashed ${this.targetColor}`
+          : `2px solid ${this.dragColor}`;
+      this.currentSnip.id =
+        this.snipType == "target"
+          ? "targ-" + this.targetCounter++
+          : "drag-" + this.dragCounter++;
+      this.wrapper.appendChild(this.currentSnip);
+    }
+    updateSelection(event) {
+      if (!this.isSelecting || !this.currentSnip) return;
+  
+      const wrapperRect = this.wrapper.getBoundingClientRect();
+      const currentX = event.clientX - wrapperRect.left;
+      const currentY = event.clientY - wrapperRect.top;
+  
+      // Ensure width and height are positive by setting min value at startX/startY
+      const width = Math.max(currentX - this.startX, 0);
+      const height = Math.max(currentY - this.startY, 0);
+  
+      this.currentSnip.style.left = `${this.startX}px`;
+      this.currentSnip.style.top = `${this.startY}px`;
+      this.currentSnip.style.width = `${width}px`;
+      this.currentSnip.style.height = `${height}px`;
+    }
+  
+    endSelection(event) {
+      if (!this.isSelecting) return;
+      this.isSelecting = false;
+      if (this.currentSnip) {
+        let height = jQuery(this.currentSnip).height();
+        let width = jQuery(this.currentSnip).width();
+        width = Math.max(width, 30);
+        height = Math.max(height, 20);
+        jQuery(this.currentSnip).height(height);
+        jQuery(this.currentSnip).width(width);
+  
+        const snip = this.currentSnip;
+  
+        const isOverlapping = this.isOverlapping(this.currentSnip);
+  
+        if (
+          this.currentSnip.offsetWidth < 10 ||
+          this.currentSnip.offsetHeight < 10 ||
+          isOverlapping
+        ) {
+          this.deleteSnip(this.currentSnip);
+          if (isOverlapping) {
+            alertWarning("Selection is not valid it is overlapping");
+          }
+        } else {
+          if (this.snipType === "draggable") {
+            this.updateBackgroundImage();
+            this.makeDraggable(this.currentSnip);
+          } else {
+            this.enableTargetSnip(this.currentSnip);
+          }
+          if (this.add_btn) {
+            this.currentSnip.appendChild(this.getDeleteButton());
+          }
+          this.handleHeightWidth(this.currentSnip);
+        }
+  
+        if (this.isOverlapping(snip)) {
+          this.deleteSnip(snip);
+          alertWarning("Selection is not valid it is overlapping");
+        }
+  
+      }
+  
+  
+  
+      this.resetSnipCreation();
+  
+  
+    }
+    handleHeightWidth(currentSnip) {
+      if (!this.fixedHeight && !this.fixedWidth) return;
+      const length = document.querySelectorAll(".snip").length;
+      const isSingle = length === 1;
+      if (this.fixedHeight) {
+        if (isSingle) {
+          $("#areaHeight").val($(currentSnip).height() || 20);
+        } else {
+          $(currentSnip).height($("#areaHeight").val());
+        }
+      }
+      if (this.fixedWidth) {
+        if (isSingle) {
+          $("#areaWidth").val($(currentSnip).width() || 30);
+        } else {
+          $(currentSnip).width($("#areaWidth").val());
+        }
+      }
+    }
+    updateBackgroundImage() {
+      const self = this;
+      const wrapperRect = this.wrapper.getBoundingClientRect();
+      const url = this.mainImage.src;
+      $(".snip.draggable").each(function (idx, snip) {
+        const left = parseFloat(snip.style.left);
+        const top = parseFloat(snip.style.top);
+        snip.style.backgroundImage = `url(${url})`;
+        snip.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
+        snip.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
+        const id = snip.id;
+        const els = $(`.snip[dragged='${id}']`);
+  
+        if (els.length != 0) {
+          els.each(function (idx, el) {
+            const snp = $(el).find('.value').get(0);
+            snp.style.backgroundImage = `url(${url})`;
+            snp.style.backgroundSize = `${wrapperRect.width}px ${wrapperRect.height}px`;
+            snp.style.backgroundPosition = `-${left + 2}px -${top + 2}px`;
+            $(snp).width($(snip).width());
+            $(snp).height($(snip).height());
+          })
+        }
+      });
+    }
+    deleteSnip(snip) {
+      if (snip) snip.remove();
+      this.resetSnipCreation();
+    }
+    resetSnipCreation() {
+      this.isButtonClicked = false;
+      this.isCreatingSnip = false;
+      this.currentSnip = null;
+      this.resetCursor();
+    }
+    enableSnipCreation(type) {
+      if (this.isCreatingSnip) {
+        this.resetSnipCreation();
+      }
+      this.isSnipEnabled = true;
+      this.snipType = type;
+      this.isButtonClicked = true;
+      this.setCursor();
+    }
+    setCursor() {
+      this.wrapper.classList.add("snip-creation");
+    }
+    resetCursor() {
+      this.wrapper.classList.remove("snip-creation");
+    }
+    makeDraggable(snip) {
+      snip.setAttribute("draggable", true);
+      snip.addEventListener("dragstart", (e) => this.onDragStart(e, snip));
+      snip.addEventListener("dragend", (e) => this.onDragEnd(e, snip));
+    }
+  
+    onDragStart(event, snip) {
+      event.dataTransfer.setData("text", snip.id);
+      // snip.style.opacity = "0.5";
+      snip.classList.add("dropping");
+    }
+    onDragEnd(event, snip) {
+      try {
+  
+        setTimeout(function () {
+          snip.classList.remove("dropping");
+        }, 1500);
+      } catch (error) { }
+     
+      // snip.classList.remove('dropping');
+    }
+    enableTargetSnip(targetWrapper) {
+      targetWrapper.addEventListener("dragover", (e) =>
+        this.onDragOver(e, targetWrapper)
+      );
+      targetWrapper.addEventListener("drop", (e) =>
+        this.onDrop(e, targetWrapper)
+      );
+    }
+    disableTargetSnip(targetWrapper) {
+      targetWrapper.removeEventListener("dragover", (e) =>
+        this.onDragOver(e, targetWrapper)
+      );
+      targetWrapper.removeEventListener("drop", (e) =>
+        this.onDrop(e, targetWrapper)
+      );
+    }
+    onDragOver(event, targetWrapper) {
+      event.preventDefault();
+    }
+    onDrop(event, targetWrapper) {
+      event.preventDefault();
+  
+      const snipId = event.dataTransfer.getData("text");
+  
+  
+      this.handleDrop(snipId, targetWrapper);
+    }
+    handleDrop(snipId, targetWrapper, validate = false) {
+      if (targetWrapper.id == snipId) {
+        return;
+      }
+      if (targetWrapper && snipId != "") {
+  
+        const draggedSnip = document.getElementById(snipId);
+        if (!targetWrapper.className.includes("draggable") && !draggedSnip.className.includes('value')) {
+          console.log('eheheheh')
+          let beforeHtml = targetWrapper.innerHTML;
+          const old = targetWrapper.querySelector(".value");
+          if (old) {
+            try {
+  
+  
+              this.restoreDraggable(targetWrapper.getAttribute("dragged"));
+            } catch (error) { }
+            old.remove();
+          }
+  
+          if (draggedSnip) {
+            const clonedSnip = draggedSnip.cloneNode(true);
+            clonedSnip.classList.remove("snip", "draggable", "dropping");
+            clonedSnip.classList.add("value");
+            clonedSnip.style.left = `auto`;
+            clonedSnip.style.top = `auto`;
+            clonedSnip.style.border = "none";
+            // clonedSnip.style.opacity = "0.5";
+            clonedSnip.setAttribute("data-id", clonedSnip.id);
+            clonedSnip.id = "dragged-" + clonedSnip.id;
+            try {
+              clonedSnip.querySelector(".resize-handle").remove();
+            } catch (error) { }
+  
+            try {
+              clonedSnip.querySelector(".delete-btn").remove();
+            } catch (error) { }
+            const dropEvent = new CustomEvent("on-dropped", {
+              detail: {
+                parent: targetWrapper.id,
+                value: snipId,
+              },
+            });
+            wrapper.dispatchEvent(dropEvent);
+            targetWrapper.appendChild(clonedSnip);
+            $(targetWrapper).attr("dragged", draggedSnip.id);
+            let shouldHide = false;
+            if (this.isOneToOne) {
+              draggedSnip.classList.add("is_dragged");
+              shouldHide = true;
+              draggedSnip.removeAttribute("draggable");
+            } else {
+  
+              draggedSnip.classList.add("drag_multiple");
+            }
+            this.enableTargetSnip(draggedSnip);
+  
+            this.makeDraggable(clonedSnip);
+            const afterHtml = targetWrapper.innerHTML;
+            this.addUndo({
+              draggable: draggedSnip.id,
+              target: targetWrapper.id,
+              shouldHide,
+              beforeHtml,
+              afterHtml,
+            });
+          }
+          this.updateTarget(false);
+        } else {
+  
+          try {
+            const targetID = targetWrapper.id;
+  
+            const snipElement = document.querySelector(".dropping");
+            const id = snipElement.id.replace("dragged-", "");
+            const parent = snipElement.parentNode;
+   
+           if (targetID == parent.id) {
+              // this.applyOpacity =false;
+              return
+            }
+      
+            // this.applyOpacity = true;
+  
+            if (parent.className.includes('target')) {
+              $(parent).find('.value').remove();
+              $(parent).attr('dragged', '');
+              if (id) {
+                const dragble = $(`#${id}`);
+                dragble.removeClass("is_dragged");
+                dragble.removeClass("drag_multiple");
+                dragble.attr("draggable", "true");
+                dragble.css({ 'opacity': 1 })
+              }
+              this.updateTarget();
+              return;
+            }
+  
+  
+            if (targetID == id) {
+              targetWrapper.classList.remove("is_dragged", "drag_multiple");
+              targetWrapper.setAttribute("draggable", "true");
+              // targetWrapper.style.opacity = 1;
+              parent.setAttribute("dragged", "");
+              draggedSnip.remove();
+              this.updateBackgroundImage();
+            }
+            this.updateTarget();
+          } catch (error) { }
+        }
+      }
+  
+    }
+  
+    restoreDraggable(dragID) {
+  
+      if (dragID.length != 0) {
+        console.log('heheh')
+        const dragble = $(`#${dragID}`);
+        dragble.removeClass("is_dragged", "drag_multiple");
+        dragble.attr("draggable", "true");
+        // dragble.css({ 'opacity': 1 });
+        updateChosen();
+      }
+    }
+  
+    changeSelectType(elmId, multiple) {
+      var obj = $("#" + elmId);
+      var objChzn = byid(elmId + "_chzn");
+      if (objChzn) {
+        objChzn.remove();
+      }
+      obj.chosen("destroy");
+      if (multiple) {
+        obj.attr("multiple", "multiple");
+      } else {
+        obj.removeAttr("multiple");
+      }
+      obj.removeClass("chzn-done");
+      obj.chosen();
+    }
+  }
+  
