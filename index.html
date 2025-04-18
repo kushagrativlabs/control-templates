@@ -102,7 +102,7 @@
 
 		<style>
 			.target .value {
-				opacity: .5;
+				opacity: .5 !important;
 			}
 
 			.content {
@@ -377,9 +377,6 @@
 										Value</button>
 									<button type="button" id="resetAllConfig" class="btn btn-secondary">Reset All
 										Configs</button>
-
-									<button type="button" id="undoBtn" class="btn btn-secondary" disabled>Undo</button>
-									<button type="button" id="redoBtn" class="btn btn-secondary" disabled>Redo</button>
 								</div>
 								<br><br><br>
 								<div class="check-box-wrapper">
@@ -501,13 +498,46 @@
 				const exportSnip = document.getElementById('exportSnip');
 
 				validateBtn.addEventListener('click', function () {
-					dragTargetInstance.isValid();
+					const ret = dragTargetInstance.isValid();
+					console.log(ret);
 				});
 
 				downloadImageBtn.addEventListener('click', async function () {
 					const data = await dragTargetInstance.downloadSnip(); // pass true as parameter  to download;
-
+					console.log(data);
+					dragTargetInstance.downloadSnip(true);
 				});
+
+				importSnip.addEventListener('click', function () {
+					$("#jsonFileInput").click(); // Trigger file input click
+					//dragTargetInstance.import(); //pass config file to import the config without the filepicket
+				});
+
+				document.getElementById('jsonFileInput').addEventListener('change', function () {
+					let file = event.target.files[0];
+					if (!file) return; // If no file is selected
+					if (file.type !== "application/json" && !file.name.endsWith(".json")) {
+						alert("Please upload a valid JSON file.");
+						return;
+					}
+					let reader = new FileReader();
+					reader.onload = function (e) {
+						try {
+							let jsonData = JSON.parse(e.target.result); // Parse JSON
+							dragTargetInstance.import(jsonData);
+						} catch (error) {
+							console.log(error);
+						}
+					};
+					reader.readAsText(file);
+				});
+
+				exportSnip.addEventListener('click', async function () {
+					const config = await dragTargetInstance.export(); // pass true as parameter  to download;
+					console.log(config);
+					dragTargetInstance.export(true);
+				});
+
 			}
 		</script>
 	</div>

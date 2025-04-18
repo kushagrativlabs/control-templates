@@ -11,7 +11,7 @@ class DDEditor {
       add_btn = true
     ) {
   
-      const version = "Version: 15/04/2025";
+      const version = "Version: 16/04/2025";
       console.log(version);
       alertMessage(version);
       this.applyOpacity = true;
@@ -28,13 +28,7 @@ class DDEditor {
       this.fixedWidthCheckbox = document.getElementById("fixedWidth");
       this.areaHeight = 0;
       this.areaWidth = 0;
-      this.undoBtn = document.getElementById("undoBtn");
-      this.redoBtn = document.getElementById("redoBtn");
       this.currentDrag = "";
-      this.undo = [];
-      this.redo = [];
-      this.mapItem = false;
-      this.map = {};
       this.isOneToOne = true;
       this.currentOverlapping = null;
       this.isPlaceHolder = true;
@@ -58,28 +52,6 @@ class DDEditor {
       this.configs = config;
       this.ogImage = true;
       this.mainImage.onload = () => this.init();
-    }
-    addUndo(data) {
-      this.undo.push(data);
-      this.undoBtn.disabled = this.undo.length == 0;
-    }
-    removeUndo() {
-      if (this.undo.length === 0) return null; // Return null if no items exist
-      const lastItem = this.undo.pop(); // Remove and get last item
-      this.undoBtn.disabled = this.undo.length == 0;
-      this.addRedo(lastItem);
-      return lastItem; // Return the removed item
-    }
-    addRedo(data) {
-      this.redo.push(data);
-      this.redoBtn.disabled = this.redo.length == 0;
-    }
-    removeRedo() {
-      if (this.redo.length === 0) return null; // Return null if no items exist
-      const lastItem = this.redo.pop(); // Remove and get last item
-      this.redoBtn.disabled = this.redo.length == 0;
-      this.addUndo(lastItem);
-      return lastItem; // Return the removed item
     }
   
     isValid() {
@@ -669,6 +641,7 @@ class DDEditor {
           self.targetCounter = 1;
   
           $('#resetConfigModal').modal('hide');
+          self.updateTarget(true);
         });
         $(document).on("click", "#resetValues", function (e) {
           $('#resetValueModal').modal('show');
@@ -685,25 +658,9 @@ class DDEditor {
           });
   
           $('#resetValueModal').modal('hide');
+          self.updateTarget(true);
         })
-  
-  
-        $(self.undoBtn).on("click", function (e) {
-          const lastChild = self.removeUndo();
-          const target = $(`#${lastChild.target}`);
-          const draggable = $(`#${lastChild.draggable}`);
-          const beforeHtml = lastChild.beforeHtml;
-          target.html(beforeHtml);
-          draggable.show();
-        });
-        $(self.redoBtn).on("click", function (e) {
-          const lastChild = self.removeRedo();
-          const target = $(`#${lastChild.target}`);
-          const draggable = $(`#${lastChild.draggable}`);
-          const afterHtml = lastChild.afterHtml;
-          target.html(afterHtml);
-          lastChild.shouldHide ? draggable.hide() : draggable.show();
-        });
+
         $(document).on("click", ".snip.draggable", function (e) {
           e.stopPropagation();
           self.currentDrag = this.id;
@@ -1089,6 +1046,15 @@ class DDEditor {
     }
     initCommonEvents() {
       const self = this;
+      let importInput = document.createElement("input");
+      importInput.type = "file";
+      importInput.id = "jsonFileInput";
+      importInput.accept = ".json";
+      importInput.style.display = "none";
+      this.wrapper.appendChild(importInput);
+      importInput.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
       self.fixedHeightCheckbox.addEventListener("change", function (e) {
         self.fixedHeight = self.fixedHeightCheckbox.checked;
       });
@@ -1401,7 +1367,6 @@ class DDEditor {
   
     onDragStart(event, snip) {
       event.dataTransfer.setData("text", snip.id);
-      // snip.style.opacity = "0.5";
       snip.classList.add("dropping");
     }
     onDragEnd(event, snip) {
@@ -1412,7 +1377,6 @@ class DDEditor {
         }, 1500);
       } catch (error) { }
      
-      // snip.classList.remove('dropping');
     }
     enableTargetSnip(targetWrapper) {
       targetWrapper.addEventListener("dragover", (e) =>
@@ -1449,13 +1413,10 @@ class DDEditor {
   
         const draggedSnip = document.getElementById(snipId);
         if (!targetWrapper.className.includes("draggable") && !draggedSnip.className.includes('value')) {
-          console.log('eheheheh')
-          let beforeHtml = targetWrapper.innerHTML;
+       
           const old = targetWrapper.querySelector(".value");
           if (old) {
             try {
-  
-  
               this.restoreDraggable(targetWrapper.getAttribute("dragged"));
             } catch (error) { }
             old.remove();
@@ -1468,7 +1429,6 @@ class DDEditor {
             clonedSnip.style.left = `auto`;
             clonedSnip.style.top = `auto`;
             clonedSnip.style.border = "none";
-            // clonedSnip.style.opacity = "0.5";
             clonedSnip.setAttribute("data-id", clonedSnip.id);
             clonedSnip.id = "dragged-" + clonedSnip.id;
             try {
@@ -1500,13 +1460,6 @@ class DDEditor {
   
             this.makeDraggable(clonedSnip);
             const afterHtml = targetWrapper.innerHTML;
-            this.addUndo({
-              draggable: draggedSnip.id,
-              target: targetWrapper.id,
-              shouldHide,
-              beforeHtml,
-              afterHtml,
-            });
           }
           this.updateTarget(false);
         } else {
@@ -1519,12 +1472,9 @@ class DDEditor {
             const parent = snipElement.parentNode;
    
            if (targetID == parent.id) {
-              // this.applyOpacity =false;
               return
             }
-      
-            // this.applyOpacity = true;
-  
+    
             if (parent.className.includes('target')) {
               $(parent).find('.value').remove();
               $(parent).attr('dragged', '');
@@ -1543,7 +1493,6 @@ class DDEditor {
             if (targetID == id) {
               targetWrapper.classList.remove("is_dragged", "drag_multiple");
               targetWrapper.setAttribute("draggable", "true");
-              // targetWrapper.style.opacity = 1;
               parent.setAttribute("dragged", "");
               draggedSnip.remove();
               this.updateBackgroundImage();
@@ -1562,7 +1511,6 @@ class DDEditor {
         const dragble = $(`#${dragID}`);
         dragble.removeClass("is_dragged", "drag_multiple");
         dragble.attr("draggable", "true");
-        // dragble.css({ 'opacity': 1 });
         updateChosen();
       }
     }
